@@ -1,0 +1,43 @@
+{
+  "name": "sp-BudgetPlanner",
+  "version": "1.0.0",
+  "description": "A Budget Planner that is developed for SharePoint 2013/2016/ Online and Teams.\r # Pre-Reqs",
+  "main": "src/index.ts",
+  "scripts": {
+    "all": "npm run build && npm run prod",
+    "build": "webpack --mode=development",
+    "prod": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReconFlux/sp-BudgetPlanner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ReconFlux/sp-BudgetPlanner/issues"
+  },
+  "homepage": "https://github.com/ReconFlux/sp-BudgetPlanner#readme",
+  "dependencies": {
+    "datatables.net": "^1.11.5",
+    "datatables.net-bs5": "^1.11.5",
+    "dattatable": "^1.7.8",
+    "gd-sprest-bs": "^9.5.3",
+    "jquery": "^3.6.0",
+    "moment": "^2.29.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "html-loader": "^3.1.0",
+    "sass": "^1.51.0",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.9",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
