@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ReconFlux/sp-BudgetPlanner#readme",
   "dependencies": {
+    "chart.js": "^3.7.1",
     "datatables.net": "^1.11.5",
     "datatables.net-bs5": "^1.11.5",
     "dattatable": "^1.7.8",
