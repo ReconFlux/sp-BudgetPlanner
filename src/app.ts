@@ -40,7 +40,7 @@ export class App {
                 items: [
                     {
                         className: "btn-outline-light",
-                        text: "Create Item",
+                        text: "Add Transaction",
                         isButton: true,
                         onClick: () => {
                             // Create an item
@@ -110,7 +110,7 @@ export class App {
                         // Format the date
                         onRenderCell: (el, column, item: TransItem) => {
                             let date = item[column.name];
-                            moment(date).format("MMMM DD, YYYY");
+                            el.innerHTML = moment(date).format("MMMM DD, YYYY");
                         }
                     }
                 ]

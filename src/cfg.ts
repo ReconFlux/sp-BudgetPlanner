@@ -31,6 +31,7 @@ export const Configuration = Helper.SPConfig({
                     name: "amount",
                     title: "Amount",
                     type: Helper.SPCfgFieldType.Number,
+                    decimals: 2,
                     required: false,
                     description: "Enter your Amount. i.e. 2500.00"
                 } as Helper.IFieldInfoNumber,

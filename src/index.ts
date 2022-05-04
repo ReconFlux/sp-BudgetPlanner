@@ -39,7 +39,7 @@ const GlobalVariable = {
                         // Show the dialog
                         InstallationRequired.showDialog({
                             onHeaderRendered: el => {
-                                el.innerHTML = Strings.ProjectName + " " + "(" + "Version:" + " " + Strings.Version + ")"
+                                el.innerHTML = Strings.ProjectName + " " + "(" + "Version:" + " " + Strings.Version + ")" + " " + "Installation Screen"
                             }
                         });
 
