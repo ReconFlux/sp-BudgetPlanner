@@ -8,12 +8,14 @@ import { DataSource, TransItem } from "../ds";
 
 export class TableTab {
     // Vars
+    private _Header: Navigation = null;
     // Constructor
     constructor(el: HTMLElement) {
         this.render(el);
     }
     // Render
     private render(el: HTMLElement) {
+        let headContainer = document.createElement("div");
         let Table = new DataTable({
             el,
             rows: DataSource.TransItems,
@@ -64,5 +66,22 @@ export class TableTab {
                 }
             ]
         });
+        this._Header = new Navigation({
+            el: headContainer,
+            title: "Transactions Table",
+            hideFilter: true,
+            hideSearch: true,
+            onRendering: props => {
+                props.type = Components.NavbarTypes.Light;
+                props.id = "Table_Header";
+            },
+            items: [
+                {
+                    text: "All Transactions",
+                    isButton: false
+                }
+            ]
+        });
+        el.prepend(headContainer);
     }
 }
