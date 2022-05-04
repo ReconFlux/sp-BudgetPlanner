@@ -74,13 +74,7 @@ export class TableTab {
             onRendering: props => {
                 props.type = Components.NavbarTypes.Light;
                 props.id = "Table_Header";
-            },
-            items: [
-                {
-                    text: "All Transactions",
-                    isButton: false
-                }
-            ]
+            }
         });
         el.prepend(headContainer);
     }

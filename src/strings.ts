@@ -23,6 +23,6 @@ const Strings = {
     ProjectDescription: "A Budget Planner that is developed for SharePoint 2013/2016/Online.",
     SolutionUrl: ContextInfo.webServerRelativeUrl + "/SiteAssets/sp-BudgetPlanner/index.html",
     SourceUrl: ContextInfo.webServerRelativeUrl,
-    Version: "1.1"
+    Version: "2.5"
 };
 export default Strings;

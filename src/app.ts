@@ -39,9 +39,9 @@ export class App {
             },
             itemsEnd: [
                 {
-                    text: "Transaction",
+                    text: " ",
                     iconType: plusSquareFill,
-                    iconSize: 18,
+                    iconSize: 19,
                     isButton: true,
                     className: "btn-outline-light me-1 btn-sm",
                     onClick: () => {
@@ -49,11 +49,13 @@ export class App {
                         ItemForm.create({
                             // Remove the Title field ( function at bottom of page )
                             onCreateEditForm: props => { return this, updateFormProperties(props); },
+                            useModal: true,
                             onUpdate: () => {
                                 // Load the data
                                 DataSource.loadTransItems().then(items => {
                                     // Refresh the table
                                     // dashboard.refresh(items);
+                                    // TODO, Need to figure out how to refresh the tables and charts
                                 });
                             }
                         });

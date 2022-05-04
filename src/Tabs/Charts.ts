@@ -1,23 +1,30 @@
 import Strings from "../strings";
 import { Components } from "gd-sprest-bs";
+import { Dashboard, IItemFormCreateProps, Navigation, ItemForm, DataTable } from "dattatable";
 import * as jQuery from "jquery";
 import * as moment from "moment";
 import Chart from 'chart.js/auto';
 import { ArrayListener } from 'chart.js/helpers';
-import { DataSource, TransItem } from "../ds";
+import { DataSource, ExpenseItem } from "../ds";
 
 
 export class ChartsTab {
     // Vars
     private _categories: Array<string> = null;
     private _Transactions: Array<any> = null;
+    private _Totals: Array<any> = null;
+    private _Header: Navigation = null;
+    private _itemData: ExpenseItem = null;
+
     // Constructor
     constructor(el: HTMLElement) {
-        this.render(el);
+
         this._categories = [];
         this._Transactions = [];
+        this._Totals = [];
         this.loadCategories();
         this.loadTransactions();
+        this.render(el);
     }
     // Load Categories Labels
     private loadCategories() {
@@ -46,12 +53,30 @@ export class ChartsTab {
 
         }
     };
+
     // Render
     private render(el: HTMLElement) {
+
+
+        for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+            let item = DataSource.ExpenseItems[i];
+            this._Totals.push({
+                amount: item.amount
+            });
+        }
+
+        let sum: number = 0;
+        let ExpensItems = DataSource.ExpenseItems;
+        ExpensItems.forEach((item) => sum += item.amount);
+        console.log(sum);
+        let sumString = sum.toString();
+
+
+        let headContainer = document.createElement("div");
         let _canvas = document.createElement("canvas");
         _canvas.id = "myChart";
         _canvas.width = 100;
-        _canvas.height = 100;
+        _canvas.height = 25;
         el.appendChild(_canvas);
 
         const ctx = _canvas.getContext('2d');
@@ -60,28 +85,55 @@ export class ChartsTab {
             type: 'bar',
             data: {
                 // Check this
-                labels: this._categories,
+                labels: ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials", "Income"],
                 datasets: [
                     {
-                        label: "Car",
+                        label: 'Transactions',
                         data: this._Transactions,
                         backgroundColor: "#000080"
                     }
                 ]
             },
             options: {
-
+                animation: false,
+                maintainAspectRatio: true,
                 parsing: false,
-                devicePixelRatio: 1,
-                aspectRatio: 3,
+                responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        stacked: true,
+                        grid: {
+                            display: true,
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
                     }
-                },
-                animation: false,
+                }
             }
         });
+
+        this._Header = new Navigation({
+            el: headContainer,
+            title: "Transactions Chart",
+            hideFilter: true,
+            hideSearch: true,
+            onRendering: props => {
+                props.type = Components.NavbarTypes.Light;
+                props.id = "Chart_Header";
+            },
+            items: [
+                {
+                    text: "Total Expense:" + " " + sumString,
+                    isDisabled: true,
+                    isButton: false
+                }
+            ]
+        });
+        el.prepend(headContainer);
+
 
     }
 }
