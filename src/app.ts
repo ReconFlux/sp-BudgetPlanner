@@ -27,11 +27,11 @@ export class App {
             useModal: true,
             filters: {
                 items: [{
-                    header: "By Status",
+                    header: "By Category",
                     items: DataSource.categoryFilters,
                     onFilter: (value: string) => {
                         // Filter the table
-                        dashboard.filter(2, value);
+                        dashboard.filter(1, value);
                     }
                 }]
             },
