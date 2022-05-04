@@ -37,7 +37,12 @@ const GlobalVariable = {
                     // See if an install is required
                     if (installFl) {
                         // Show the dialog
-                        InstallationRequired.showDialog();
+                        InstallationRequired.showDialog({
+                            onHeaderRendered: el => {
+                                el.innerHTML = Strings.ProjectName + " " + "(" + "Version:" + " " + Strings.Version + ")"
+                            }
+                        });
+
                     } else {
                         // Log
                         console.error("[" + Strings.ProjectName + "] Error initializing the solution.");
