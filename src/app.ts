@@ -1,6 +1,7 @@
-import { Dashboard, ItemForm } from "dattatable";
+import { Dashboard, IItemFormCreateProps, ItemForm } from "dattatable";
 import { Components } from "gd-sprest-bs";
 import * as jQuery from "jquery";
+import * as moment from "moment";
 import { DataSource, TransItem, ExpenseItem, IncomeItem } from "./ds";
 import Strings from "./strings";
 
@@ -44,6 +45,8 @@ export class App {
                         onClick: () => {
                             // Create an item
                             ItemForm.create({
+                                // Remove the Title field ( function at bottom of page )
+                                onCreateEditForm: props => { return this, updateFormProperties(props); },
                                 onUpdate: () => {
                                     // Load the data
                                     DataSource.loadTransItems().then(items => {
@@ -103,10 +106,23 @@ export class App {
                     },
                     {
                         name: "date",
-                        title: "Date"
+                        title: "Date",
+                        // Format the date
+                        onRenderCell: (el, column, item: TransItem) => {
+                            let date = item[column.name];
+                            moment(date).format("MMMM DD, YYYY");
+                        }
                     }
                 ]
             }
         });
     }
+
+
+}
+
+function updateFormProperties(props: Components.IListFormEditProps): Components.IListFormEditProps {
+    props.excludeFields = ["Title"];
+
+    return props;
 }
