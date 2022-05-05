@@ -10,6 +10,8 @@ import { DataSource, ExpenseItem } from "../ds";
 
 export class ChartsComponent {
 
+    static ExpenseLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
+
     // Vars
     private _categories: Array<string> = null;
     private _Transactions: Array<any> = null;
@@ -37,9 +39,9 @@ export class ChartsComponent {
     // Load Categories Labels
     private loadCategories() {
         this._categories = [];
-        if (DataSource.TransItems) {
-            for (let i = 0; i < DataSource.TransItems.length; i++) {
-                let item = DataSource.TransItems[i];
+        if (DataSource.ExpenseItems) {
+            for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+                let item = DataSource.ExpenseItems[i];
                 let category = (item.category || "");
 
                 this._categories.push(category);
@@ -97,7 +99,7 @@ export class ChartsComponent {
 
             data: {
                 // Check this
-                labels: ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"],
+                labels: ChartsComponent.ExpenseLabels,
                 datasets: [
                     {
                         label: 'Transactions',
@@ -107,9 +109,7 @@ export class ChartsComponent {
                 ]
             },
             options: {
-                animation: false,
                 maintainAspectRatio: true,
-                parsing: false,
                 responsive: true,
                 scales: {
                     y: {
@@ -152,14 +152,19 @@ export class ChartsComponent {
 
     refresh() {
 
-        DataSource.init().then(items => {
+        this._categories = [];
+        this._Transactions = [];
 
-            this.loadTransactions();
-            this.loadCategories();
-            this._gchart.update();
-            addData(this._gchart, this._categories, this._Transactions)
-            console.log("Chart shouldve updated");
-        });
+        if (DataSource.ExpenseItems) {
+
+            DataSource.init().then(items => {
+
+                this.loadTransactions();
+                this.loadCategories();
+                this._gchart.update();
+                console.log("Chart shouldve updated");
+            });
+        }
     }
 
 
