@@ -76,11 +76,7 @@ export class SubNavigation {
                             onCreateEditForm: props => { return this, updateFormProperties(props); },
                             useModal: true,
                             onUpdate: () => {
-                                // Load the data
-                                DataSource.loadTransItems().then(items => {
-                                    // Refresh the table
-                                    // dashboard.refresh(items);
-                                    // TODO, Need to figure out how to refresh the tables and charts
+                                DataSource.init().then((items) => {
                                     this._props.onRefresh();
                                 });
                             }

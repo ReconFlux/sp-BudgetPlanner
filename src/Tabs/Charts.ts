@@ -4,6 +4,8 @@ import { Dashboard, IItemFormCreateProps, Navigation, ItemForm, DataTable } from
 import * as jQuery from "jquery";
 import * as moment from "moment";
 import Chart from 'chart.js/auto';
+import { registerables } from 'chart.js';
+import { getRelativePosition } from 'chart.js/helpers';
 import { ArrayListener } from 'chart.js/helpers';
 import { DataSource, ExpenseItem } from "../ds";
 
@@ -13,9 +15,9 @@ export class ChartsComponent {
     static ExpenseLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
 
     // Vars
-    private _categories: Array<string> = null;
     private _Transactions: Array<any> = null;
     private _Totals: Array<any> = null;
+    private _Sum = null;
     private _Header: Navigation = null;
     private _itemData: ExpenseItem = null;
     private _el: HTMLElement;
@@ -27,50 +29,44 @@ export class ChartsComponent {
     // Constructor
     constructor(el: HTMLElement) {
 
-        this._categories = [];
         this._Transactions = [];
         this._Totals = [];
-        this.loadCategories();
         this.loadTransactions();
         this.render(el);
     }
 
-
-    // Load Categories Labels
-    private loadCategories() {
-        this._categories = [];
-        if (DataSource.ExpenseItems) {
-            for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-                let item = DataSource.ExpenseItems[i];
-                let category = (item.category || "");
-
-                this._categories.push(category);
-            }
-        }
-    };
-
     // Load Transactions
     private loadTransactions() {
-
         this._Transactions = [];
-
-        if (DataSource.ExpenseItems) {
-            for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-                let item = DataSource.ExpenseItems[i];
-                this._Transactions.push({
-                    id: item.Id,
-                    x: item.category,
-                    y: item.amount,
-                });
+        DataSource.init().then(items => {
+            if (DataSource.ExpenseItems) {
+                for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+                    let item = DataSource.ExpenseItems[i];
+                    this._Transactions.push({
+                        id: item.Id,
+                        x: item.category,
+                        y: item.amount,
+                    });
+                }
             }
+        });
 
-        }
     };
 
-    // Render
-    private render(el: HTMLElement) {
+    refresh() {
+        this.loadTransactions();
+        console.log("Refreshes Chart");
+        this.getSum();
+        if (DataSource.ExpenseItems) {
+            DataSource.init().then((items) => {
+                addData(this._gchart, this._Transactions);
+                this._gchart.update();
+            });
+        }
+    }
 
 
+    private getSum() {
         for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
             let item = DataSource.ExpenseItems[i];
             this._Totals.push({
@@ -82,9 +78,14 @@ export class ChartsComponent {
         let ExpensItems = DataSource.ExpenseItems;
         ExpensItems.forEach((item) => sum += item.amount);
         console.log(sum);
-        let sumString = sum.toString();
+        this._Sum = sum.toString();
+    }
 
 
+    // Render
+    private render(el: HTMLElement) {
+
+        this.getSum();
         let headContainer = document.createElement("div");
         let _canvas = document.createElement("canvas");
         _canvas.id = "myChart";
@@ -94,37 +95,38 @@ export class ChartsComponent {
 
         const ctx = _canvas.getContext('2d');
 
-        this._gchart = new Chart(ctx, {
-            type: 'bar',
+        const chartData = {
+            labels: ChartsComponent.ExpenseLabels,
+            datasets: [{
+                label: 'Transactions',
+                data: this._Transactions,
+                backgroundColor: "#000080"
+            }]
+        }
 
-            data: {
-                // Check this
-                labels: ChartsComponent.ExpenseLabels,
-                datasets: [
-                    {
-                        label: 'Transactions',
-                        data: this._Transactions,
-                        backgroundColor: "#000080"
+        const options = {
+            maintainAspectRatio: true,
+            responsive: true,
+            scales: {
+                y: {
+                    stacked: true,
+                    grid: {
+                        display: true,
                     }
-                ]
-            },
-            options: {
-                maintainAspectRatio: true,
-                responsive: true,
-                scales: {
-                    y: {
-                        stacked: true,
-                        grid: {
-                            display: true,
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
+                },
+                x: {
+                    grid: {
+                        display: false
                     }
                 }
             }
+        }
+
+        // Chart Creation
+        this._gchart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: options
         });
 
 
@@ -140,7 +142,7 @@ export class ChartsComponent {
             },
             items: [
                 {
-                    text: "Total Expense:" + " " + sumString,
+                    text: "Total Expense:" + " " + this._Sum,
                     isDisabled: true,
                     isButton: false
                 }
@@ -148,45 +150,14 @@ export class ChartsComponent {
         });
         el.prepend(headContainer);
     }
-
-
-    refresh() {
-
-        this._categories = [];
-        this._Transactions = [];
-
-        if (DataSource.ExpenseItems) {
-
-            DataSource.init().then(items => {
-
-                this.loadTransactions();
-                this.loadCategories();
-                this._gchart.update();
-                console.log("Chart shouldve updated");
-            });
-        }
-    }
-
-
-
-
 }
 
-function addData(chart, label, Mdata) {
-    this._gchart = chart;
-
-    label = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"];
-
-    Mdata = this._Transactions
-
-    chart.data.labels.push(label);
-
-    chart.data.datasets.forEach((Mdata) => {
-        Mdata.data.pop();
+function addData(chart, Mdata) {
+    chart.data.datasets.pop();
+    chart.data.datasets.push({
+        label: "Transactions",
+        data: Mdata,
+        backgroundColor: "#000080"
     });
     chart.update();
-
-
-
-
 }
