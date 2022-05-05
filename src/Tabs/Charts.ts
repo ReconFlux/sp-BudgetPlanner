@@ -9,6 +9,7 @@ import { DataSource, ExpenseItem } from "../ds";
 
 
 export class ChartsComponent {
+
     // Vars
     private _categories: Array<string> = null;
     private _Transactions: Array<any> = null;
@@ -16,7 +17,7 @@ export class ChartsComponent {
     private _Header: Navigation = null;
     private _itemData: ExpenseItem = null;
     private _el: HTMLElement;
-
+    private _Chart: Chart = null;
 
     // Constructor
     constructor(el: HTMLElement) {
@@ -56,7 +57,7 @@ export class ChartsComponent {
         }
     };
 
-    
+
 
     // Render
     private render(el: HTMLElement) {
@@ -85,7 +86,7 @@ export class ChartsComponent {
 
         const ctx = _canvas.getContext('2d');
 
-        const myChart = new Chart(ctx, {
+        this._Chart = new Chart(ctx, {
             type: 'bar',
 
             data: {
@@ -120,7 +121,8 @@ export class ChartsComponent {
             }
         });
 
-        
+
+
         this._Header = new Navigation({
             el: headContainer,
             title: "Transactions Chart",
@@ -140,8 +142,8 @@ export class ChartsComponent {
         });
         el.prepend(headContainer);
     }
-public refresh() {
-    myChart
-}
 
+    refresh() {
+        console.log("CHART REFRESH HERE");
+    }
 }

@@ -16,16 +16,21 @@ export class App {
     private _navigation: Navigation = null;
     private _Tabs: Components.INav = null;
     private _footer: Footer = null;
+    private _el: HTMLElement;
     private _Chart: ChartsComponent = null;
+
 
     // Constructor
     constructor(el: HTMLElement) {
         // Set the list name
         ItemForm.ListName = Strings.Lists.Main;
 
+        this._el = el;
         // Render the dashboard
         this.render(el);
     }
+
+
 
     // Renders the dashboard
     private render(el: HTMLElement) {
@@ -57,6 +62,7 @@ export class App {
                                     // Refresh the table
                                     // dashboard.refresh(items);
                                     // TODO, Need to figure out how to refresh the tables and charts
+                                    refresh();
                                 });
                             }
                         });
@@ -99,5 +105,9 @@ export class App {
 function updateFormProperties(props: Components.IListFormEditProps): Components.IListFormEditProps {
     props.excludeFields = ["Title"];
     return props;
+}
+
+function refresh() {
+    this._Chart.refresh();
 }
 
