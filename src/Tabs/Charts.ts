@@ -8,13 +8,15 @@ import { ArrayListener } from 'chart.js/helpers';
 import { DataSource, ExpenseItem } from "../ds";
 
 
-export class ChartsTab {
+export class ChartsComponent {
     // Vars
     private _categories: Array<string> = null;
     private _Transactions: Array<any> = null;
     private _Totals: Array<any> = null;
     private _Header: Navigation = null;
     private _itemData: ExpenseItem = null;
+    private _el: HTMLElement;
+
 
     // Constructor
     constructor(el: HTMLElement) {
@@ -41,9 +43,9 @@ export class ChartsTab {
 
     // Load Transactions
     private loadTransactions() {
-        if (DataSource.TransItems) {
-            for (let i = 0; i < DataSource.TransItems.length; i++) {
-                let item = DataSource.TransItems[i];
+        if (DataSource.ExpenseItems) {
+            for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+                let item = DataSource.ExpenseItems[i];
                 this._Transactions.push({
                     id: item.Id,
                     x: item.category,
@@ -53,6 +55,8 @@ export class ChartsTab {
 
         }
     };
+
+    
 
     // Render
     private render(el: HTMLElement) {
@@ -83,9 +87,10 @@ export class ChartsTab {
 
         const myChart = new Chart(ctx, {
             type: 'bar',
+
             data: {
                 // Check this
-                labels: ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials", "Income"],
+                labels: ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"],
                 datasets: [
                     {
                         label: 'Transactions',
@@ -115,6 +120,7 @@ export class ChartsTab {
             }
         });
 
+        
         this._Header = new Navigation({
             el: headContainer,
             title: "Transactions Chart",
@@ -133,7 +139,9 @@ export class ChartsTab {
             ]
         });
         el.prepend(headContainer);
-
-
     }
+public refresh() {
+    myChart
+}
+
 }

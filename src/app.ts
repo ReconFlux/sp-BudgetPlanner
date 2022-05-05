@@ -6,7 +6,7 @@ import { DataSource, TransItem, ExpenseItem, IncomeItem } from "./ds";
 import Strings from "./strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "./Tabs/Table";
-import { ChartsTab } from "./Tabs/Charts";
+import { ChartsComponent } from "./Tabs/Charts";
 
 /**
  * Main Application
@@ -16,6 +16,7 @@ export class App {
     private _navigation: Navigation = null;
     private _Tabs: Components.INav = null;
     private _footer: Footer = null;
+    private _Chart: ChartsComponent = null;
 
     // Constructor
     constructor(el: HTMLElement) {
@@ -79,7 +80,7 @@ export class App {
                 },
                 {
                     title: "Charts",
-                    onRenderTab: (el) => { new ChartsTab(el); }
+                    onRenderTab: (el) => { new ChartsComponent(el); }
                 }
             ]
         });
