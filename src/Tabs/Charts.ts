@@ -17,7 +17,10 @@ export class ChartsComponent {
     private _Header: Navigation = null;
     private _itemData: ExpenseItem = null;
     private _el: HTMLElement;
-    private _Chart: Chart = null;
+
+
+    private _gchart = null;
+    get GChart() { return this._gchart; }
 
     // Constructor
     constructor(el: HTMLElement) {
@@ -29,6 +32,8 @@ export class ChartsComponent {
         this.loadTransactions();
         this.render(el);
     }
+
+
     // Load Categories Labels
     private loadCategories() {
         this._categories = [];
@@ -44,6 +49,9 @@ export class ChartsComponent {
 
     // Load Transactions
     private loadTransactions() {
+
+        this._Transactions = [];
+
         if (DataSource.ExpenseItems) {
             for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
                 let item = DataSource.ExpenseItems[i];
@@ -56,8 +64,6 @@ export class ChartsComponent {
 
         }
     };
-
-
 
     // Render
     private render(el: HTMLElement) {
@@ -86,7 +92,7 @@ export class ChartsComponent {
 
         const ctx = _canvas.getContext('2d');
 
-        this._Chart = new Chart(ctx, {
+        this._gchart = new Chart(ctx, {
             type: 'bar',
 
             data: {
@@ -143,7 +149,39 @@ export class ChartsComponent {
         el.prepend(headContainer);
     }
 
+
     refresh() {
-        console.log("CHART REFRESH HERE");
+
+        DataSource.init().then(items => {
+
+            this.loadTransactions();
+            this.loadCategories();
+            this._gchart.update();
+            addData(this._gchart, this._categories, this._Transactions)
+            console.log("Chart shouldve updated");
+        });
     }
+
+
+
+
+}
+
+function addData(chart, label, Mdata) {
+    this._gchart = chart;
+
+    label = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"];
+
+    Mdata = this._Transactions
+
+    chart.data.labels.push(label);
+
+    chart.data.datasets.forEach((Mdata) => {
+        Mdata.data.pop();
+    });
+    chart.update();
+
+
+
+
 }

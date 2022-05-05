@@ -7,6 +7,8 @@ import Strings from "./strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "./Tabs/Table";
 import { ChartsComponent } from "./Tabs/Charts";
+import { SubNavigation } from "./Components/subNav";
+import { Tabs } from "./Components/Tabs";
 
 /**
  * Main Application
@@ -14,10 +16,10 @@ import { ChartsComponent } from "./Tabs/Charts";
 export class App {
     // Vars
     private _navigation: Navigation = null;
-    private _Tabs: Components.INav = null;
+    private _SubNavigation: SubNavigation = null;
     private _footer: Footer = null;
     private _el: HTMLElement;
-    private _Chart: ChartsComponent = null;
+    private _Tabs: Components.INav = null;
 
 
     // Constructor
@@ -43,53 +45,20 @@ export class App {
             onRendering: props => {
                 props.type = Components.NavbarTypes.Dark
             },
-            itemsEnd: [
-                {
-                    text: " ",
-                    iconType: plusSquareFill,
-                    iconSize: 19,
-                    isButton: true,
-                    className: "btn-outline-light me-1 btn-sm",
-                    onClick: () => {
-                        // Create an item
-                        ItemForm.create({
-                            // Remove the Title field ( function at bottom of page )
-                            onCreateEditForm: props => { return this, updateFormProperties(props); },
-                            useModal: true,
-                            onUpdate: () => {
-                                // Load the data
-                                DataSource.loadTransItems().then(items => {
-                                    // Refresh the table
-                                    // dashboard.refresh(items);
-                                    // TODO, Need to figure out how to refresh the tables and charts
-                                    refresh();
-                                });
-                            }
-                        });
-                    }
-                }
-            ]
         });
-        this._Tabs = Components.Nav({
+
+
+        // Add the SubNav
+        new SubNavigation({
             el: el,
-            isPills: false,
-            onLinkRendered: (el) => {
-                el.classList.add("fs-5");
-            },
-            id: "Tabs",
-            isTabs: true,
-            items: [
-                {
-                    title: "Data Sheet",
-                    isActive: true,
-                    onRenderTab: (_tab) => { new TableTab(_tab); }
-                },
-                {
-                    title: "Charts",
-                    onRenderTab: (el) => { new ChartsComponent(el); }
-                }
-            ]
+            onRefresh: () => {
+                appTabs.Refresh();
+            }
         });
+
+        // Tabs
+        let appTabs = new Tabs(this._el);
+
         this._footer = new Footer({
             el,
             itemsEnd: [
@@ -100,14 +69,6 @@ export class App {
         });
 
     }
-
-}
-function updateFormProperties(props: Components.IListFormEditProps): Components.IListFormEditProps {
-    props.excludeFields = ["Title"];
-    return props;
 }
 
-function refresh() {
-    this._Chart.refresh();
-}
 
