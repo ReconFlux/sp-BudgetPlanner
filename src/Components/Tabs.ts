@@ -67,6 +67,9 @@ export class Tabs {
         this._Tabs.el.classList.remove("nav-tabs");
     }
     Refresh() {
+
+        // Calls the refresh functions
         this._Charts.refresh();
+        this._DataSheet.refresh();
     }
 }

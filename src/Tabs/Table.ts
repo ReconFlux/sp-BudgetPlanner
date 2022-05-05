@@ -1,5 +1,5 @@
 import Strings from "../strings";
-import { Dashboard, IItemFormCreateProps, Navigation, ItemForm, DataTable } from "dattatable";
+import { Dashboard, IItemFormCreateProps, Navigation, ItemForm, DataTable, LoadingDialog } from "dattatable";
 import { Components } from "gd-sprest-bs";
 import * as jQuery from "jquery";
 import * as moment from "moment";
@@ -9,12 +9,36 @@ import { DataSource, TransItem } from "../ds";
 export class TableTab {
     // Vars
     private _Header: Navigation = null;
+    private _el: HTMLElement = null;
     // Constructor
     constructor(el: HTMLElement) {
-        this.render(el);
+        // Save the properties
+        this._el = el;
+        this.render();
     }
-    // Render
-    private render(el: HTMLElement) {
+
+    refresh() {
+        console.log("Refreshes Datasheet");
+        // Show a loading dialog
+        LoadingDialog.setHeader("Reloading Data");
+        LoadingDialog.setBody("Reloading the datasheet. This will close afterwards.");
+        LoadingDialog.show();
+
+        // Clear the element
+        while (this._el.firstChild) { this._el.removeChild(this._el.firstChild); }
+
+        // Load the workspace item
+        DataSource.init().then(() => {
+            // Render the component
+            this.render();
+
+            // Hide the dialog
+            LoadingDialog.hide();
+        });
+    }
+
+    // Create the Table
+    private renderDatasheet(el) {
         let headContainer = document.createElement("div");
         let Table = new DataTable({
             el,
@@ -77,5 +101,11 @@ export class TableTab {
             }
         });
         el.prepend(headContainer);
+    }
+
+    // Render
+    private render() {
+        // render the table
+        this.renderDatasheet(this._el)
     }
 }
