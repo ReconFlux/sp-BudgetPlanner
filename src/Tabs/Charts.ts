@@ -80,14 +80,21 @@ export class ChartsComponent {
                     let itemCategory = getFieldValue("category", item);
                     let itemAmount = getFieldValue("amount", item);
 
-                    if (itemCategory = "Mortage") {
-                        // Mortgage Data
+
+                    if (item.category == "Mortage") {
                         this._MortageData.push({
                             x: formatDateValue(itemDate),
                             y: itemAmount,
                             category: itemCategory
                         });
+                        return this._MortageData;
+
                     }
+                    console.log(this._MortageData);
+                    // Mortgage Data
+
+
+
 
 
 
@@ -103,7 +110,7 @@ export class ChartsComponent {
         this.getSum();
         if (DataSource.ExpenseItems) {
             DataSource.init().then((items) => {
-                addData(this._gchart, this._ExpenseData);
+                addData(this._gchart, this._MortageData);
                 this._gchart.update();
             });
         }
@@ -142,11 +149,10 @@ export class ChartsComponent {
         const ctx = _canvas.getContext('2d');
 
         const chartData = {
-            labels: ChartsComponent.MonthLabels,
+
             datasets: [
                 {
-                    // Mortgage Data
-                    label: "Mortage",
+
                     data: this._MortageData,
                     backgroundColor: "#000080",
                     parsing: {
@@ -195,7 +201,7 @@ export class ChartsComponent {
 function addData(chart, Mdata) {
     chart.data.datasets.pop();
     chart.data.datasets.push({
-        label: "Transactions",
+
         data: Mdata,
         backgroundColor: "#000080"
     });
