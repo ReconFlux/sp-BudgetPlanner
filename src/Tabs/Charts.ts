@@ -123,7 +123,7 @@ function addData(chart, Mdata) {
         label: "Expenses",
         data: Mdata,
         borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(219, 219, 219, 0.3)',
+        backgroundColor: 'rgba(109, 39, 39, 0.45)',
         fill: true,
         parsing: {
             yAxisKey: 'sum',
