@@ -85,7 +85,7 @@ export class TableTab {
                     // Format the date
                     onRenderCell: (el, column, item: TransItem) => {
                         let date = item[column.name];
-                        el.innerHTML = moment(date).format("MMMM DD, YYYY");
+                        el.innerHTML = moment(date).format(Strings.DateFormat);
                     }
                 }
             ]

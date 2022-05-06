@@ -8,19 +8,30 @@ import { registerables } from 'chart.js';
 import { getRelativePosition } from 'chart.js/helpers';
 import { ArrayListener } from 'chart.js/helpers';
 import { DataSource, ExpenseItem } from "../ds";
+import { formatDateValue, getFieldValue } from "../common";
 
 
 export class ChartsComponent {
 
-    static ExpenseLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
-
+    static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
     // Vars
-    private _Transactions: Array<any> = null;
+    private _ExpenseData: Array<any> = null;
     private _Totals: Array<any> = null;
     private _Sum = null;
     private _Header: Navigation = null;
     private _itemData: ExpenseItem = null;
     private _el: HTMLElement;
+
+    // Expenses
+    private _MortageData: Array<any> = null;
+    private _InternetData: Array<any> = null;
+    private _PhoneData: Array<any> = null;
+    private _CarData: Array<any> = null;
+    private _UtilityData: Array<any> = null;
+    private _MiscData: Array<any> = null;
+    private _LeisureData: Array<any> = null;
+    private _Essentials: Array<any> = null;
 
 
     private _gchart = null;
@@ -29,24 +40,57 @@ export class ChartsComponent {
     // Constructor
     constructor(el: HTMLElement) {
 
-        this._Transactions = [];
+        this._ExpenseData = [];
         this._Totals = [];
         this.loadTransactions();
         this.render(el);
+
+        this._MortageData = [];
+        this._InternetData = [];
+        this._PhoneData = [];
+        this._CarData = [];
+        this._UtilityData = [];
+        this._MiscData = [];
+        this._LeisureData = [];
+        this._Essentials = [];
+
     }
 
     // Load Transactions
     private loadTransactions() {
-        this._Transactions = [];
+
+        this._ExpenseData = [];
+        this._MortageData = [];
+        this._InternetData = [];
+        this._PhoneData = [];
+        this._CarData = [];
+        this._UtilityData = [];
+        this._MiscData = [];
+        this._LeisureData = [];
+        this._Essentials = [];
+
         DataSource.init().then(items => {
+
             if (DataSource.ExpenseItems) {
+
                 for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
                     let item = DataSource.ExpenseItems[i];
-                    this._Transactions.push({
-                        id: item.Id,
-                        x: item.category,
-                        y: item.amount,
-                    });
+
+                    let itemDate = getFieldValue("date", item);
+                    let itemCategory = getFieldValue("category", item);
+                    let itemAmount = getFieldValue("amount", item);
+
+                    if (itemCategory = "Mortage") {
+                        // Mortgage Data
+                        this._MortageData.push({
+                            x: formatDateValue(itemDate),
+                            y: itemAmount,
+                            category: itemCategory
+                        });
+                    }
+
+
+
                 }
             }
         });
@@ -59,7 +103,7 @@ export class ChartsComponent {
         this.getSum();
         if (DataSource.ExpenseItems) {
             DataSource.init().then((items) => {
-                addData(this._gchart, this._Transactions);
+                addData(this._gchart, this._ExpenseData);
                 this._gchart.update();
             });
         }
@@ -67,8 +111,10 @@ export class ChartsComponent {
 
 
     private getSum() {
+
         for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
             let item = DataSource.ExpenseItems[i];
+
             this._Totals.push({
                 amount: item.amount
             });
@@ -96,35 +142,29 @@ export class ChartsComponent {
         const ctx = _canvas.getContext('2d');
 
         const chartData = {
-            labels: ChartsComponent.ExpenseLabels,
-            datasets: [{
-                label: 'Transactions',
-                data: this._Transactions,
-                backgroundColor: "#000080"
-            }]
+            labels: ChartsComponent.MonthLabels,
+            datasets: [
+                {
+                    // Mortgage Data
+                    label: "Mortage",
+                    data: this._MortageData,
+                    backgroundColor: "#000080",
+                    parsing: {
+                        yAxisKey: 'y',
+                        xAxisKey: 'x'
+                    }
+                }
+            ]
         }
 
         const options = {
             maintainAspectRatio: true,
             responsive: true,
-            scales: {
-                y: {
-                    stacked: true,
-                    grid: {
-                        display: true,
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    }
-                }
-            }
         }
 
         // Chart Creation
         this._gchart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: chartData,
             options: options
         });
