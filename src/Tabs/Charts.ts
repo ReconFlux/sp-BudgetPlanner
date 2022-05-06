@@ -9,174 +9,62 @@ import { getRelativePosition } from 'chart.js/helpers';
 import { ArrayListener } from 'chart.js/helpers';
 import { DataSource, ExpenseItem } from "../ds";
 import { formatDateValue, getFieldValue } from "../common";
+import { ChartData } from "../Components/ChartLogic";
 
 
 export class ChartsComponent {
 
+    // Vars
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
-    // Vars
-    private _ExpenseData: Array<any> = null;
-    private _Totals: Array<any> = null;
-    private _Sum = null;
+    // private _Sum = null;
     private _Header: Navigation = null;
-    private _itemData: ExpenseItem = null;
     private _el: HTMLElement;
 
-    // Expenses
-    private _MortageData: Array<any> = null;
-    private _InternetData: Array<any> = null;
-    private _PhoneData: Array<any> = null;
-    private _CarData: Array<any> = null;
-    private _UtilityData: Array<any> = null;
-    private _MiscData: Array<any> = null;
-    private _LeisureData: Array<any> = null;
-    private _Essentials: Array<any> = null;
 
 
-    private _gchart = null;
-    get GChart() { return this._gchart; }
+    private _datachart = null;
+    get DataChart() { return this._datachart; }
 
     // Constructor
     constructor(el: HTMLElement) {
-
-        this._ExpenseData = [];
-        this._Totals = [];
-        this.loadTransactions();
+        this.loadData();
         this.render(el);
 
-        this._MortageData = [];
-        this._InternetData = [];
-        this._PhoneData = [];
-        this._CarData = [];
-        this._UtilityData = [];
-        this._MiscData = [];
-        this._LeisureData = [];
-        this._Essentials = [];
-
+    }
+    // Load Data
+    private loadData() {
+        ChartData.loadJanuaryData();
+        ChartData.loadFebruaryData();
+        ChartData.loadMarchData();
+        ChartData.loadAprilData();
+        ChartData.loadMayData();
+        console.log(ChartData._ExpenseSum);
     }
 
-    // Load Transactions
-    private loadTransactions() {
 
-        this._ExpenseData = [];
-        this._MortageData = [];
-        this._InternetData = [];
-        this._PhoneData = [];
-        this._CarData = [];
-        this._UtilityData = [];
-        this._MiscData = [];
-        this._LeisureData = [];
-        this._Essentials = [];
-
-        DataSource.init().then(items => {
-
-            if (DataSource.ExpenseItems) {
-
-                for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-                    let item = DataSource.ExpenseItems[i];
-
-                    let itemDate = getFieldValue("date", item);
-                    let itemCategory = getFieldValue("category", item);
-                    let itemAmount = getFieldValue("amount", item);
-
-
-                    if (item.category == "Mortage") {
-                        this._MortageData.push({
-                            x: formatDateValue(itemDate),
-                            y: itemAmount,
-                            category: itemCategory
-                        });
-                        return this._MortageData;
-
-                    }
-                    console.log(this._MortageData);
-                    // Mortgage Data
-
-
-
-
-
-
-                }
-            }
-        });
-
-    };
-
+    // Refresh
     refresh() {
-        this.loadTransactions();
         console.log("Refreshes Chart");
-        this.getSum();
+        this.loadData();
         if (DataSource.ExpenseItems) {
             DataSource.init().then((items) => {
-                addData(this._gchart, this._MortageData);
-                this._gchart.update();
-            });
-        }
-    }
-
-
-    private getSum() {
-
-        for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-            let item = DataSource.ExpenseItems[i];
-
-            this._Totals.push({
-                amount: item.amount
+                addData(this._datachart, ChartData._ExpenseSum);
+                this._datachart.update();
             });
         }
 
-        let sum: number = 0;
-        let ExpensItems = DataSource.ExpenseItems;
-        ExpensItems.forEach((item) => sum += item.amount);
-        console.log(sum);
-        this._Sum = sum.toString();
+
+
     }
 
 
-    // Render
-    private render(el: HTMLElement) {
-
-        this.getSum();
+    // Render Chart
+    render(el: HTMLElement) {
+        // Driv Creation
         let headContainer = document.createElement("div");
         let _canvas = document.createElement("canvas");
-        _canvas.id = "myChart";
-        _canvas.width = 100;
-        _canvas.height = 25;
-        el.appendChild(_canvas);
-
-        const ctx = _canvas.getContext('2d');
-
-        const chartData = {
-
-            datasets: [
-                {
-
-                    data: this._MortageData,
-                    backgroundColor: "#000080",
-                    parsing: {
-                        yAxisKey: 'y',
-                        xAxisKey: 'x'
-                    }
-                }
-            ]
-        }
-
-        const options = {
-            maintainAspectRatio: true,
-            responsive: true,
-        }
-
-        // Chart Creation
-        this._gchart = new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: options
-        });
-
-
-
+        // Chart Navigation
         this._Header = new Navigation({
             el: headContainer,
             title: "Transactions Chart",
@@ -186,24 +74,61 @@ export class ChartsComponent {
                 props.type = Components.NavbarTypes.Light;
                 props.id = "Chart_Header";
             },
-            items: [
-                {
-                    text: "Total Expense:" + " " + this._Sum,
-                    isDisabled: true,
-                    isButton: false
-                }
-            ]
         });
         el.prepend(headContainer);
-    }
-}
+        // Constants ( for the chart )
+        const options = {
+            maintainAspectRatio: true,
+            responsive: true,
+        }
 
+        const chartData = {
+            datasets: [
+                {
+                    label: "Expenses",
+                    data: ChartData._ExpenseSum,
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    backgroundColor: 'rgba(219, 219, 219, 0.3)',
+                    fill: true,
+                    parsing: {
+                        yAxisKey: 'sum',
+                        xAxisKey: 'month'
+                    }
+                }
+            ]
+        }
+
+        // Chart Container Props
+        _canvas.id = "myChart";
+        _canvas.width = 100;
+        _canvas.height = 25;
+        el.appendChild(_canvas);
+        // Chart Creation
+        const ctx = _canvas.getContext('2d');
+
+        // Chart Creation
+        this._datachart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: options
+        });
+    }
+
+}
+// Add Data Function
 function addData(chart, Mdata) {
     chart.data.datasets.pop();
     chart.data.datasets.push({
 
+        label: "Expenses",
         data: Mdata,
-        backgroundColor: "#000080"
+        borderColor: 'rgba(255, 0, 0, 1)',
+        backgroundColor: 'rgba(219, 219, 219, 0.3)',
+        fill: true,
+        parsing: {
+            yAxisKey: 'sum',
+            xAxisKey: 'month'
+        }
     });
     chart.update();
 }

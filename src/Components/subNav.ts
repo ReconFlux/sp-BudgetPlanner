@@ -56,19 +56,19 @@ export class SubNavigation {
                 props.type = Components.NavbarTypes.Light
             },
             itemsEnd: [
-                {
-                    text: "Update",
-                    isButton: true,
-                    onClick: () => {
-                        this._props.onRefresh();
-                    }
-                },
+                // {
+                //     text: "Update",
+                //     isButton: true,
+                //     onClick: () => {
+                //         this._props.onRefresh();
+                //     }
+                // },
                 {
                     text: " ",
                     iconType: plusSquareFill,
-                    iconSize: 19,
+                    iconSize: 22,
                     isButton: true,
-                    className: "btn-outline-light me-1 btn-sm",
+                    className: "btn-outline-dark me-1 btn-sm",
                     onClick: () => {
                         // Create an item
                         ItemForm.create({
