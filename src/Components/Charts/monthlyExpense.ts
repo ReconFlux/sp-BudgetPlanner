@@ -98,7 +98,8 @@ export class MonthlyExpenseChart {
         _canvas.id = "myChart";
         _canvas.width = 100;
         _canvas.height = 25;
-        el.appendChild(_canvas);
+        headContainer.appendChild(_canvas);
+        el.appendChild(headContainer);
         // Chart Creation
         const ctx = _canvas.getContext('2d');
 

@@ -28,6 +28,8 @@ export class Tabs {
     private _SideMenu: ChartSideMenu = null;
 
 
+
+
     // Constructor
     constructor(el: HTMLElement) {
         // Set the list name
@@ -42,6 +44,9 @@ export class Tabs {
 
     // Renders the dashboard
     private render(el: HTMLElement) {
+        // element properties
+        let _sidemenuElement = document.createElement("div");
+        _sidemenuElement.id = "SideMenu_Element";
         this._Tabs = Components.Nav({
             el: el,
             isPills: true,
@@ -59,7 +64,7 @@ export class Tabs {
                 },
                 {
                     title: Tabs.TabNames.Charts,
-                    onRenderTab: (el) => { this._SideMenu = new ChartSideMenu(el); }
+                    onRenderTab: (_sidemenuElement) => { this._SideMenu = new ChartSideMenu(_sidemenuElement); }
                 }
             ]
         });
