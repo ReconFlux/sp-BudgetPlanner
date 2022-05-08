@@ -38,6 +38,7 @@ export class ChartSideMenu {
 
         // Render the dashboard
         this.render(el);
+        this.chartRender();
     }
 
 
@@ -101,17 +102,14 @@ export class ChartSideMenu {
 
 
         _rightside.appendChild(this._chart);
+        this._monthlyexpense = new MonthlyExpenseChart(this._chart)
     }
 
-    // private chartRender() {
+    private chartRender() {
 
-    //     let activebutton = document.getElementById("btn_Expenses");
-    //     if (activebutton.classList.contains("active")) {
-    //         this._monthlyexpense = new MonthlyExpenseChart(this._chart);
-    //     } else {
-    //         this._chart = null;
-    //     }
-    // }
+        // TODO
+        console.log("Checks what chart your displaying;")
+    }
 
     private setActiveElement(el: HTMLElement) {
         // Get the buttons
@@ -123,9 +121,7 @@ export class ChartSideMenu {
             element.classList.remove("active");
         }
     }
-    private Activeswitch(el: HTMLElement, ev) {
 
-    }
     // Refresh() {
     //     // Calls the refresh functions
     //     this._Charts.refresh();
