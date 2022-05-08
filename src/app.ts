@@ -6,7 +6,7 @@ import { DataSource, TransItem, ExpenseItem, IncomeItem } from "./ds";
 import Strings from "./strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "./Tabs/Table";
-import { ChartsComponent } from "./Tabs/Charts";
+//import { ChartsComponent } from "./Components/Charts/monthlyExpense";
 import { SubNavigation } from "./Components/subNav";
 import { Tabs } from "./Components/Tabs";
 
@@ -52,7 +52,7 @@ export class App {
         new SubNavigation({
             el: el,
             onRefresh: () => {
-                appTabs.Refresh();
+                //appTabs.Refresh();
             }
         });
 

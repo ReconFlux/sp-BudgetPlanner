@@ -7,16 +7,16 @@ import Strings from "../strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "../Tabs/Table";
 import { SubNavigation } from "../Components/subNav";
-import { ChartSideMenu } from "../Tabs/chartsSideMenu";
+import { MonthlyExpenseChart } from "../Components/Charts/monthlyExpense";
 
 /**
  * Main Application
  */
-export class Tabs {
+export class ChartSideMenu {
 
     static TabNames = {
-        DataSheet: "Datasheet",
-        Charts: "Charts"
+        monthlyExpense: "Monthly Expenses",
+        monthlyIncome: "Monthly Income"
     }
 
 
@@ -24,8 +24,9 @@ export class Tabs {
     // Vars
     private _el: HTMLElement;
     private _Tabs: Components.INav = null;
-    private _DataSheet: TableTab = null;
-    private _SideMenu: ChartSideMenu = null;
+    private _monthlyexpense: MonthlyExpenseChart = null;
+
+
 
 
     // Constructor
@@ -34,6 +35,7 @@ export class Tabs {
         ItemForm.ListName = Strings.Lists.Main;
 
         this._el = el;
+
         // Render the dashboard
         this.render(el);
     }
@@ -42,24 +44,28 @@ export class Tabs {
 
     // Renders the dashboard
     private render(el: HTMLElement) {
+        let mainContainer = document.createElement("div");
+
+
+        // Side Bar
         this._Tabs = Components.Nav({
-            el: el,
+            el: mainContainer,
+            // onLinkRendered: (el) => {
+            //     el.classList.add("fs-5");
+            // },
+            id: "SideMenuTabs",
+            isVertical: true,
             isPills: true,
-            onLinkRendered: (el) => {
-                el.classList.add("fs-5");
-            },
-            id: "Tabs",
             isTabs: true,
-            enableFill: true,
             items: [
                 {
-                    title: Tabs.TabNames.DataSheet,
+                    title: ChartSideMenu.TabNames.monthlyExpense,
                     isActive: true,
-                    onRenderTab: (_tab) => { this._DataSheet = new TableTab(_tab); }
+                    onRenderTab: (ChartLoader) => { this._monthlyexpense = new MonthlyExpenseChart(ChartLoader); }
                 },
                 {
-                    title: Tabs.TabNames.Charts,
-                    onRenderTab: (el) => { this._SideMenu = new ChartSideMenu(el); }
+                    title: ChartSideMenu.TabNames.monthlyIncome,
+                    //onRenderTab: (el) => { this._Charts = new ChartsComponent(el); }
                 }
             ]
         });

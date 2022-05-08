@@ -1,4 +1,4 @@
-import Strings from "../strings";
+import Strings from "../../strings";
 import { Components } from "gd-sprest-bs";
 import { Dashboard, IItemFormCreateProps, Navigation, ItemForm, DataTable } from "dattatable";
 import * as jQuery from "jquery";
@@ -7,12 +7,12 @@ import Chart from 'chart.js/auto';
 import { registerables } from 'chart.js';
 import { getRelativePosition } from 'chart.js/helpers';
 import { ArrayListener } from 'chart.js/helpers';
-import { DataSource, ExpenseItem } from "../ds";
-import { formatDateValue, getFieldValue } from "../common";
-import { ChartData } from "../Components/ChartLogic";
+import { DataSource, ExpenseItem } from "../../ds";
+import { formatDateValue, getFieldValue } from "../../common";
+import { ChartData } from "../ChartLogic";
 
 
-export class ChartsComponent {
+export class MonthlyExpenseChart {
 
     // Vars
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -61,25 +61,21 @@ export class ChartsComponent {
 
     // Render Chart
     render(el: HTMLElement) {
+
         // Driv Creation
         let headContainer = document.createElement("div");
         let _canvas = document.createElement("canvas");
-        // Chart Navigation
-        this._Header = new Navigation({
-            el: headContainer,
-            title: "Transactions Chart",
-            hideFilter: true,
-            hideSearch: true,
-            onRendering: props => {
-                props.type = Components.NavbarTypes.Light;
-                props.id = "Chart_Header";
-            },
-        });
-        el.prepend(headContainer);
+
         // Constants ( for the chart )
         const options = {
             maintainAspectRatio: true,
             responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Monthly Expenses'
+                }
+            }
         }
 
         const chartData = {
@@ -88,7 +84,7 @@ export class ChartsComponent {
                     label: "Expenses",
                     data: ChartData._ExpenseSum,
                     borderColor: 'rgba(255, 0, 0, 1)',
-                    backgroundColor: 'rgba(219, 219, 219, 0.3)',
+                    backgroundColor: 'rgba(109, 39, 39, 0.45)',
                     fill: true,
                     parsing: {
                         yAxisKey: 'sum',

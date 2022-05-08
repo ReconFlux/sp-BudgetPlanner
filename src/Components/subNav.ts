@@ -6,7 +6,7 @@ import { DataSource, TransItem, ExpenseItem, IncomeItem } from "../ds";
 import Strings from "../strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "../Tabs/Table";
-import { ChartsComponent } from "../Tabs/Charts";
+//import { ChartsComponent } from "./Charts/monthlyExpense";
 
 
 // Properties
@@ -25,7 +25,7 @@ export class SubNavigation {
     private _Tabs: Components.INav = null;
     private _footer: Footer = null;
     private _el: HTMLElement;
-    private _GChart: ChartsComponent = null;
+    //private _GChart: ChartsComponent = null;
     private _props: IProps = null;
 
     // Constructor
@@ -55,16 +55,9 @@ export class SubNavigation {
             onRendering: props => {
                 props.type = Components.NavbarTypes.Light
             },
-            itemsEnd: [
-                // {
-                //     text: "Update",
-                //     isButton: true,
-                //     onClick: () => {
-                //         this._props.onRefresh();
-                //     }
-                // },
+            items: [
                 {
-                    text: " ",
+                    text: " Add a transaction",
                     iconType: plusSquareFill,
                     iconSize: 22,
                     isButton: true,

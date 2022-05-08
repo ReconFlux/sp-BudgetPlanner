@@ -27,7 +27,7 @@ const Strings = {
     TimeFormat: "MM/DD/YYYY HH:mm:ss",
 
 
-    Version: "0.8.8",
+    Version: "1.0.1",
 
 };
 export default Strings;
