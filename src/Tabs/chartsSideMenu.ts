@@ -69,8 +69,10 @@ export class ChartSideMenu {
         // Left Side Menu
         let _btn_monthExpense = document.createElement("div");
         let _btn_Net = document.createElement("div");
+        let _btn_catExp = document.createElement("div");
         _leftside.appendChild(_btn_monthExpense);
         _leftside.appendChild(_btn_Net);
+        _leftside.appendChild(_btn_catExp);
 
         // Render the buttons
         Components.Button({
@@ -95,6 +97,18 @@ export class ChartSideMenu {
             onClick: (props, ev) => {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_NET') as HTMLElement;
+                self.classList.add(this._active);
+            }
+        });
+        Components.Button({
+            el: _btn_catExp,
+            text: "Expense Catalog",
+            className: "m-1 btn-chart",
+            id: "btn_catExp",
+            type: Components.ButtonTypes.OutlineDark,
+            onClick: (props, ev) => {
+                this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
+                let self = document.getElementById('btn_catExp') as HTMLElement;
                 self.classList.add(this._active);
             }
         });
