@@ -103,7 +103,7 @@ export class ChartSideMenu {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_NET') as HTMLElement;
                 self.classList.add(this._active);
-                this._monthlyexpense.switchtoNET;
+                this.SwitchtoNet();
             }
         });
         Components.Button({
@@ -140,5 +140,9 @@ export class ChartSideMenu {
         // Calls the refresh functions
         console.log("CHART REFRESH");
         this._monthlyexpense.refresh();
+    }
+
+    SwitchtoNet() {
+        this._monthlyexpense.switchtoNET();
     }
 }
