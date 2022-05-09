@@ -53,11 +53,15 @@ export class MonthlyExpenseChart {
                 this._datachart.update();
             });
         }
-
-
-
     }
 
+
+    // Updates Chart to NET data
+    switchtoNET() {
+        loadNetData(this._datachart);
+        this._datachart.update();
+        console.log("switches Title");
+    }
 
     // Render Chart
     render(el: HTMLElement) {
@@ -127,5 +131,9 @@ function addData(chart, Mdata) {
             xAxisKey: 'month'
         }
     });
+    chart.update();
+}
+function loadNetData(chart) {
+    chart.options.plugins.title.text = 'NET';
     chart.update();
 }

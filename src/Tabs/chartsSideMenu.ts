@@ -98,6 +98,7 @@ export class ChartSideMenu {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_NET') as HTMLElement;
                 self.classList.add(this._active);
+                this._monthlyexpense.switchtoNET;
             }
         });
         Components.Button({
@@ -116,7 +117,7 @@ export class ChartSideMenu {
 
 
         _rightside.appendChild(this._chart);
-        this._monthlyexpense = new MonthlyExpenseChart(this._chart)
+        this._monthlyexpense = new MonthlyExpenseChart(this._chart);
     }
 
     private chartRender() {
