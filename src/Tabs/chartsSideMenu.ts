@@ -147,6 +147,5 @@ export class ChartSideMenu {
     Refresh() {
         // Calls the refresh functions
         this._monthlyexpense.refresh();
-        
     }
 }
