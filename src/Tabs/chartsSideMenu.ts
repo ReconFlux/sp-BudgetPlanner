@@ -10,20 +10,11 @@ import { SubNavigation } from "../Components/subNav";
 import { MonthlyExpenseChart } from "../Components/Charts/monthlyExpense";
 
 
-export interface Idataset {
-
-    label: string;
-    data: any;
-    borderColor: string;
-    backgroundColor: string;
-    fill: string;
-    parsing: {
-        yAxisKey: string;
-        xAxisKey: string;
-    }
-
+// Properties
+interface IProps {
+    el: HTMLElement;
+    onRefresh: () => void;
 }
-
 
 export class ChartSideMenu {
 
@@ -40,30 +31,33 @@ export class ChartSideMenu {
     private _monthlyexpense: MonthlyExpenseChart = null;
     private _chart = document.createElement("div");
     private _active: string = "active";
-
+    private _props: IProps = null;
 
 
 
     // Constructor
-    constructor(el: HTMLElement) {
+    constructor(props: IProps) {
 
-        this._el = el;
+        this._el = document.createElement("div");
+        this._props.el.appendChild(this._el);
 
+
+        this._props = props;
         // Render the dashboard
-        this.render(el);
+        this.render();
         this.chartRender();
     }
 
 
 
     // Renders the dashboard
-    private render(el: HTMLElement) {
+    private render() {
         let _mainContainer = document.createElement("div");
         let _row = document.createElement("div");
         let _leftside = document.createElement("div");
         let _rightside = document.createElement("div");
 
-        el.appendChild(_mainContainer);
+        this._el.appendChild(_mainContainer);
 
         // container props
         _mainContainer.classList.add("container");
@@ -150,9 +144,9 @@ export class ChartSideMenu {
         }
     }
 
-    // Refresh() {
-    //     // Calls the refresh functions
-    //     this._Charts.refresh();
-    //     this._DataSheet.refresh();
-    // }
+    Refresh() {
+        // Calls the refresh functions
+        this._monthlyexpense.refresh();
+        
+    }
 }

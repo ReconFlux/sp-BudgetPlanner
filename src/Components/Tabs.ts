@@ -64,16 +64,23 @@ export class Tabs {
                 },
                 {
                     title: Tabs.TabNames.Charts,
-                    onRenderTab: (_sidemenuElement) => { this._SideMenu = new ChartSideMenu(_sidemenuElement); }
+                    onRenderTab: (_sidemenuElement) => {
+                        this._SideMenu = new ChartSideMenu({
+                            el: _sidemenuElement,
+                            onRefresh: () => {
+                                this._SideMenu.Refresh();
+                            }
+                        });
+                    }
                 }
             ]
         });
         // Update the classes on tabs
         this._Tabs.el.classList.remove("nav-tabs");
     }
-    // Refresh() {
-    //     // Calls the refresh functions
-    //     this._Charts.refresh();
-    //     this._DataSheet.refresh();
-    // }
+    Refresh() {
+        // Calls the refresh functions
+        //this._Charts.refresh();
+        this._DataSheet.refresh();
+    }
 }

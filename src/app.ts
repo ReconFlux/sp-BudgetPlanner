@@ -52,7 +52,7 @@ export class App {
         new SubNavigation({
             el: el,
             onRefresh: () => {
-                //appTabs.Refresh();
+                appTabs.Refresh();
             }
         });
 

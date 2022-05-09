@@ -84,7 +84,3 @@ function updateFormProperties(props: Components.IListFormEditProps): Components.
     props.excludeFields = ["Title"];
     return props;
 }
-
-function refresh() {
-    this._Chart.refresh();
-}
