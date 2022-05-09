@@ -9,9 +9,22 @@ import { TableTab } from "../Tabs/Table";
 import { SubNavigation } from "../Components/subNav";
 import { MonthlyExpenseChart } from "../Components/Charts/monthlyExpense";
 
-/**
- * Main Application
- */
+
+export interface Idataset {
+
+    label: string;
+    data: any;
+    borderColor: string;
+    backgroundColor: string;
+    fill: string;
+    parsing: {
+        yAxisKey: string;
+        xAxisKey: string;
+    }
+
+}
+
+
 export class ChartSideMenu {
 
     static TabNames = {
