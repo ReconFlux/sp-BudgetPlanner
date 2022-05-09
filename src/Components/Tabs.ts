@@ -81,6 +81,7 @@ export class Tabs {
     Refresh() {
         // Calls the refresh functions
         //this._Charts.refresh();
+        this._SideMenu.Refresh();
         this._DataSheet.refresh();
     }
 }

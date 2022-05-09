@@ -26,7 +26,7 @@ export class ChartSideMenu {
 
 
     // Vars
-    private _el: HTMLElement;
+    private _el: HTMLElement = null;
     private _Tabs: Components.INav = null;
     private _monthlyexpense: MonthlyExpenseChart = null;
     private _chart = document.createElement("div");
@@ -38,14 +38,12 @@ export class ChartSideMenu {
     // Constructor
     constructor(props: IProps) {
 
-        this._el = document.createElement("div");
-        this._props.el.appendChild(this._el);
 
-
+        this._el = props.el;
         this._props = props;
         // Render the dashboard
         this.render();
-        this.chartRender();
+
     }
 
 
@@ -127,12 +125,6 @@ export class ChartSideMenu {
         this._monthlyexpense = new MonthlyExpenseChart(this._chart);
     }
 
-    private chartRender() {
-
-        // TODO
-        console.log("Checks what chart your displaying;")
-    }
-
     private setActiveElement(el: HTMLElement) {
         // Get the buttons
         let elements = document.querySelectorAll(".btn-chart");
@@ -146,6 +138,7 @@ export class ChartSideMenu {
 
     Refresh() {
         // Calls the refresh functions
+        console.log("CHART REFRESH");
         this._monthlyexpense.refresh();
     }
 }
