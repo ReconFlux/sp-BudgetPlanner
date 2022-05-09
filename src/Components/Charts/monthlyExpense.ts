@@ -75,7 +75,6 @@ export class DATAChart {
 
     // Render Chart
     render(el: HTMLElement) {
-
         // Driv Creation
         let headContainer = document.createElement("div");
         let _canvas = document.createElement("canvas");
@@ -107,16 +106,14 @@ export class DATAChart {
                 }
             ]
         }
-
         // Chart Container Props
         _canvas.id = "myChart";
         _canvas.width = 100;
-        _canvas.height = 25;
+        _canvas.height = 27;
         headContainer.appendChild(_canvas);
         el.appendChild(headContainer);
         // Chart Creation
         const ctx = _canvas.getContext('2d');
-
         // Chart Creation
         this._datachart = new Chart(ctx, {
             type: 'line',
