@@ -12,7 +12,7 @@ import { formatDateValue, getFieldValue } from "../../common";
 import { ChartData } from "../ChartLogic";
 
 
-export class MonthlyExpenseChart {
+export class DATAChart {
 
     // Vars
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -59,6 +59,16 @@ export class MonthlyExpenseChart {
     // Updates Chart to NET data
     switchtoNET() {
         loadNetData(this._datachart);
+        this._datachart.update();
+        console.log("switches Title");
+    }
+    switchtoCATExp() {
+        loadExpCATData(this._datachart);
+        this._datachart.update();
+        console.log("switches Title");
+    }
+    switchtoMonthlyExp() {
+        loadMonthlyExp(this._datachart);
         this._datachart.update();
         console.log("switches Title");
     }
@@ -135,5 +145,13 @@ function addData(chart, Mdata) {
 }
 function loadNetData(chart) {
     chart.options.plugins.title.text = 'NET';
+    chart.update();
+}
+function loadExpCATData(chart) {
+    chart.options.plugins.title.text = 'Expense Catalog';
+    chart.update();
+}
+function loadMonthlyExp(chart) {
+    chart.options.plugins.title.text = 'Monthly Expenses';
     chart.update();
 }

@@ -7,7 +7,7 @@ import Strings from "../strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "../Tabs/Table";
 import { SubNavigation } from "../Components/subNav";
-import { MonthlyExpenseChart } from "../Components/Charts/monthlyExpense";
+import { DATAChart } from "../Components/Charts/monthlyExpense";
 
 
 // Properties
@@ -28,7 +28,7 @@ export class ChartSideMenu {
     // Vars
     private _el: HTMLElement = null;
     private _Tabs: Components.INav = null;
-    private _monthlyexpense: MonthlyExpenseChart = null;
+    private _DATAChart: DATAChart = null;
     private _chart = document.createElement("div");
     private _active: string = "active";
     private _props: IProps = null;
@@ -90,6 +90,7 @@ export class ChartSideMenu {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_Expenses') as HTMLElement;
                 self.classList.add(this._active);
+                this.switchtoMonthlyExp();
             }
 
         });
@@ -116,13 +117,14 @@ export class ChartSideMenu {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_catExp') as HTMLElement;
                 self.classList.add(this._active);
+                this.SwitchtoCATExp();
             }
         });
 
 
 
         _rightside.appendChild(this._chart);
-        this._monthlyexpense = new MonthlyExpenseChart(this._chart);
+        this._DATAChart = new DATAChart(this._chart);
     }
 
     private setActiveElement(el: HTMLElement) {
@@ -139,10 +141,18 @@ export class ChartSideMenu {
     Refresh() {
         // Calls the refresh functions
         console.log("CHART REFRESH");
-        this._monthlyexpense.refresh();
+        this._DATAChart.refresh();
     }
 
     SwitchtoNet() {
-        this._monthlyexpense.switchtoNET();
+        this._DATAChart.switchtoNET();
+    }
+
+    SwitchtoCATExp() {
+        this._DATAChart.switchtoCATExp();
+    }
+
+    switchtoMonthlyExp() {
+        this._DATAChart.switchtoMonthlyExp();
     }
 }
