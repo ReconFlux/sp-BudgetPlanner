@@ -34,13 +34,12 @@ export class DATAChart {
     }
     // Load Data
     private loadData() {
-        ChartData.loadJanuaryData();
-        ChartData.loadFebruaryData();
-        ChartData.loadMarchData();
-        ChartData.loadAprilData();
-        ChartData.loadMayData();
-        console.log(ChartData._NETSum);
-
+        // ChartData.loadJanuaryData();
+        // ChartData.loadFebruaryData();
+        // ChartData.loadMarchData();
+        // ChartData.loadAprilData();
+        // ChartData.loadMayData();
+        ChartData.loadIncomeData();
     }
 
 
