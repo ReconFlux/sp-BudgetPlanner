@@ -17,7 +17,7 @@ export interface IncomeItem extends Types.SP.ListItem {
     category: string;
 }
 
-// Expense (Everything except Income and Status combined)
+// Expense (Everything except Income combined)
 export interface ExpenseItem extends Types.SP.ListItem {
     date: string;
     amount: number;

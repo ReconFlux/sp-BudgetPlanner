@@ -64,17 +64,17 @@ export class DATAChart {
     switchtoNET() {
         loadNetData(this._datachart);
         this._datachart.update();
-        console.log("switches Title");
+        console.log("switches to NET");
     }
     switchtoCATExp() {
         loadExpCATData(this._datachart);
         this._datachart.update();
-        console.log("switches Title");
+        console.log("switches to CAT");
     }
     switchtoMonthlyExp() {
         loadMonthlyExp(this._datachart);
         this._datachart.update();
-        console.log("switches Title");
+        console.log("switches to Monthly");
     }
 
     // Render Chart
