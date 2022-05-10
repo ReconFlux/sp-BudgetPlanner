@@ -36,8 +36,8 @@ export class ChartData {
     static loadJanuaryData(): any {
         this._JanuaryExpenses = [];
         this._ExpenseSum = [];
-        let JanIncome = [];
         this._NETSum = [];
+        let JanIncome = [];
         if (DataSource.ExpenseItems) {
             for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
                 let item = DataSource.ExpenseItems[i];
@@ -102,6 +102,8 @@ export class ChartData {
     }
     static loadFebruaryData(): any {
         this._FebruaryExpenses = [];
+        this._ExpenseSum = [];
+        this._NETSum = [];
         let febIncome = [];
         if (DataSource.ExpenseItems) {
             for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
@@ -166,6 +168,8 @@ export class ChartData {
     }
     static loadMarchData(): any {
         this._MarchExpenses = [];
+        this._ExpenseSum = [];
+        this._NETSum = [];
         let marIncome = [];
         if (DataSource.ExpenseItems) {
             for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
@@ -229,6 +233,8 @@ export class ChartData {
     }
     static loadAprilData(): any {
         this._AprilExpenses = [];
+        this._ExpenseSum = [];
+        this._NETSum = [];
         let aprIncome = [];
         if (DataSource.ExpenseItems) {
             for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
@@ -292,6 +298,8 @@ export class ChartData {
     }
     static loadMayData(): any {
         this._MayExpenses = [];
+        this._ExpenseSum = [];
+        this._NETSum = [];
         let mayIncome = [];
         if (DataSource.ExpenseItems) {
             for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
