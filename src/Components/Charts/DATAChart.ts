@@ -39,9 +39,7 @@ export class DATAChart {
         ChartData.loadMarchData();
         ChartData.loadAprilData();
         ChartData.loadMayData();
-        console.log(ChartData._ExpenseSum);
-        // LoadIncomeData
-        // Load NET
+        console.log(ChartData._NETSum);
 
     }
 

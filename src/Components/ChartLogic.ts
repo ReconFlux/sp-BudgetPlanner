@@ -121,12 +121,12 @@ export class ChartData {
                 }
             }
             // Get the Sum for the month of Feb
-            let _FebSum: number = 0;
+
             let FebExpItems = this._FebruaryExpenses;
-            FebExpItems.forEach((item) => _FebSum += item.amount);
+            FebExpItems.forEach((item) => this._FebSum += item.amount);
             // Push to the ExpenseSum Array
             this._ExpenseSum.push({
-                sum: _FebSum,
+                sum: this._FebSum,
                 month: "February"
             });
         }
@@ -185,12 +185,11 @@ export class ChartData {
                 }
             }
             // Get the Sum for the month of Jan
-            let _MarchSum: number = 0;
             let FebExpItems = this._MarchExpenses;
-            FebExpItems.forEach((item) => _MarchSum += item.amount);
+            FebExpItems.forEach((item) => this._MarSum += item.amount);
             // Push to the ExpenseSum Array
             this._ExpenseSum.push({
-                sum: _MarchSum,
+                sum: this._MarSum,
                 month: "March"
             });
         }
@@ -249,15 +248,47 @@ export class ChartData {
                 }
             }
             // Get the Sum for the month of Jan
-            let _AprilSum: number = 0;
             let FebExpItems = this._AprilExpenses;
-            FebExpItems.forEach((item) => _AprilSum += item.amount);
+            FebExpItems.forEach((item) => this._AprSum += item.amount);
             // Push to the ExpenseSum Array
             this._ExpenseSum.push({
-                sum: _AprilSum,
+                sum: this._AprSum,
                 month: "April"
             });
         }
+        // Aprils Income
+        if (DataSource.IncomeItems) {
+            for (let i = 0; i < DataSource.IncomeItems.length; i++) {
+                let item = DataSource.IncomeItems[i];
+
+                let itemDate = getFieldValue("date", item);
+                let itemCategory = getFieldValue("category", item);
+                let itemAmount = getFieldValue("amount", item);
+                let wholeMOnth = formatDateValue(itemDate);
+                // get total expense for April
+                if (wholeMOnth == "April") {
+
+                    aprIncome.push({
+                        amount: item.amount,
+                        month: wholeMOnth
+                    });
+                }
+            }
+
+            // Get the Sum of Income
+            let _aprIncomeSum: number = 0;
+            let aprNet: number = 0;
+            aprIncome.forEach((item) => _aprIncomeSum += item.amount);
+
+            aprNet = _aprIncomeSum - this._AprSum;
+
+
+            // Add April Net to the Net Array
+            this._NETSum.push({
+                amount: aprNet,
+                month: "April"
+            });
+        };
     }
     static loadMayData(): any {
         this._MayExpenses = [];
@@ -280,15 +311,47 @@ export class ChartData {
                 }
             }
             // Get the Sum for the month of Jan
-            let _MaySum: number = 0;
             let FebExpItems = this._MayExpenses;
-            FebExpItems.forEach((item) => _MaySum += item.amount);
+            FebExpItems.forEach((item) => this._MaySum += item.amount);
             // Push to the ExpenseSum Array
             this._ExpenseSum.push({
-                sum: _MaySum,
+                sum: this._MaySum,
                 month: "May"
             });
         }
+        // Mays Income
+        if (DataSource.IncomeItems) {
+            for (let i = 0; i < DataSource.IncomeItems.length; i++) {
+                let item = DataSource.IncomeItems[i];
+
+                let itemDate = getFieldValue("date", item);
+                let itemCategory = getFieldValue("category", item);
+                let itemAmount = getFieldValue("amount", item);
+                let wholeMOnth = formatDateValue(itemDate);
+                // get total expense for May
+                if (wholeMOnth == "May") {
+
+                    mayIncome.push({
+                        amount: item.amount,
+                        month: wholeMOnth
+                    });
+                }
+            }
+
+            // Get the Sum of Income
+            let _MayIncomeSum: number = 0;
+            let MayNet: number = 0;
+            mayIncome.forEach((item) => _MayIncomeSum += item.amount);
+
+            MayNet = _MayIncomeSum - this._MaySum;
+
+
+            // Add May Net to the Net Array
+            this._NETSum.push({
+                amount: MayNet,
+                month: "May"
+            });
+        };
     }
 
 
