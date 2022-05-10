@@ -26,6 +26,7 @@ export class ChartData {
 
 
     static _ExpenseSum: Array<any> = null;
+    static _NETSum: Array<any> = null;
 
     static loadJanuaryData(): any {
         this._JanuaryExpenses = [];

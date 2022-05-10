@@ -40,6 +40,9 @@ export class DATAChart {
         ChartData.loadAprilData();
         ChartData.loadMayData();
         console.log(ChartData._ExpenseSum);
+        // LoadIncomeData
+        // Load NET
+
     }
 
 
@@ -47,6 +50,7 @@ export class DATAChart {
     refresh() {
         console.log("Refreshes Chart");
         this.loadData();
+        // TODO. Add a validation to check what button is toggled so that it can load that dataset
         if (DataSource.ExpenseItems) {
             DataSource.init().then((items) => {
                 addData(this._datachart, ChartData._ExpenseSum);

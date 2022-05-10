@@ -7,7 +7,7 @@ import Strings from "../strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "../Tabs/Table";
 import { SubNavigation } from "../Components/subNav";
-import { DATAChart } from "../Components/Charts/monthlyExpense";
+import { DATAChart } from "../Components/Charts/DATAChart";
 
 
 // Properties
