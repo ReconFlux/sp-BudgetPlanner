@@ -309,7 +309,16 @@ export class ChartData {
             console.log(this._IncomeSum);
         }
     }
-    static loadNETData(): any { }
+    static loadNETData(): any {
+        this._NETSum = [];
+
+        let expenses = this._ExpenseSum as any;
+        let incomes = this._IncomeSum as any;
+        for (let i = 0; i <= expenses.length; i++) {
+            let expenseAmount = expenses.amount;
+        }
+        console.log(this._NETSum);
+    }
 
 
 

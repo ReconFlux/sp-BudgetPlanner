@@ -36,6 +36,7 @@ export class DATAChart {
     private loadData() {
         ChartData.loadExpenseData();
         ChartData.loadIncomeData();
+        ChartData.loadNETData();
     }
 
 
