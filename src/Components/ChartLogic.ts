@@ -11,31 +11,27 @@ import { DataSource, ExpenseItem } from "../ds";
 import { formatDateValue, getFieldValue } from "../common";
 
 export class ChartData {
-    static _JanuaryExpenses: Array<any> = null;
-    static _FebruaryExpenses: Array<any> = null;
-    static _MarchExpenses: Array<any> = null;
-    static _AprilExpenses: Array<any> = null;
-    static _MayExpenses: Array<any> = null;
-    static _JuneExpenses: Array<any> = null;
-    static _JulyExpenses: Array<any> = null;
-    static _AugustExpenses: Array<any> = null;
-    static _SeptemberExpenses: Array<any> = null;
-    static _OctoberExpenses: Array<any> = null;
-    static _NovemberExpenses: Array<any> = null;
-    static _DecemberExpenses: Array<any> = null;
 
-
+    // Arrays
     static _ExpenseSum: Array<any> = null;
     static _NETSum: Array<any> = null;
     static _IncomeSum: Array<any> = null;
-    static _JansIncome: Array<any> = null;
-    static _FebsIncome: Array<any> = null;
-    static _JanIncomeSumNumber: number = 0;
-    static _FebSum: number = 0;
-    static _MarSum: number = 0;
-    static _AprSum: number = 0;
-    static _MaySum: number = 0;
 
+    // Numbers for the sums
+    static _JanIncomeSum: number = 0;
+    static _FebIncomeSum: number = 0;
+    static _MarIncomeSum: number = 0;
+    static _AprIncomeSum: number = 0;
+    static _MayIncomeSum: number = 0;
+    static _JuneIncomeSum: number = 0;
+    static _JulyIncomeSum: number = 0;
+    static _AugIncomeSum: number = 0;
+    static _SeptIncomeSum: number = 0;
+    static _OctIncomeSum: number = 0;
+    static _NovIncomeSum: number = 0;
+    static _DecIncomeSum: number = 0;
+
+    // Months
     static Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     // static loadJanuaryData(): any {
@@ -404,36 +400,132 @@ export class ChartData {
 
     // Loads the NET for each month
     static loadIncomeData(): any {
+        this._IncomeSum = [];
         if (DataSource.IncomeItems) {
-            let incomedata = [];
-            let itemAmountSum
+
             for (let i = 0; i < DataSource.IncomeItems.length; i++) {
                 let item = DataSource.IncomeItems[i];
-
                 let itemDate = getFieldValue("date", item);
                 let itemCategory = getFieldValue("category", item);
                 let itemAmount = getFieldValue("amount", item);
                 let wholeMOnth = formatDateValue(itemDate);
 
-                
+                // Switch for Each Month
+                switch (wholeMOnth) {
+                    case this.Months[0]: {
+                        this._JanIncomeSum = this._JanIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[1]: {
+                        this._FebIncomeSum = this._FebIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[2]: {
+                        this._MarIncomeSum = this._MarIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[3]: {
+                        this._AprIncomeSum = this._AprIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[4]: {
+                        this._MayIncomeSum = this._MayIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[5]: {
+                        this._JuneIncomeSum = this._JuneIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[6]: {
+                        this._JulyIncomeSum = this._JulyIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[7]: {
+                        this._AugIncomeSum = this._AugIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[8]: {
+                        this._SeptIncomeSum = this._SeptIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[9]: {
+                        this._OctIncomeSum = this._OctIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[10]: {
+                        this._NovIncomeSum = this._NovIncomeSum += itemAmount;
+                        break;
+                    }
+                    case this.Months[11]: {
+                        this._DecIncomeSum = this._DecIncomeSum += itemAmount;
+                        break;
+                    }
+                }
 
-                incomedata.push({
-                    amount: itemAmount,
-                    category: itemCategory,
-                    date: wholeMOnth
-                });
             }
-           
-            
-            // incomedata.forEach((item) => {
-            //     switch (item.date) {
+            // Push sums into an array
+            // Jans
+            this._IncomeSum.push({
+                amount: this._JanIncomeSum,
+                month: this.Months[0]
+            });
+            // Febs
+            this._IncomeSum.push({
+                amount: this._FebIncomeSum,
+                month: this.Months[1]
+            });
+            // Mars
+            this._IncomeSum.push({
+                amount: this._MarIncomeSum,
+                month: this.Months[2]
+            });
+            // Aprs
+            this._IncomeSum.push({
+                amount: this._AprIncomeSum,
+                month: this.Months[3]
+            });
+            // Mays
+            this._IncomeSum.push({
+                amount: this._MayIncomeSum,
+                month: this.Months[4]
+            });
+            // Junes
+            this._IncomeSum.push({
+                amount: this._JuneIncomeSum,
+                month: this.Months[5]
+            });
+            // Julys
+            this._IncomeSum.push({
+                amount: this._JulyIncomeSum,
+                month: this.Months[6]
+            });
+            // Augs
+            this._IncomeSum.push({
+                amount: this._AugIncomeSum,
+                month: this.Months[7]
+            });
+            // Septs
+            this._IncomeSum.push({
+                amount: this._SeptIncomeSum,
+                month: this.Months[8]
+            });
+            // Octs
+            this._IncomeSum.push({
+                amount: this._OctIncomeSum,
+                month: this.Months[9]
+            });
+            // Novs
+            this._IncomeSum.push({
+                amount: this._NovIncomeSum,
+                month: this.Months[10]
+            });
+            // Decs
+            this._IncomeSum.push({
+                amount: this._DecIncomeSum,
+                month: this.Months[11]
+            });
+            console.log(this._IncomeSum);
 
-            //         case this.Months[0]:
-
-            //             console.log(item.amount);
-            //             break;
-            //     }
-            // });
         }
 
     }
