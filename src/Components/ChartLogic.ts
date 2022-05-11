@@ -14,8 +14,9 @@ export class ChartData {
 
     // Arrays
     static _ExpenseSum: Array<any> = null;
-    static _NETSum: Array<any> = null;
+    static _NETDiff: Array<any> = null;
     static _IncomeSum: Array<any> = null;
+    static _CatelogArray: Array<any> = null;
 
     // Numbers for the INCOME sums
     static _JanIncomeSum: number = 0;
@@ -44,7 +45,20 @@ export class ChartData {
     static _OctEXPSum: number = 0;
     static _NovEXPSum: number = 0;
     static _DecEXPSum: number = 0;
+
     // Numbers for the NET sums
+    static _JanNETDiff: number = 0;
+    static _FebNETDiff: number = 0;
+    static _MarNETDiff: number = 0;
+    static _AprNETDiff: number = 0;
+    static _MayNETDiff: number = 0;
+    static _JuneNETDiff: number = 0;
+    static _JulyNETDiff: number = 0;
+    static _AugNETDiff: number = 0;
+    static _SeptNETDiff: number = 0;
+    static _OctNETDiff: number = 0;
+    static _NovNETDiff: number = 0;
+    static _DecNETDiff: number = 0;
 
     // Months
     static Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -310,14 +324,84 @@ export class ChartData {
         }
     }
     static loadNETData(): any {
-        this._NETSum = [];
+        this._NETDiff = [];
+        if (DataSource.TransItems) {
 
-        let expenses = this._ExpenseSum as any;
-        let incomes = this._IncomeSum as any;
-        for (let i = 0; i <= expenses.length; i++) {
-            let expenseAmount = expenses.amount;
+            this._JanNETDiff = this._JanIncomeSum - this._JanEXPSum
+            this._FebNETDiff = this._FebIncomeSum - this._FebEXPSum
+            this._MarNETDiff = this._MarIncomeSum - this._MarEXPSum
+            this._AprNETDiff = this._AprIncomeSum - this._AprEXPSum
+            this._MayNETDiff = this._MayIncomeSum - this._MayEXPSum
+            this._JuneNETDiff = this._JuneIncomeSum - this._JuneEXPSum
+            this._JulyNETDiff = this._JulyIncomeSum - this._JulyEXPSum
+            this._AugNETDiff = this._AugIncomeSum - this._AugEXPSum
+            this._SeptNETDiff = this._SeptIncomeSum - this._SeptEXPSum
+            this._OctNETDiff = this._OctIncomeSum - this._OctEXPSum
+            this._NovNETDiff = this._NovIncomeSum - this._NovEXPSum
+            this._DecNETDiff = this._DecIncomeSum - this._DecEXPSum
+
+            this._NETDiff.push({
+                amount: this._JanNETDiff,
+                month: this.Months[0]
+            });
+            this._NETDiff.push({
+                amount: this._FebNETDiff,
+                month: this.Months[1]
+            });
+            this._NETDiff.push({
+                amount: this._MarNETDiff,
+                month: this.Months[2]
+            });
+            this._NETDiff.push({
+                amount: this._AprNETDiff,
+                month: this.Months[3]
+            });
+            this._NETDiff.push({
+                amount: this._MayNETDiff,
+                month: this.Months[4]
+            });
+            this._NETDiff.push({
+                amount: this._JuneNETDiff,
+                month: this.Months[5]
+            });
+            this._NETDiff.push({
+                amount: this._JulyNETDiff,
+                month: this.Months[6]
+            });
+            this._NETDiff.push({
+                amount: this._AugNETDiff,
+                month: this.Months[7]
+            });
+            this._NETDiff.push({
+                amount: this._SeptNETDiff,
+                month: this.Months[8]
+            });
+            this._NETDiff.push({
+                amount: this._OctNETDiff,
+                month: this.Months[9]
+            });
+            this._NETDiff.push({
+                amount: this._NovNETDiff,
+                month: this.Months[10]
+            });
+            this._NETDiff.push({
+                amount: this._DecNETDiff,
+                month: this.Months[11]
+            });
         }
-        console.log(this._NETSum);
+        console.log("Net Differences Loaded: ");
+        console.log(this._NETDiff);
+    }
+    static loadExpenseCatelog(): any {
+        this._CatelogArray = [];
+        for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+            let items = DataSource.ExpenseItems[i];
+            this._CatelogArray.push({
+                amount: items.amount,
+                category: items.category
+            });
+        }
+        console.log(this._CatelogArray);
     }
 
 
