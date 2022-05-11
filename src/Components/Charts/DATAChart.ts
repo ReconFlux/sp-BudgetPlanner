@@ -17,7 +17,7 @@ export class DATAChart {
     // Vars
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
-    ChartLabels = ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"]
+    static ChartLabels = ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"]
     // private _Sum = null;
     private _Header: Navigation = null;
     private _el: HTMLElement;
@@ -95,7 +95,7 @@ export class DATAChart {
         const chartData = {
             datasets: [
                 {
-                    label: this.ChartLabels[0],
+                    label: DATAChart.ChartLabels[0],
                     data: ChartData._ExpenseSum,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(109, 39, 39, 0.45)',
@@ -159,11 +159,10 @@ function loadNetData(chart, NetData) {
 }
 function loadExpCATData(chart, CatData) {
     chart.options.plugins.title.text = 'Expense Catalog';
-    chart.options.plugins.title.text = 'Expense Catalog';
     chart.data.datasets.pop();
     chart.data.datasets.push({
         type: 'bar',
-        label: DATAChart.CategoryLabels[2],
+        label: DATAChart.ChartLabels[2],
         data: CatData,
         borderColor: 'rgba(255, 0, 0, 1)',
         backgroundColor: 'rgba(109, 39, 39, 0.45)',

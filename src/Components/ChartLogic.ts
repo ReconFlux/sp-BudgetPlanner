@@ -60,9 +60,21 @@ export class ChartData {
     static _NovNETDiff: number = 0;
     static _DecNETDiff: number = 0;
 
+    // Numbers for the Category Sums
+    static _MortageSum: number = 0;
+    static _InternetSum: number = 0;
+    static _PhoneSum: number = 0;
+    static _CarSum: number = 0;
+    static _UtilitySum: number = 0;
+    static _MiscSum: number = 0;
+    static _LeisureSum: number = 0;
+    static _EssentialsSum: number = 0;
+
     // Months
     static Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+    // Expense Categories
+    static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
     // Loads the Expenses for each month
     static loadExpenseData(): any {
         this._ExpenseSum = [];
@@ -394,16 +406,83 @@ export class ChartData {
     }
     static loadExpenseCatelog(): any {
         this._CatelogArray = [];
+
         for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-            let items = DataSource.ExpenseItems[i];
-            this._CatelogArray.push({
-                amount: items.amount,
-                category: items.category
-            });
+            let item = DataSource.ExpenseItems[i];
+            let itemDate = getFieldValue("date", item);
+            let itemCategory = getFieldValue("category", item);
+            let itemAmount = getFieldValue("amount", item);
+            let wholeMOnth = formatDateValue(itemDate);
+
+            // Sums for each category
+            switch (itemCategory) {
+                case this.CategoryLabels[0]: {
+                    this._MortageSum = this._MortageSum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[1]: {
+                    this._InternetSum = this._InternetSum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[2]: {
+                    this._PhoneSum = this._PhoneSum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[3]: {
+                    this._CarSum = this._CarSum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[4]: {
+                    this._UtilitySum = this._UtilitySum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[5]: {
+                    this._MiscSum = this._MiscSum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[6]: {
+                    this._LeisureSum = this._LeisureSum += itemAmount;
+                    break;
+                }
+                case this.CategoryLabels[7]: {
+                    this._EssentialsSum = this._EssentialsSum += itemAmount;
+                    break;
+                }
+            }
         }
+        this._CatelogArray.push({
+            amount: this._MortageSum,
+            category: this.CategoryLabels[0]
+        });
+        this._CatelogArray.push({
+            amount: this._InternetSum,
+            category: this.CategoryLabels[1]
+        });
+        this._CatelogArray.push({
+            amount: this._PhoneSum,
+            category: this.CategoryLabels[2]
+        });
+        this._CatelogArray.push({
+            amount: this._CarSum,
+            category: this.CategoryLabels[3]
+        });
+        this._CatelogArray.push({
+            amount: this._UtilitySum,
+            category: this.CategoryLabels[4]
+        });
+        this._CatelogArray.push({
+            amount: this._MiscSum,
+            category: this.CategoryLabels[5]
+        });
+        this._CatelogArray.push({
+            amount: this._LeisureSum,
+            category: this.CategoryLabels[6]
+        });
+        this._CatelogArray.push({
+            amount: this._EssentialsSum,
+            category: this.CategoryLabels[7]
+        });
         console.log(this._CatelogArray);
     }
-
-
 
 }
