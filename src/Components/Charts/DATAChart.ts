@@ -17,6 +17,7 @@ export class DATAChart {
     // Vars
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
+    ChartLabels = ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"]
     // private _Sum = null;
     private _Header: Navigation = null;
     private _el: HTMLElement;
@@ -25,6 +26,7 @@ export class DATAChart {
 
     private _datachart = null;
     get DataChart() { return this._datachart; }
+
 
     // Constructor
     constructor(el: HTMLElement) {
@@ -57,17 +59,17 @@ export class DATAChart {
 
     // Updates Chart to NET data
     switchtoNET() {
-        loadNetData(this._datachart);
+        loadNetData(this._datachart, ChartData._NETDiff);
         this._datachart.update();
         console.log("switches to NET");
     }
     switchtoCATExp() {
-        loadExpCATData(this._datachart);
+        loadExpCATData(this._datachart, ChartData._CatelogArray);
         this._datachart.update();
         console.log("switches to CAT");
     }
     switchtoMonthlyExp() {
-        loadMonthlyExp(this._datachart);
+        loadMonthlyExp(this._datachart, ChartData._ExpenseSum);
         this._datachart.update();
         console.log("switches to Monthly");
     }
@@ -93,13 +95,13 @@ export class DATAChart {
         const chartData = {
             datasets: [
                 {
-                    label: "Expenses",
+                    label: this.ChartLabels[0],
                     data: ChartData._ExpenseSum,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(109, 39, 39, 0.45)',
                     fill: true,
                     parsing: {
-                        yAxisKey: 'sum',
+                        yAxisKey: 'amount',
                         xAxisKey: 'month'
                     }
                 }
@@ -127,27 +129,63 @@ function addData(chart, Mdata) {
     chart.data.datasets.pop();
     chart.data.datasets.push({
 
-        label: "Expenses",
+        label: "Monthly Expenses",
         data: Mdata,
         borderColor: 'rgba(255, 0, 0, 1)',
         backgroundColor: 'rgba(109, 39, 39, 0.45)',
         fill: true,
         parsing: {
-            yAxisKey: 'sum',
+            yAxisKey: 'amount',
             xAxisKey: 'month'
         }
     });
     chart.update();
 }
-function loadNetData(chart) {
+function loadNetData(chart, NetData) {
     chart.options.plugins.title.text = 'NET';
+    chart.data.datasets.pop();
+    chart.data.datasets.push({
+        label: DATAChart.CategoryLabels[1],
+        data: NetData,
+        borderColor: 'rgba(255, 0, 0, 1)',
+        backgroundColor: 'rgba(109, 39, 39, 0.45)',
+        fill: true,
+        parsing: {
+            yAxisKey: 'amount',
+            xAxisKey: 'month'
+        }
+    });
     chart.update();
 }
-function loadExpCATData(chart) {
+function loadExpCATData(chart, CatData) {
     chart.options.plugins.title.text = 'Expense Catalog';
+    chart.data.datasets.pop();
+    chart.data.datasets.push({
+        label: DATAChart.CategoryLabels[2],
+        data: CatData,
+        borderColor: 'rgba(255, 0, 0, 1)',
+        backgroundColor: 'rgba(109, 39, 39, 0.45)',
+        fill: true,
+        parsing: {
+            yAxisKey: 'amount',
+            xAxisKey: 'category'
+        }
+    });
     chart.update();
 }
-function loadMonthlyExp(chart) {
+function loadMonthlyExp(chart, ExpData) {
     chart.options.plugins.title.text = 'Monthly Expenses';
+    chart.data.datasets.pop();
+    chart.data.datasets.push({
+        label: DATAChart.CategoryLabels[0],
+        data: ExpData,
+        borderColor: 'rgba(255, 0, 0, 1)',
+        backgroundColor: 'rgba(109, 39, 39, 0.45)',
+        fill: true,
+        parsing: {
+            yAxisKey: 'amount',
+            xAxisKey: 'month'
+        }
+    });
     chart.update();
 }
