@@ -12,3 +12,19 @@ canvas {
 
 #btn_NET {width: 100% !important;}
 #btn_catExp { width: 100% !important;}
+
+a#Charts-tab.active {
+  background-color: black !important;
+  border-color: black !important;
+}
+a#Charts-tab {
+  color: white !important;
+}
+a#Datasheet-tab.active {
+  background-color: black !important;
+  border-color: black !important;
+  color: white !important;
+}
+a#Datasheet-tab {
+  color: white !important;
+}

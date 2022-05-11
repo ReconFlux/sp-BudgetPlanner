@@ -159,8 +159,10 @@ function loadNetData(chart, NetData) {
 }
 function loadExpCATData(chart, CatData) {
     chart.options.plugins.title.text = 'Expense Catalog';
+    chart.options.plugins.title.text = 'Expense Catalog';
     chart.data.datasets.pop();
     chart.data.datasets.push({
+        type: 'bar',
         label: DATAChart.CategoryLabels[2],
         data: CatData,
         borderColor: 'rgba(255, 0, 0, 1)',
