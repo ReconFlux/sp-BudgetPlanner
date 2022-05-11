@@ -34,11 +34,7 @@ export class DATAChart {
     }
     // Load Data
     private loadData() {
-        // ChartData.loadJanuaryData();
-        // ChartData.loadFebruaryData();
-        // ChartData.loadMarchData();
-        // ChartData.loadAprilData();
-        // ChartData.loadMayData();
+        ChartData.loadExpenseData();
         ChartData.loadIncomeData();
     }
 
