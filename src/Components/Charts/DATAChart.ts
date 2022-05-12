@@ -18,6 +18,7 @@ export class DATAChart {
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
     static ChartLabels = ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"]
+    private _active: string = "active";
     // private _Sum = null;
     private _Header: Navigation = null;
     private _el: HTMLElement;
@@ -45,15 +46,28 @@ export class DATAChart {
 
     // Refresh
     refresh() {
-        console.log("Refreshes Chart");
-        this.loadData();
-        // TODO. Add a validation to check what button is toggled so that it can load that dataset
-        if (DataSource.ExpenseItems) {
-            DataSource.init().then((items) => {
-                addData(this._datachart, ChartData._ExpenseSum);
-                this._datachart.update();
-            });
+        console.log("Refreshes The Chart V2");
+        let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
+        let btn_NET = document.getElementById('btn_NET') as HTMLElement;
+        let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
+
+        DataSource.init();
+        // Check button selection
+        if (btn_Expenses.classList.contains(this._active)) {
+            loadMonthlyExp(this._datachart, ChartData._ExpenseSum);
+            this._datachart.update();
+            console.log("Refresh Method: Buton Expenses is active");
+        } else if (btn_NET.classList.contains(this._active)) {
+            loadNetData(this._datachart, ChartData._NETDiff);
+            this._datachart.update();
+            console.log("Refresh Method: Buton NET is active");
+        } else if (btn_catExp.classList.contains(this._active)) {
+            loadExpCATData(this._datachart, ChartData._CatelogArray);
+            this._datachart.update();
+            console.log("Refresh Method: Buton CAT EXP is active");
         }
+
+
     }
 
 
@@ -142,51 +156,67 @@ function addData(chart, Mdata) {
     chart.update();
 }
 function loadNetData(chart, NetData) {
-    chart.options.plugins.title.text = 'NET';
-    chart.data.datasets.pop();
-    chart.data.datasets.push({
-        label: DATAChart.CategoryLabels[1],
-        data: NetData,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(109, 39, 39, 0.45)',
-        fill: true,
-        parsing: {
-            yAxisKey: 'amount',
-            xAxisKey: 'month'
-        }
+
+    DataSource.loadTransItems().then(() => {
+
+        ChartData._IncomeSum.length = 0;
+        ChartData._ExpenseSum.length = 0;
+
+        chart.options.plugins.title.text = 'NET';
+        chart.data.datasets.pop(NetData);
+        chart.data.datasets.push({
+            label: DATAChart.ChartLabels[1],
+            data: NetData,
+            borderColor: 'rgba(255, 0, 0, 1)',
+            backgroundColor: 'rgba(109, 39, 39, 0.45)',
+            fill: true,
+            parsing: {
+                yAxisKey: 'amount',
+                xAxisKey: 'month'
+            }
+        });
+        chart.update();
     });
-    chart.update();
 }
 function loadExpCATData(chart, CatData) {
-    chart.options.plugins.title.text = 'Expense Catalog';
-    chart.data.datasets.pop();
-    chart.data.datasets.push({
-        type: 'bar',
-        label: DATAChart.ChartLabels[2],
-        data: CatData,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(109, 39, 39, 0.45)',
-        fill: true,
-        parsing: {
-            yAxisKey: 'amount',
-            xAxisKey: 'category'
-        }
+
+    DataSource.loadTransItems().then(() => {
+
+        ChartData._CatelogArray.length = 0;
+        chart.options.plugins.title.text = 'Expense Catalog';
+        chart.data.datasets.pop(CatData);
+        chart.data.datasets.push({
+            type: 'bar',
+            label: DATAChart.ChartLabels[2],
+            data: CatData,
+            borderColor: 'rgba(255, 0, 0, 1)',
+            backgroundColor: 'rgba(109, 39, 39, 0.45)',
+            fill: true,
+            parsing: {
+                yAxisKey: 'amount',
+                xAxisKey: 'category'
+            }
+        });
+        chart.update();
     });
-    chart.update();
 }
 function loadMonthlyExp(chart, ExpData) {
-    chart.options.plugins.title.text = 'Monthly Expenses';
-    chart.data.datasets.pop();
-    chart.data.datasets.push({
-        label: DATAChart.CategoryLabels[0],
-        data: ExpData,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(109, 39, 39, 0.45)',
-        fill: true,
-        parsing: {
-            yAxisKey: 'amount',
-            xAxisKey: 'month'
-        }
+
+    DataSource.loadExpenseItems().then(() => {
+        ChartData._ExpenseSum.length = 0,
+            chart.options.plugins.title.text = 'Monthly Expenses';
+        chart.data.datasets.pop(ExpData);
+        chart.data.datasets.push({
+            label: DATAChart.ChartLabels[0],
+            data: ExpData,
+            borderColor: 'rgba(255, 0, 0, 1)',
+            backgroundColor: 'rgba(109, 39, 39, 0.45)',
+            fill: true,
+            parsing: {
+                yAxisKey: 'amount',
+                xAxisKey: 'month'
+            }
+        });
+        chart.update();
     });
-    chart.update();
 }

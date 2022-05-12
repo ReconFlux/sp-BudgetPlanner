@@ -78,132 +78,139 @@ export class ChartData {
     // Loads the Expenses for each month
     static loadExpenseData(): any {
         this._ExpenseSum = [];
-        if (DataSource.ExpenseItems) {
 
-            for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-                let item = DataSource.ExpenseItems[i];
-                let itemDate = getFieldValue("date", item);
-                let itemCategory = getFieldValue("category", item);
-                let itemAmount = getFieldValue("amount", item);
-                let wholeMOnth = formatDateValue(itemDate);
+        DataSource.loadExpenseItems().then(() => {
 
-                // Sums for each month
-                switch (wholeMOnth) {
-                    case this.Months[0]: {
-                        this._JanEXPSum = this._JanEXPSum += itemAmount;
-                        break;
+            if (DataSource.ExpenseItems) {
+
+                for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+                    let item = DataSource.ExpenseItems[i];
+                    let itemDate = getFieldValue("date", item);
+                    let itemCategory = getFieldValue("category", item);
+                    let itemAmount = getFieldValue("amount", item);
+                    let wholeMOnth = formatDateValue(itemDate);
+
+                    // Sums for each month
+                    switch (wholeMOnth) {
+                        case this.Months[0]: {
+                            this._JanEXPSum = this._JanEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[1]: {
+                            this._FebEXPSum = this._FebEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[2]: {
+                            this._MarEXPSum = this._MarEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[3]: {
+                            this._AprEXPSum = this._AprEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[4]: {
+                            this._MayEXPSum = this._MayEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[5]: {
+                            this._JuneEXPSum = this._JuneEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[6]: {
+                            this._JulyEXPSum = this._JulyEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[7]: {
+                            this._AugEXPSum = this._AugEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[8]: {
+                            this._SeptEXPSum = this._SeptEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[9]: {
+                            this._OctEXPSum = this._OctEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[10]: {
+                            this._NovEXPSum = this._NovEXPSum += itemAmount;
+                            break;
+                        }
+                        case this.Months[11]: {
+                            this._DecEXPSum = this._DecEXPSum += itemAmount;
+                            break;
+                        }
                     }
-                    case this.Months[1]: {
-                        this._FebEXPSum = this._FebEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[2]: {
-                        this._MarEXPSum = this._MarEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[3]: {
-                        this._AprEXPSum = this._AprEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[4]: {
-                        this._MayEXPSum = this._MayEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[5]: {
-                        this._JuneEXPSum = this._JuneEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[6]: {
-                        this._JulyEXPSum = this._JulyEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[7]: {
-                        this._AugEXPSum = this._AugEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[8]: {
-                        this._SeptEXPSum = this._SeptEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[9]: {
-                        this._OctEXPSum = this._OctEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[10]: {
-                        this._NovEXPSum = this._NovEXPSum += itemAmount;
-                        break;
-                    }
-                    case this.Months[11]: {
-                        this._DecEXPSum = this._DecEXPSum += itemAmount;
-                        break;
-                    }
+
                 }
-
+                // Push sums into an array
+                // Jans
+                this._ExpenseSum.push({
+                    amount: this._JanEXPSum,
+                    month: this.Months[0]
+                });
+                // Febs
+                this._ExpenseSum.push({
+                    amount: this._FebEXPSum,
+                    month: this.Months[1]
+                });
+                // Mars
+                this._ExpenseSum.push({
+                    amount: this._MarEXPSum,
+                    month: this.Months[2]
+                });
+                // Aprs
+                this._ExpenseSum.push({
+                    amount: this._AprEXPSum,
+                    month: this.Months[3]
+                });
+                // Mays
+                this._ExpenseSum.push({
+                    amount: this._MayEXPSum,
+                    month: this.Months[4]
+                });
+                // Junes
+                this._ExpenseSum.push({
+                    amount: this._JuneEXPSum,
+                    month: this.Months[5]
+                });
+                // Julys
+                this._ExpenseSum.push({
+                    amount: this._JulyEXPSum,
+                    month: this.Months[6]
+                });
+                // Augs
+                this._ExpenseSum.push({
+                    amount: this._AugEXPSum,
+                    month: this.Months[7]
+                });
+                // Septs
+                this._ExpenseSum.push({
+                    amount: this._SeptEXPSum,
+                    month: this.Months[8]
+                });
+                // Octs
+                this._ExpenseSum.push({
+                    amount: this._OctEXPSum,
+                    month: this.Months[9]
+                });
+                // Novs
+                this._ExpenseSum.push({
+                    amount: this._NovEXPSum,
+                    month: this.Months[10]
+                });
+                // Decs
+                this._ExpenseSum.push({
+                    amount: this._DecEXPSum,
+                    month: this.Months[11]
+                });
+                console.log("Loading Expense Array: ");
+                console.log(this._ExpenseSum);
             }
-            // Push sums into an array
-            // Jans
-            this._ExpenseSum.push({
-                amount: this._JanEXPSum,
-                month: this.Months[0]
-            });
-            // Febs
-            this._ExpenseSum.push({
-                amount: this._FebEXPSum,
-                month: this.Months[1]
-            });
-            // Mars
-            this._ExpenseSum.push({
-                amount: this._MarEXPSum,
-                month: this.Months[2]
-            });
-            // Aprs
-            this._ExpenseSum.push({
-                amount: this._AprEXPSum,
-                month: this.Months[3]
-            });
-            // Mays
-            this._ExpenseSum.push({
-                amount: this._MayEXPSum,
-                month: this.Months[4]
-            });
-            // Junes
-            this._ExpenseSum.push({
-                amount: this._JuneEXPSum,
-                month: this.Months[5]
-            });
-            // Julys
-            this._ExpenseSum.push({
-                amount: this._JulyEXPSum,
-                month: this.Months[6]
-            });
-            // Augs
-            this._ExpenseSum.push({
-                amount: this._AugEXPSum,
-                month: this.Months[7]
-            });
-            // Septs
-            this._ExpenseSum.push({
-                amount: this._SeptEXPSum,
-                month: this.Months[8]
-            });
-            // Octs
-            this._ExpenseSum.push({
-                amount: this._OctEXPSum,
-                month: this.Months[9]
-            });
-            // Novs
-            this._ExpenseSum.push({
-                amount: this._NovEXPSum,
-                month: this.Months[10]
-            });
-            // Decs
-            this._ExpenseSum.push({
-                amount: this._DecEXPSum,
-                month: this.Months[11]
-            });
-            console.log("Loading Expense Array: ");
-            console.log(this._ExpenseSum);
-        }
+
+        });
+
+
     }
     // Loads the Income for each month
     static loadIncomeData(): any {
