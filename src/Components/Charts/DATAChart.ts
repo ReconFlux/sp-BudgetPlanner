@@ -46,27 +46,26 @@ export class DATAChart {
 
     // Refresh
     refresh() {
-        console.log("Refreshes The Chart V2");
+        console.log("Data Chart Refresh Method Called");
         let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
         let btn_NET = document.getElementById('btn_NET') as HTMLElement;
         let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
 
-        DataSource.init();
-        // Check button selection
-        if (btn_Expenses.classList.contains(this._active)) {
-            loadMonthlyExp(this._datachart, ChartData._ExpenseSum);
+        DataSource.init().then(() => {
+            this.loadData();
             this._datachart.update();
-            console.log("Refresh Method: Buton Expenses is active");
-        } else if (btn_NET.classList.contains(this._active)) {
-            loadNetData(this._datachart, ChartData._NETDiff);
-            this._datachart.update();
-            console.log("Refresh Method: Buton NET is active");
-        } else if (btn_catExp.classList.contains(this._active)) {
-            loadExpCATData(this._datachart, ChartData._CatelogArray);
-            this._datachart.update();
-            console.log("Refresh Method: Buton CAT EXP is active");
-        }
-
+            // Checks the button state
+            if (btn_Expenses.classList.contains(this._active)) {
+                this.switchtoMonthlyExp();
+                console.log("Monthly Expense Button is active, refreshes exp array");
+            } else if (btn_NET.classList.contains(this._active)) {
+                this.switchtoNET();
+                console.log("NET Button si active, refreshes Net Data");
+            } else if (btn_catExp.classList.contains(this._active)) {
+                this.switchtoCATExp();
+                console.log("Cat Exp button is active, refreshes Cat Exp Data");
+            }
+        });
 
     }
 
@@ -157,10 +156,7 @@ function addData(chart, Mdata) {
 }
 function loadNetData(chart, NetData) {
 
-    DataSource.loadTransItems().then(() => {
-
-        ChartData._IncomeSum.length = 0;
-        ChartData._ExpenseSum.length = 0;
+    DataSource.init().then(() => {
 
         chart.options.plugins.title.text = 'NET';
         chart.data.datasets.pop(NetData);
@@ -180,9 +176,9 @@ function loadNetData(chart, NetData) {
 }
 function loadExpCATData(chart, CatData) {
 
-    DataSource.loadTransItems().then(() => {
+    DataSource.init().then(() => {
 
-        ChartData._CatelogArray.length = 0;
+        //ChartData._CatelogArray.length = 0;
         chart.options.plugins.title.text = 'Expense Catalog';
         chart.data.datasets.pop(CatData);
         chart.data.datasets.push({
@@ -202,9 +198,9 @@ function loadExpCATData(chart, CatData) {
 }
 function loadMonthlyExp(chart, ExpData) {
 
-    DataSource.loadExpenseItems().then(() => {
-        ChartData._ExpenseSum.length = 0,
-            chart.options.plugins.title.text = 'Monthly Expenses';
+    DataSource.init().then(() => {
+        //ChartData._ExpenseSum.length = 0,
+        chart.options.plugins.title.text = 'Monthly Expenses';
         chart.data.datasets.pop(ExpData);
         chart.data.datasets.push({
             label: DATAChart.ChartLabels[0],
