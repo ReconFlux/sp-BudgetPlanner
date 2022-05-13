@@ -2,13 +2,13 @@
   "errors": [],
   "warnings": [],
   "version": "4.44.2",
-  "hash": "f218b4fbcadb06a21388",
-  "time": 11374,
-  "builtAt": 1652463722046,
+  "hash": "814aeb5ec0d912bb083a",
+  "time": 11235,
+  "builtAt": 1652464505741,
   "publicPath": "",
   "outputPath": "C:\\Users\\tsgtr\\BudgetPlanner\\sp-BudgetPlanner\\spfx\\dist",
   "assetsByChunkName": {
-    "budget-planner-web-part": "budget-planner-web-part_6881b34ff56b9c600a8a.js"
+    "budget-planner-web-part": "budget-planner-web-part_094e12fc1feaf1714585.js"
   },
   "assets": [
     {
@@ -28,8 +28,8 @@
       "emitted": true
     },
     {
-      "name": "budget-planner-web-part_6881b34ff56b9c600a8a.js",
-      "size": 1697728,
+      "name": "budget-planner-web-part_094e12fc1feaf1714585.js",
+      "size": 1697750,
       "chunks": [
         0
       ],
@@ -43,7 +43,7 @@
       "isOverSizeLimit": true
     },
     {
-      "name": "budget-planner-web-part_6881b34ff56b9c600a8a.js.LICENSE.txt",
+      "name": "budget-planner-web-part_094e12fc1feaf1714585.js.LICENSE.txt",
       "size": 78,
       "chunks": [],
       "chunkNames": [],
@@ -58,7 +58,7 @@
         0
       ],
       "assets": [
-        "budget-planner-web-part_6881b34ff56b9c600a8a.js"
+        "budget-planner-web-part_094e12fc1feaf1714585.js"
       ],
       "children": {},
       "childAssets": {},
@@ -71,7 +71,7 @@
         0
       ],
       "assets": [
-        "budget-planner-web-part_6881b34ff56b9c600a8a.js"
+        "budget-planner-web-part_094e12fc1feaf1714585.js"
       ],
       "children": {},
       "childAssets": {},
@@ -84,14 +84,14 @@
       "rendered": true,
       "initial": true,
       "entry": true,
-      "size": 1701299,
+      "size": 1701322,
       "names": [
         "budget-planner-web-part"
       ],
       "files": [
-        "budget-planner-web-part_6881b34ff56b9c600a8a.js"
+        "budget-planner-web-part_094e12fc1feaf1714585.js"
       ],
-      "hash": "6dfac85d5896996c97cd",
+      "hash": "3f5c1801cc891685fe2c",
       "siblings": [],
       "parents": [],
       "children": [],
@@ -103,7 +103,7 @@
           "name": "./lib/webparts/budgetPlanner/BudgetPlannerWebPart.js",
           "index": 0,
           "index2": 5,
-          "size": 3660,
+          "size": 3683,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -138,7 +138,7 @@
             "ModuleConcatenation bailout: Module is an entry point"
           ],
           "depth": 0,
-          "source": "var __extends = (this && this.__extends) || (function () {\r\n    var extendStatics = function (d, b) {\r\n        extendStatics = Object.setPrototypeOf ||\r\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\r\n            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\r\n        return extendStatics(d, b);\r\n    };\r\n    return function (d, b) {\r\n        extendStatics(d, b);\r\n        function __() { this.constructor = d; }\r\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\r\n    };\r\n})();\r\nimport { Version } from '@microsoft/sp-core-library';\r\nimport { PropertyPaneTextField } from '@microsoft/sp-property-pane';\r\nimport { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';\r\n//import styles from './BudgetPlannerWebPart.module.scss';\r\nimport * as strings from 'BudgetPlannerWebPartStrings';\r\nimport \"../../../../dist/sp-BudgetPlanner.min.js\";\r\nvar BudgetPlannerWebPart = /** @class */ (function (_super) {\r\n    __extends(BudgetPlannerWebPart, _super);\r\n    function BudgetPlannerWebPart() {\r\n        var _this = _super !== null && _super.apply(this, arguments) || this;\r\n        _this._isDarkTheme = false;\r\n        _this._environmentMessage = '';\r\n        return _this;\r\n    }\r\n    BudgetPlannerWebPart.prototype.onInit = function () {\r\n        this._environmentMessage = this._getEnvironmentMessage();\r\n        return _super.prototype.onInit.call(this);\r\n    };\r\n    BudgetPlannerWebPart.prototype.render = function () {\r\n        SPBudgetPlanner.render(this.domElement, this.context);\r\n    };\r\n    BudgetPlannerWebPart.prototype._getEnvironmentMessage = function () {\r\n        if (!!this.context.sdks.microsoftTeams) { // running in Teams\r\n            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;\r\n        }\r\n        return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;\r\n    };\r\n    BudgetPlannerWebPart.prototype.onThemeChanged = function (currentTheme) {\r\n        if (!currentTheme) {\r\n            return;\r\n        }\r\n        this._isDarkTheme = !!currentTheme.isInverted;\r\n        var semanticColors = currentTheme.semanticColors;\r\n        this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);\r\n        this.domElement.style.setProperty('--link', semanticColors.link);\r\n        this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);\r\n    };\r\n    Object.defineProperty(BudgetPlannerWebPart.prototype, \"dataVersion\", {\r\n        get: function () {\r\n            return Version.parse('1.0');\r\n        },\r\n        enumerable: false,\r\n        configurable: true\r\n    });\r\n    BudgetPlannerWebPart.prototype.getPropertyPaneConfiguration = function () {\r\n        return {\r\n            pages: [\r\n                {\r\n                    header: {\r\n                        description: strings.PropertyPaneDescription\r\n                    },\r\n                    groups: [\r\n                        {\r\n                            groupName: strings.BasicGroupName,\r\n                            groupFields: [\r\n                                PropertyPaneTextField('description', {\r\n                                    label: strings.DescriptionFieldLabel\r\n                                })\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        };\r\n    };\r\n    return BudgetPlannerWebPart;\r\n}(BaseClientSideWebPart));\r\nexport default BudgetPlannerWebPart;\r\n//# sourceMappingURL=BudgetPlannerWebPart.js.map"
+          "source": "var __extends = (this && this.__extends) || (function () {\r\n    var extendStatics = function (d, b) {\r\n        extendStatics = Object.setPrototypeOf ||\r\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\r\n            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\r\n        return extendStatics(d, b);\r\n    };\r\n    return function (d, b) {\r\n        extendStatics(d, b);\r\n        function __() { this.constructor = d; }\r\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\r\n    };\r\n})();\r\nimport { Version } from '@microsoft/sp-core-library';\r\nimport { PropertyPaneTextField } from '@microsoft/sp-property-pane';\r\nimport { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';\r\n//import styles from './BudgetPlannerWebPart.module.scss';\r\nimport * as strings from 'BudgetPlannerWebPartStrings';\r\nimport \"../../../../dist/sp-BudgetPlanner.min.js\";\r\nvar BudgetPlannerWebPart = /** @class */ (function (_super) {\r\n    __extends(BudgetPlannerWebPart, _super);\r\n    function BudgetPlannerWebPart() {\r\n        var _this = _super !== null && _super.apply(this, arguments) || this;\r\n        _this._isDarkTheme = false;\r\n        _this._environmentMessage = '';\r\n        return _this;\r\n    }\r\n    BudgetPlannerWebPart.prototype.onInit = function () {\r\n        this._environmentMessage = this._getEnvironmentMessage();\r\n        return _super.prototype.onInit.call(this);\r\n    };\r\n    BudgetPlannerWebPart.prototype.render = function () {\r\n        SPBudgetPlanner.render(this.domElement, this.context, \"/sites/burtrumtech/\");\r\n    };\r\n    BudgetPlannerWebPart.prototype._getEnvironmentMessage = function () {\r\n        if (!!this.context.sdks.microsoftTeams) { // running in Teams\r\n            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;\r\n        }\r\n        return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;\r\n    };\r\n    BudgetPlannerWebPart.prototype.onThemeChanged = function (currentTheme) {\r\n        if (!currentTheme) {\r\n            return;\r\n        }\r\n        this._isDarkTheme = !!currentTheme.isInverted;\r\n        var semanticColors = currentTheme.semanticColors;\r\n        this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);\r\n        this.domElement.style.setProperty('--link', semanticColors.link);\r\n        this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);\r\n    };\r\n    Object.defineProperty(BudgetPlannerWebPart.prototype, \"dataVersion\", {\r\n        get: function () {\r\n            return Version.parse('1.0');\r\n        },\r\n        enumerable: false,\r\n        configurable: true\r\n    });\r\n    BudgetPlannerWebPart.prototype.getPropertyPaneConfiguration = function () {\r\n        return {\r\n            pages: [\r\n                {\r\n                    header: {\r\n                        description: strings.PropertyPaneDescription\r\n                    },\r\n                    groups: [\r\n                        {\r\n                            groupName: strings.BasicGroupName,\r\n                            groupFields: [\r\n                                PropertyPaneTextField('description', {\r\n                                    label: strings.DescriptionFieldLabel\r\n                                })\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        };\r\n    };\r\n    return BudgetPlannerWebPart;\r\n}(BaseClientSideWebPart));\r\nexport default BudgetPlannerWebPart;\r\n//# sourceMappingURL=BudgetPlannerWebPart.js.map"
         },
         {
           "id": "26ea",
@@ -492,7 +492,7 @@
       "name": "./lib/webparts/budgetPlanner/BudgetPlannerWebPart.js",
       "index": 0,
       "index2": 5,
-      "size": 3660,
+      "size": 3683,
       "cacheable": true,
       "built": true,
       "optional": false,
@@ -527,7 +527,7 @@
         "ModuleConcatenation bailout: Module is an entry point"
       ],
       "depth": 0,
-      "source": "var __extends = (this && this.__extends) || (function () {\r\n    var extendStatics = function (d, b) {\r\n        extendStatics = Object.setPrototypeOf ||\r\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\r\n            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\r\n        return extendStatics(d, b);\r\n    };\r\n    return function (d, b) {\r\n        extendStatics(d, b);\r\n        function __() { this.constructor = d; }\r\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\r\n    };\r\n})();\r\nimport { Version } from '@microsoft/sp-core-library';\r\nimport { PropertyPaneTextField } from '@microsoft/sp-property-pane';\r\nimport { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';\r\n//import styles from './BudgetPlannerWebPart.module.scss';\r\nimport * as strings from 'BudgetPlannerWebPartStrings';\r\nimport \"../../../../dist/sp-BudgetPlanner.min.js\";\r\nvar BudgetPlannerWebPart = /** @class */ (function (_super) {\r\n    __extends(BudgetPlannerWebPart, _super);\r\n    function BudgetPlannerWebPart() {\r\n        var _this = _super !== null && _super.apply(this, arguments) || this;\r\n        _this._isDarkTheme = false;\r\n        _this._environmentMessage = '';\r\n        return _this;\r\n    }\r\n    BudgetPlannerWebPart.prototype.onInit = function () {\r\n        this._environmentMessage = this._getEnvironmentMessage();\r\n        return _super.prototype.onInit.call(this);\r\n    };\r\n    BudgetPlannerWebPart.prototype.render = function () {\r\n        SPBudgetPlanner.render(this.domElement, this.context);\r\n    };\r\n    BudgetPlannerWebPart.prototype._getEnvironmentMessage = function () {\r\n        if (!!this.context.sdks.microsoftTeams) { // running in Teams\r\n            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;\r\n        }\r\n        return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;\r\n    };\r\n    BudgetPlannerWebPart.prototype.onThemeChanged = function (currentTheme) {\r\n        if (!currentTheme) {\r\n            return;\r\n        }\r\n        this._isDarkTheme = !!currentTheme.isInverted;\r\n        var semanticColors = currentTheme.semanticColors;\r\n        this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);\r\n        this.domElement.style.setProperty('--link', semanticColors.link);\r\n        this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);\r\n    };\r\n    Object.defineProperty(BudgetPlannerWebPart.prototype, \"dataVersion\", {\r\n        get: function () {\r\n            return Version.parse('1.0');\r\n        },\r\n        enumerable: false,\r\n        configurable: true\r\n    });\r\n    BudgetPlannerWebPart.prototype.getPropertyPaneConfiguration = function () {\r\n        return {\r\n            pages: [\r\n                {\r\n                    header: {\r\n                        description: strings.PropertyPaneDescription\r\n                    },\r\n                    groups: [\r\n                        {\r\n                            groupName: strings.BasicGroupName,\r\n                            groupFields: [\r\n                                PropertyPaneTextField('description', {\r\n                                    label: strings.DescriptionFieldLabel\r\n                                })\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        };\r\n    };\r\n    return BudgetPlannerWebPart;\r\n}(BaseClientSideWebPart));\r\nexport default BudgetPlannerWebPart;\r\n//# sourceMappingURL=BudgetPlannerWebPart.js.map"
+      "source": "var __extends = (this && this.__extends) || (function () {\r\n    var extendStatics = function (d, b) {\r\n        extendStatics = Object.setPrototypeOf ||\r\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\r\n            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\r\n        return extendStatics(d, b);\r\n    };\r\n    return function (d, b) {\r\n        extendStatics(d, b);\r\n        function __() { this.constructor = d; }\r\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\r\n    };\r\n})();\r\nimport { Version } from '@microsoft/sp-core-library';\r\nimport { PropertyPaneTextField } from '@microsoft/sp-property-pane';\r\nimport { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';\r\n//import styles from './BudgetPlannerWebPart.module.scss';\r\nimport * as strings from 'BudgetPlannerWebPartStrings';\r\nimport \"../../../../dist/sp-BudgetPlanner.min.js\";\r\nvar BudgetPlannerWebPart = /** @class */ (function (_super) {\r\n    __extends(BudgetPlannerWebPart, _super);\r\n    function BudgetPlannerWebPart() {\r\n        var _this = _super !== null && _super.apply(this, arguments) || this;\r\n        _this._isDarkTheme = false;\r\n        _this._environmentMessage = '';\r\n        return _this;\r\n    }\r\n    BudgetPlannerWebPart.prototype.onInit = function () {\r\n        this._environmentMessage = this._getEnvironmentMessage();\r\n        return _super.prototype.onInit.call(this);\r\n    };\r\n    BudgetPlannerWebPart.prototype.render = function () {\r\n        SPBudgetPlanner.render(this.domElement, this.context, \"/sites/burtrumtech/\");\r\n    };\r\n    BudgetPlannerWebPart.prototype._getEnvironmentMessage = function () {\r\n        if (!!this.context.sdks.microsoftTeams) { // running in Teams\r\n            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;\r\n        }\r\n        return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;\r\n    };\r\n    BudgetPlannerWebPart.prototype.onThemeChanged = function (currentTheme) {\r\n        if (!currentTheme) {\r\n            return;\r\n        }\r\n        this._isDarkTheme = !!currentTheme.isInverted;\r\n        var semanticColors = currentTheme.semanticColors;\r\n        this.domElement.style.setProperty('--bodyText', semanticColors.bodyText);\r\n        this.domElement.style.setProperty('--link', semanticColors.link);\r\n        this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered);\r\n    };\r\n    Object.defineProperty(BudgetPlannerWebPart.prototype, \"dataVersion\", {\r\n        get: function () {\r\n            return Version.parse('1.0');\r\n        },\r\n        enumerable: false,\r\n        configurable: true\r\n    });\r\n    BudgetPlannerWebPart.prototype.getPropertyPaneConfiguration = function () {\r\n        return {\r\n            pages: [\r\n                {\r\n                    header: {\r\n                        description: strings.PropertyPaneDescription\r\n                    },\r\n                    groups: [\r\n                        {\r\n                            groupName: strings.BasicGroupName,\r\n                            groupFields: [\r\n                                PropertyPaneTextField('description', {\r\n                                    label: strings.DescriptionFieldLabel\r\n                                })\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        };\r\n    };\r\n    return BudgetPlannerWebPart;\r\n}(BaseClientSideWebPart));\r\nexport default BudgetPlannerWebPart;\r\n//# sourceMappingURL=BudgetPlannerWebPart.js.map"
     },
     {
       "id": "26ea",

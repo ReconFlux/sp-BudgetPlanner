@@ -3,7 +3,7 @@
   "solution": {
     "name": "sp-budget-planner-client-side-solution",
     "id": "2f4bf9b2-228b-4f74-af75-670d843df31f",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,7 +30,7 @@
         "title": "sp-budget-planner Feature",
         "description": "The feature that activates elements of the sp-budget-planner solution.",
         "id": "c0d3336d-6d85-4a97-aeb1-5936f9ce9cca",
-        "version": "1.0.0.0"
+        "version": "1.0.0.1"
       }
     ]
   },

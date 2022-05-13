@@ -29,7 +29,7 @@ export default class BudgetPlannerWebPart extends BaseClientSideWebPart<IBudgetP
   }
 
   public render(): void {
-    SPBudgetPlanner.render(this.domElement, this.context);
+    SPBudgetPlanner.render(this.domElement, this.context, "/sites/burtrumtech/");
   }
 
   private _getEnvironmentMessage(): string {
