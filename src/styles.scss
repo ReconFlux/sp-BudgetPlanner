@@ -13,18 +13,40 @@ canvas {
 #btn_NET {width: 100% !important;}
 #btn_catExp { width: 100% !important;}
 
+a#Charts-tab:hover {
+  background-color: black !important;
+  color: white !important;
+  border-color: black !important;
+  border-width: thin !important;
+}
+
 a#Charts-tab.active {
   background-color: black !important;
   border-color: black !important;
+  color: white !important;
+  border-width: thin !important;
 }
 a#Charts-tab {
-  color: white !important;
+  color: black !important;
+  border-color: black !important;
+  border-width: thin !important;
+  background-color: white !important;
+}
+a#Datasheet-tab {
+  color: black !important;
+  border-color: black !important;
+  border-width: thin !important;
+  background-color: white !important
 }
 a#Datasheet-tab.active {
   background-color: black !important;
   border-color: black !important;
   color: white !important;
+  border-width: thin !important;
 }
-a#Datasheet-tab {
+a#Datasheet-tab:hover {
+  background-color: black !important;
   color: white !important;
+  border-color: black !important;
+  border-width: thin !important;
 }
