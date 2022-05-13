@@ -1,5 +1,6 @@
 canvas {
-    border: 1px dotted black;
+    border: 1px dotted #979797 !important;
+    background-color: #3c3c3c !important;
   }
 #SideMenu_MainContainer {
   max-width: 100% !important;
@@ -50,3 +51,4 @@ a#Datasheet-tab:hover {
   border-color: black !important;
   border-width: thin !important;
 }
+

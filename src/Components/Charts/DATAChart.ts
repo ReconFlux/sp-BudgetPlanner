@@ -112,8 +112,12 @@ export class DATAChart {
                 title: {
                     display: true,
                     text: 'Monthly Expenses'
-                }
+                },
             }
+        }
+
+        function plugin(chart) {
+
         }
 
         const chartData = {
