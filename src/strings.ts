@@ -15,7 +15,7 @@ export const setContext = (context, sourceUrl?: string) => {
  */
 const Strings = {
     AppElementId: "sp-BudgetPlanner",
-    GlobalVariable: "SPDashboard",
+    GlobalVariable: "SPBudgetPlanner",
     Lists: {
         Main: "Transactions"
     },

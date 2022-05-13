@@ -1,11 +1,15 @@
 {
   "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
     "isCreatingSolution": true,
-    "environment": "spo",
-    "version": "1.11.0",
+    "version": "1.14.0",
     "libraryName": "sp-budget-planner",
-    "libraryId": "b0a459ff-f355-413a-bf25-da536fa383e5",
+    "libraryId": "2f4bf9b2-228b-4f74-af75-670d843df31f",
+    "environment": "spo",
     "packageManager": "npm",
+    "solutionName": "sp-BudgetPlanner",
+    "solutionShortDescription": "sp-BudgetPlanner description",
+    "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "componentType": "webpart"
   }
