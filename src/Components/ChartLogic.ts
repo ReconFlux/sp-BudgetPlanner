@@ -12,6 +12,7 @@ import { formatDateValue, getFieldValue } from "../common";
 
 export class ChartData {
 
+
     // Arrays
     static _ExpenseSum: Array<any> = null;
     static _NETDiff: Array<any> = null;
@@ -499,6 +500,81 @@ export class ChartData {
             }
             console.log(this._CatelogArray);
         });
+    }
+
+    static ClearData(): PromiseLike<void> {
+        return new Promise((resolve, reject) => {
+            // call the clearallarray method
+            ChartData.clearALLArrays();
+            console.log("Loading Expense Array: ");
+            console.log(this._ExpenseSum);
+            console.log("Income Array Loaded: ");
+            console.log(this._IncomeSum);
+            console.log("Net Differences Loaded: ");
+            console.log(this._NETDiff);
+            console.log("Expense Category Loaded: ");
+            console.log(this._CatelogArray);
+
+            resolve();
+        });
+    }
+
+    static clearALLArrays() {
+        ChartData._ExpenseSum = [];
+        ChartData._NETDiff = [];
+        ChartData._IncomeSum = [];
+        ChartData._CatelogArray = [];
+        // Numbers for the INCOME sums
+        ChartData._JanIncomeSum = 0;
+        ChartData._FebIncomeSum = 0;
+        ChartData._MarIncomeSum = 0;
+        ChartData._AprIncomeSum = 0;
+        ChartData._MayIncomeSum = 0;
+        ChartData._JuneIncomeSum = 0;
+        ChartData._JulyIncomeSum = 0;
+        ChartData._AugIncomeSum = 0;
+        ChartData._SeptIncomeSum = 0;
+        ChartData._OctIncomeSum = 0;
+        ChartData._NovIncomeSum = 0;
+        ChartData._DecIncomeSum = 0;
+
+        // Numbers of the EXPENSE sums
+        ChartData._JanEXPSum = 0;
+        ChartData._FebEXPSum = 0;
+        ChartData._MarEXPSum = 0;
+        ChartData._AprEXPSum = 0;
+        ChartData._MayEXPSum = 0;
+        ChartData._JuneEXPSum = 0;
+        ChartData._JulyEXPSum = 0;
+        ChartData._AugEXPSum = 0;
+        ChartData._SeptEXPSum = 0;
+        ChartData._OctEXPSum = 0;
+        ChartData._NovEXPSum = 0;
+        ChartData._DecEXPSum = 0;
+
+        // Numbers for the NET sums
+        ChartData._JanNETDiff = 0;
+        ChartData._FebNETDiff = 0;
+        ChartData._MarNETDiff = 0;
+        ChartData._AprNETDiff = 0;
+        ChartData._MayNETDiff = 0;
+        ChartData._JuneNETDiff = 0;
+        ChartData._JulyNETDiff = 0;
+        ChartData._AugNETDiff = 0;
+        ChartData._SeptNETDiff = 0;
+        ChartData._OctNETDiff = 0;
+        ChartData._NovNETDiff = 0;
+        ChartData._DecNETDiff = 0;
+
+        // Numbers for the Category Sums
+        ChartData._MortageSum = 0;
+        ChartData._InternetSum = 0;
+        ChartData._PhoneSum = 0;
+        ChartData._CarSum = 0;
+        ChartData._UtilitySum = 0;
+        ChartData._MiscSum = 0;
+        ChartData._LeisureSum = 0;
+        ChartData._EssentialsSum = 0;
     }
 
 }

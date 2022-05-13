@@ -46,27 +46,33 @@ export class DATAChart {
 
     // Refresh
     refresh() {
-        console.log("Data Chart Refresh Method Called");
-        let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
-        let btn_NET = document.getElementById('btn_NET') as HTMLElement;
-        let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
+        console.log("Data Chart Refresh Method Called, clear the data is FIRST:");
+        // Clear the data
+        ChartData.ClearData().then(() => {
+            // Grab the buttons
+            let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
+            let btn_NET = document.getElementById('btn_NET') as HTMLElement;
+            let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
 
-        DataSource.init().then(() => {
-            this.loadData();
-            this._datachart.update();
-            // Checks the button state
-            if (btn_Expenses.classList.contains(this._active)) {
-                this.switchtoMonthlyExp();
-                console.log("Monthly Expense Button is active, refreshes exp array");
-            } else if (btn_NET.classList.contains(this._active)) {
-                this.switchtoNET();
-                console.log("NET Button si active, refreshes Net Data");
-            } else if (btn_catExp.classList.contains(this._active)) {
-                this.switchtoCATExp();
-                console.log("Cat Exp button is active, refreshes Cat Exp Data");
-            }
+            // Grabs the latest and then updates the chart based on what button you selected
+            // DataSource.init().then(() => {
+
+            //     //this.loadData();
+            //     this._datachart.update();
+            //     // Checks the button state
+            //     if (btn_Expenses.classList.contains(this._active)) {
+            //         this.switchtoMonthlyExp();
+            //         console.log("Monthly Expense Button is active, refreshes exp array");
+            //     } else if (btn_NET.classList.contains(this._active)) {
+            //         this.switchtoNET();
+            //         console.log("NET Button si active, refreshes Net Data");
+            //     } else if (btn_catExp.classList.contains(this._active)) {
+            //         this.switchtoCATExp();
+            //         console.log("Cat Exp button is active, refreshes Cat Exp Data");
+            //     }
+
+            // });
         });
-
     }
 
 
