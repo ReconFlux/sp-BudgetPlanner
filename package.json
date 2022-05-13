@@ -4,9 +4,11 @@
   "description": "A Budget Planner that is developed for SharePoint 2013/2016/ Online and Teams.\r # Pre-Reqs",
   "main": "src/index.ts",
   "scripts": {
-    "all": "npm run build && npm run prod",
-    "build": "webpack --mode=development",
-    "prod": "webpack --mode=production"
+    "all": "npm run clean && npm run build && npm run prod && npm run spfx",
+    "build": "webpack --mode development",
+    "clean": "node ./clean.js",
+    "prod": "webpack --mode production",
+    "spfx": "cd spfx && npm run package"
   },
   "repository": {
     "type": "git",

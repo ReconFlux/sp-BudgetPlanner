@@ -1,0 +1,55 @@
+{
+  "id": "3139711f-f788-4a41-bce4-1e1a50a8e1cd",
+  "alias": "BudgetPlannerWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart"
+  ],
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Other"
+      },
+      "title": {
+        "default": "Budget Planner"
+      },
+      "description": {
+        "default": "Simple Budget Planner"
+      },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "description": "Budget Planner"
+      }
+    }
+  ],
+  "loaderConfig": {
+    "internalModuleBaseUrls": [
+      "<!-- PATH TO CDN -->"
+    ],
+    "entryModuleId": "budget-planner-web-part",
+    "scriptResources": {
+      "budget-planner-web-part": {
+        "type": "path",
+        "path": "budget-planner-web-part_66dd6ee13fcf50c2c48f.js"
+      },
+      "@microsoft/sp-property-pane": {
+        "type": "component",
+        "id": "f9e737b7-f0df-4597-ba8c-3060f82380db",
+        "version": "1.11.0"
+      },
+      "BudgetPlannerWebPartStrings": {
+        "type": "path",
+        "path": "BudgetPlannerWebPartStrings_en-us_536e65149b0acf4d52c0043073b9fc59.js"
+      },
+      "@microsoft/sp-webpart-base": {
+        "type": "component",
+        "id": "974a7777-0990-4136-8fa6-95d80114c2e0",
+        "version": "1.11.0"
+      }
+    }
+  }
+}
