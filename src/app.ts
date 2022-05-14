@@ -36,6 +36,10 @@ export class App {
 
     // Renders the dashboard
     private render(el: HTMLElement) {
+
+        // Element Properties
+        el.id = "BudgetPlanner_App";
+
         // Add the navigation
         this._navigation = new Navigation({
             el,
@@ -43,7 +47,8 @@ export class App {
             hideFilter: true, // for now its hidden
             hideSearch: true,
             onRendering: props => {
-                props.type = Components.NavbarTypes.Dark
+                props.type = Components.NavbarTypes.Dark;
+                props.id = "app_mainNav";
             },
         });
 
@@ -61,6 +66,9 @@ export class App {
 
         this._footer = new Footer({
             el,
+            onRendering: (props) => {
+                props.id = "versionfooter";
+            },
             itemsEnd: [
                 {
                     text: "v" + Strings.Version
