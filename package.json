@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ReconFlux/sp-BudgetPlanner#readme",
   "dependencies": {
+    "@microsoft/sp-office-ui-fabric-core": "^1.14.0",
     "chart.js": "^3.7.1",
     "datatables.net": "^1.11.5",
     "datatables.net-bs5": "^1.11.5",
