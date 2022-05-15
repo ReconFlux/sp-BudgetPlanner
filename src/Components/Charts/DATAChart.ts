@@ -99,6 +99,20 @@ export class DATAChart {
         let headContainer = document.createElement("div");
         let _canvas = document.createElement("canvas");
 
+        // Chart Container Props
+        _canvas.id = "myChart";
+        _canvas.width = 100;
+        _canvas.height = 35;
+        headContainer.appendChild(_canvas);
+        el.appendChild(headContainer);
+        // Chart Creation
+        const ctx = _canvas.getContext('2d');
+
+        let chartgradient = ctx.createLinearGradient(0, 0, 0, 300);
+        chartgradient.addColorStop(0, 'rgba(255, 0, 0, 1)');
+        chartgradient.addColorStop(1, 'rgba(77, 0, 0, 0.1)');
+
+
         // Constants ( for the chart )
         const options = {
             maintainAspectRatio: true,
@@ -127,18 +141,14 @@ export class DATAChart {
                 }
             }
         }
-
-        function plugin(chart) {
-
-        }
-
         const chartData = {
+
             datasets: [
                 {
                     label: DATAChart.ChartLabels[0],
                     data: ChartData._ExpenseSum,
                     borderColor: 'rgba(255, 0, 0, 1)',
-                    backgroundColor: 'rgba(109, 39, 39, 0.45)',
+                    backgroundColor: chartgradient,
                     fill: true,
                     parsing: {
                         yAxisKey: 'amount',
@@ -147,15 +157,7 @@ export class DATAChart {
                 }
             ]
         }
-        // Chart Container Props
-        _canvas.id = "myChart";
-        _canvas.width = 100;
-        _canvas.height = 35;
-        headContainer.appendChild(_canvas);
-        el.appendChild(headContainer);
-        // Chart Creation
-        const ctx = _canvas.getContext('2d');
-        // Chart Creation
+
         this._datachart = new Chart(ctx, {
             type: 'line',
             data: chartData,
@@ -172,7 +174,7 @@ function addData(chart, Mdata) {
         label: "Monthly Expenses",
         data: Mdata,
         borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(109, 39, 39, 0.45)',
+        backgroundColor: this.chartgradient,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -191,7 +193,7 @@ function loadNetData(chart, NetData) {
             label: DATAChart.ChartLabels[1],
             data: NetData,
             borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: 'rgba(109, 39, 39, 0.45)',
+            backgroundColor: this.chartgradient,
             fill: true,
             parsing: {
                 yAxisKey: 'amount',
@@ -213,7 +215,7 @@ function loadExpCATData(chart, CatData) {
             label: DATAChart.ChartLabels[2],
             data: CatData,
             borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: 'rgba(109, 39, 39, 0.45)',
+            backgroundColor: this.chartgradient,
             fill: true,
             parsing: {
                 yAxisKey: 'amount',
@@ -233,7 +235,7 @@ function loadMonthlyExp(chart, ExpData) {
             label: DATAChart.ChartLabels[0],
             data: ExpData,
             borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: 'rgba(109, 39, 39, 0.45)',
+            backgroundColor: this.chartgradient,
             fill: true,
             parsing: {
                 yAxisKey: 'amount',
