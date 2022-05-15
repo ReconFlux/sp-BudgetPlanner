@@ -1,19 +1,32 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-canvas {
-    border: 1px dotted #979797 !important;
-    
-  }
-  div#BudgetPlanner_App {
-    background-color: #555a64;
-    padding: 1rem !important;
+
+div#BudgetPlanner_App {
+  background-color: #333;
+  padding: 1rem !important;
 }
+
+.bg-dark{
+  background-color: #000 !important;
+}
+
+div#appSubNAV > * {
+  background-color: #212121 !important;
+  margin-bottom: 2rem !important;
+}
+
+
+canvas {
+    border: 1rem solid #333 !important;
+    background-color: #333 !important;
+  }
+
   
 #SideMenu_MainContainer {
   max-width: 100% !important;
   padding: 0% !important;
   margin-top: 1vh !important;
-  background-color: #555a64 !important;
+  background-color: #212121 !important;
 }
 #btn_Expenses {
   width: 100% !important;
@@ -58,7 +71,4 @@ a#Datasheet-tab:hover {
   color: white !important;
   border-color: black !important;
   border-width: thin !important;
-}
-div#appSubNAV > * {
-  background-color: #555a64 !important;
 }

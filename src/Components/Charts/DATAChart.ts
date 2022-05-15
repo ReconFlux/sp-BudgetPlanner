@@ -119,11 +119,11 @@ export class DATAChart {
             scales: {
                 x: {
                     ticks: { color: 'white' },
-                    grid: { color: 'white' }
+                    grid: { color: '#444' }
                 },
                 y: {
                     ticks: { color: 'white' },
-                    grid: { color: 'white' }
+                    grid: { color: '#444' }
                 }
             }
         }
@@ -243,11 +243,11 @@ function loadMonthlyExp(chart, ExpData) {
                 scales: {
                     y: {
                         ticks: { color: 'white' },
-                        grid: { color: 'white' }
+                        grid: { color: '#444' }
                     },
                     x: {
                         ticks: { color: 'white' },
-                        grid: { color: 'white' }
+                        grid: { color: '#444' }
                     }
                 }
             }
