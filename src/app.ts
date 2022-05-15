@@ -64,17 +64,17 @@ export class App {
         // Tabs
         let appTabs = new Tabs(this._el);
 
-        this._footer = new Footer({
-            el,
-            onRendering: (props) => {
-                props.id = "versionfooter";
-            },
-            itemsEnd: [
-                {
-                    text: "v" + Strings.Version
-                }
-            ]
-        });
+        // this._footer = new Footer({
+        //     el,
+        //     onRendering: (props) => {
+        //         props.id = "versionfooter";
+        //     },
+        //     itemsEnd: [
+        //         {
+        //             text: "v" + Strings.Version
+        //         }
+        //     ]
+        // });
 
     }
 }

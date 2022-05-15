@@ -44,12 +44,18 @@ export class SubNavigation {
         this.render();
     }
 
-    // Render
 
+
+    // Render
     private render() {
+        //el props
+        this._el.id = "app_SubnavEl";
         this._navigation = new Navigation({
             el: this._el,
             title: "",
+            onRendered: (props) => {
+                props.id = "appSubNAV";
+            },
             hideFilter: true, // for now its hidden
             hideSearch: true,
             onRendering: props => {
@@ -65,7 +71,7 @@ export class SubNavigation {
                     iconType: plusSquareFill,
                     iconSize: 22,
                     isButton: true,
-                    className: "btn-outline-dark me-1 btn-sm",
+                    className: "btn-outline-light me-1 btn-sm",
                     onClick: () => {
                         // Create an item
                         ItemForm.create({

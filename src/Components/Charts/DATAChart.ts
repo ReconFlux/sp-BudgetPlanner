@@ -112,14 +112,17 @@ export class DATAChart {
                 title: {
                     display: true,
                     text: 'Monthly Expenses'
+                }
+
+            },
+            scales: {
+                x: {
+                    ticks: { color: 'white' },
+                    grid: { color: 'white' }
                 },
-                scales: {
-                    x: {
-                        grid: { color: 'red', id: "X" }
-                    },
-                    y: {
-                        grid: { color: 'red' }
-                    }
+                y: {
+                    ticks: { color: 'white' },
+                    grid: { color: 'white' }
                 }
             }
         }
@@ -146,7 +149,7 @@ export class DATAChart {
         // Chart Container Props
         _canvas.id = "myChart";
         _canvas.width = 100;
-        _canvas.height = 27;
+        _canvas.height = 35;
         headContainer.appendChild(_canvas);
         el.appendChild(headContainer);
         // Chart Creation
@@ -156,7 +159,6 @@ export class DATAChart {
             type: 'line',
             data: chartData,
             options: options
-
         });
     }
 
@@ -238,11 +240,13 @@ function loadMonthlyExp(chart, ExpData) {
             },
             options: {
                 scales: {
-                    x: {
-                        grid: { color: 'red', id: "X" }
-                    },
                     y: {
-                        grid: { color: 'red' }
+                        ticks: { color: 'white' },
+                        grid: { color: 'white' }
+                    },
+                    x: {
+                        ticks: { color: 'white' },
+                        grid: { color: 'white' }
                     }
                 }
             }

@@ -2,10 +2,11 @@
 
 canvas {
     border: 1px dotted #979797 !important;
-    background-color: #3c3c3c !important;
+    
   }
   div#BudgetPlanner_App {
     background-color: #555a64;
+    padding: 1rem !important;
 }
   
 #SideMenu_MainContainer {
@@ -58,4 +59,6 @@ a#Datasheet-tab:hover {
   border-color: black !important;
   border-width: thin !important;
 }
-
+div#appSubNAV > * {
+  background-color: #555a64 !important;
+}
