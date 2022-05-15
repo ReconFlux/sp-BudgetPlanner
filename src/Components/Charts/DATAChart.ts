@@ -72,11 +72,6 @@ export class DATAChart {
 
             });
 
-            //     //this.loadData();
-            //     this._datachart.update();
-
-
-            // });
         });
     }
 
