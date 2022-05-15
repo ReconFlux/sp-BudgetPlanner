@@ -106,7 +106,13 @@ export class DATAChart {
             plugins: {
                 title: {
                     display: true,
+                    color: 'white',
                     text: 'Monthly Expenses'
+                },
+                legend: {
+                    labels: {
+                        color: 'white'
+                    }
                 }
 
             },
