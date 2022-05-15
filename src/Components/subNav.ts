@@ -53,11 +53,15 @@ export class SubNavigation {
             hideFilter: true, // for now its hidden
             hideSearch: true,
             onRendering: props => {
-                props.type = Components.NavbarTypes.Light
+                props.type = Components.NavbarTypes.Light;
+                props.id = "App_SubnavBar";
             },
             items: [
                 {
                     text: " Add a transaction",
+                    onRender: (props) => {
+                        props.id = "APP_AddButton";
+                    },
                     iconType: plusSquareFill,
                     iconSize: 22,
                     isButton: true,

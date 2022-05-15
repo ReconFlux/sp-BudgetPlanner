@@ -113,6 +113,14 @@ export class DATAChart {
                     display: true,
                     text: 'Monthly Expenses'
                 },
+                scales: {
+                    x: {
+                        grid: { color: 'red', id: "X" }
+                    },
+                    y: {
+                        grid: { color: 'red' }
+                    }
+                }
             }
         }
 
@@ -148,6 +156,7 @@ export class DATAChart {
             type: 'line',
             data: chartData,
             options: options
+
         });
     }
 
@@ -226,6 +235,16 @@ function loadMonthlyExp(chart, ExpData) {
             parsing: {
                 yAxisKey: 'amount',
                 xAxisKey: 'month'
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: { color: 'red', id: "X" }
+                    },
+                    y: {
+                        grid: { color: 'red' }
+                    }
+                }
             }
         });
         chart.update();

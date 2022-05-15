@@ -85,7 +85,7 @@ export class ChartSideMenu {
             text: "Monthly Expenses",
             id: "btn_Expenses",
             className: "m-1 active btn-chart",
-            type: Components.ButtonTypes.OutlineDark,
+            type: Components.ButtonTypes.OutlineLight,
             onClick: (props, ev) => {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_Expenses') as HTMLElement;
@@ -99,7 +99,7 @@ export class ChartSideMenu {
             text: "Monthly NET",
             className: "m-1 btn-chart",
             id: "btn_NET",
-            type: Components.ButtonTypes.OutlineDark,
+            type: Components.ButtonTypes.OutlineLight,
             onClick: (props, ev) => {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_NET') as HTMLElement;
@@ -112,7 +112,7 @@ export class ChartSideMenu {
             text: "Expense Catalog",
             className: "m-1 btn-chart",
             id: "btn_catExp",
-            type: Components.ButtonTypes.OutlineDark,
+            type: Components.ButtonTypes.OutlineLight,
             onClick: (props, ev) => {
                 this.setActiveElement((ev.currentTarget as HTMLElement).querySelector(".btn-chart"));
                 let self = document.getElementById('btn_catExp') as HTMLElement;

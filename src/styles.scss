@@ -4,10 +4,15 @@ canvas {
     border: 1px dotted #979797 !important;
     background-color: #3c3c3c !important;
   }
+  div#BudgetPlanner_App {
+    background-color: #555a64;
+}
+  
 #SideMenu_MainContainer {
   max-width: 100% !important;
   padding: 0% !important;
   margin-top: 1vh !important;
+  background-color: #555a64 !important;
 }
 #btn_Expenses {
   width: 100% !important;
