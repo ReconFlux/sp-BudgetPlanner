@@ -11,30 +11,41 @@ import { DataSource, ExpenseItem } from "../../ds";
 import { formatDateValue, getFieldValue } from "../../common";
 import { ChartData } from "../ChartLogic";
 
-
+/**
+ * Chart
+ */
 export class DATAChart {
 
     // Vars
+    private _el: HTMLElement = null;
+    private _canvas: HTMLCanvasElement = null;
+    private _datachart = null;
+    private _active: string = "active";
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
     static ChartLabels = ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"]
-    private _active: string = "active";
-    // private _Sum = null;
-    private _Header: Navigation = null;
-    private _el: HTMLElement;
 
-
-
-    private _datachart = null;
+    // Chart
     get DataChart() { return this._datachart; }
-
-
     // Constructor
     constructor(el: HTMLElement) {
+        // Properties
+        this._canvas = document.createElement("canvas");
+        this._canvas.id = "myChart";
+        this._canvas.width = 100;
+        this._canvas.height = 35;
+
+        //el.appendChild(this._el);
+
+        // Load Data
         this.loadData();
-        this.render(el);
+
+        // Render
+        this.render(el)
+
 
     }
+
     // Load Data
     private loadData() {
         ChartData.loadExpenseData();
@@ -75,7 +86,6 @@ export class DATAChart {
         });
     }
 
-
     // Updates Chart to NET data
     switchtoNET() {
         loadNetData(this._datachart, ChartData._NETDiff);
@@ -93,25 +103,16 @@ export class DATAChart {
         console.log("switches to Monthly");
     }
 
-    // Render Chart
-    render(el: HTMLElement) {
-        // Driv Creation
+    private render(el: HTMLElement) {
         let headContainer = document.createElement("div");
-        let _canvas = document.createElement("canvas");
-
-        // Chart Container Props
-        _canvas.id = "myChart";
-        _canvas.width = 100;
-        _canvas.height = 35;
-        headContainer.appendChild(_canvas);
         el.appendChild(headContainer);
-        // Chart Creation
-        const ctx = _canvas.getContext('2d');
+        headContainer.appendChild(this._canvas);
 
+
+        const ctx = this._canvas.getContext('2d');
         let chartgradient = ctx.createLinearGradient(0, 0, 0, 300);
         chartgradient.addColorStop(0, 'rgba(255, 0, 0, 1)');
         chartgradient.addColorStop(1, 'rgba(77, 0, 0, 0.1)');
-
 
         // Constants ( for the chart )
         const options = {
@@ -148,7 +149,7 @@ export class DATAChart {
                     label: DATAChart.ChartLabels[0],
                     data: ChartData._ExpenseSum,
                     borderColor: 'rgba(255, 0, 0, 1)',
-                    backgroundColor: chartgradient,
+                    backgroundColor: 'rgba(170, 0, 0, 1)',
                     fill: true,
                     parsing: {
                         yAxisKey: 'amount',
@@ -163,26 +164,10 @@ export class DATAChart {
             data: chartData,
             options: options
         });
-    }
 
+    }
 }
 // Add Data Function
-function addData(chart, Mdata) {
-    chart.data.datasets.pop();
-    chart.data.datasets.push({
-
-        label: "Monthly Expenses",
-        data: Mdata,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: this.chartgradient,
-        fill: true,
-        parsing: {
-            yAxisKey: 'amount',
-            xAxisKey: 'month'
-        }
-    });
-    chart.update();
-}
 function loadNetData(chart, NetData) {
 
     DataSource.init().then(() => {
@@ -193,7 +178,7 @@ function loadNetData(chart, NetData) {
             label: DATAChart.ChartLabels[1],
             data: NetData,
             borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: this.chartgradient,
+            backgroundColor: 'rgba(170, 0, 0, 1)',
             fill: true,
             parsing: {
                 yAxisKey: 'amount',
@@ -215,7 +200,7 @@ function loadExpCATData(chart, CatData) {
             label: DATAChart.ChartLabels[2],
             data: CatData,
             borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: this.chartgradient,
+            backgroundColor: 'rgba(170, 0, 0, 1)',
             fill: true,
             parsing: {
                 yAxisKey: 'amount',
@@ -235,7 +220,7 @@ function loadMonthlyExp(chart, ExpData) {
             label: DATAChart.ChartLabels[0],
             data: ExpData,
             borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: this.chartgradient,
+            backgroundColor: 'rgba(170, 0, 0, 1)',
             fill: true,
             parsing: {
                 yAxisKey: 'amount',
