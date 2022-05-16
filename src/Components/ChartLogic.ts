@@ -76,278 +76,371 @@ export class ChartData {
 
     // Expense Categories
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
-    // Loads the Expenses for each month
-    static loadExpenseData(): any {
-        this._ExpenseSum = [];
-
-        DataSource.init().then(() => {
-
-            if (DataSource.ExpenseItems) {
-
-                for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-                    let item = DataSource.ExpenseItems[i];
-                    let itemDate = getFieldValue("date", item);
-                    let itemCategory = getFieldValue("category", item);
-                    let itemAmount = getFieldValue("amount", item);
-                    let wholeMOnth = formatDateValue(itemDate);
-
-                    // Sums for each month
-                    switch (wholeMOnth) {
-                        case this.Months[0]: {
-                            this._JanEXPSum = this._JanEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[1]: {
-                            this._FebEXPSum = this._FebEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[2]: {
-                            this._MarEXPSum = this._MarEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[3]: {
-                            this._AprEXPSum = this._AprEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[4]: {
-                            this._MayEXPSum = this._MayEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[5]: {
-                            this._JuneEXPSum = this._JuneEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[6]: {
-                            this._JulyEXPSum = this._JulyEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[7]: {
-                            this._AugEXPSum = this._AugEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[8]: {
-                            this._SeptEXPSum = this._SeptEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[9]: {
-                            this._OctEXPSum = this._OctEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[10]: {
-                            this._NovEXPSum = this._NovEXPSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[11]: {
-                            this._DecEXPSum = this._DecEXPSum += itemAmount;
-                            break;
-                        }
-                    }
-
-                }
-                // Push sums into an array
-                // Jans
-                this._ExpenseSum.push({
-                    amount: this._JanEXPSum,
-                    month: this.Months[0]
-                });
-                // Febs
-                this._ExpenseSum.push({
-                    amount: this._FebEXPSum,
-                    month: this.Months[1]
-                });
-                // Mars
-                this._ExpenseSum.push({
-                    amount: this._MarEXPSum,
-                    month: this.Months[2]
-                });
-                // Aprs
-                this._ExpenseSum.push({
-                    amount: this._AprEXPSum,
-                    month: this.Months[3]
-                });
-                // Mays
-                this._ExpenseSum.push({
-                    amount: this._MayEXPSum,
-                    month: this.Months[4]
-                });
-                // Junes
-                this._ExpenseSum.push({
-                    amount: this._JuneEXPSum,
-                    month: this.Months[5]
-                });
-                // Julys
-                this._ExpenseSum.push({
-                    amount: this._JulyEXPSum,
-                    month: this.Months[6]
-                });
-                // Augs
-                this._ExpenseSum.push({
-                    amount: this._AugEXPSum,
-                    month: this.Months[7]
-                });
-                // Septs
-                this._ExpenseSum.push({
-                    amount: this._SeptEXPSum,
-                    month: this.Months[8]
-                });
-                // Octs
-                this._ExpenseSum.push({
-                    amount: this._OctEXPSum,
-                    month: this.Months[9]
-                });
-                // Novs
-                this._ExpenseSum.push({
-                    amount: this._NovEXPSum,
-                    month: this.Months[10]
-                });
-                // Decs
-                this._ExpenseSum.push({
-                    amount: this._DecEXPSum,
-                    month: this.Months[11]
-                });
-                console.log("Loading Expense Array: ");
-                console.log(this._ExpenseSum);
-            }
-        });
-    }
     // Loads the Income for each month
-    static loadIncomeData(): any {
-        this._IncomeSum = [];
+    static loadIncomeData(): PromiseLike<void> {
+        return new Promise((resolve, reject) => {
 
-        DataSource.init().then(() => {
-            if (DataSource.IncomeItems) {
+            this._IncomeSum = [];
+            DataSource.init().then(() => {
+                if (DataSource.IncomeItems) {
 
-                for (let i = 0; i < DataSource.IncomeItems.length; i++) {
-                    let item = DataSource.IncomeItems[i];
-                    let itemDate = getFieldValue("date", item);
-                    let itemCategory = getFieldValue("category", item);
-                    let itemAmount = getFieldValue("amount", item);
-                    let wholeMOnth = formatDateValue(itemDate);
+                    for (let i = 0; i < DataSource.IncomeItems.length; i++) {
+                        let item = DataSource.IncomeItems[i];
+                        let itemDate = getFieldValue("date", item);
+                        let itemCategory = getFieldValue("category", item);
+                        let itemAmount = getFieldValue("amount", item);
+                        let wholeMOnth = formatDateValue(itemDate);
 
-                    // Sums for each month
-                    switch (wholeMOnth) {
-                        case this.Months[0]: {
-                            this._JanIncomeSum = this._JanIncomeSum += itemAmount;
-                            break;
+                        // Sums for each month
+                        switch (wholeMOnth) {
+                            case this.Months[0]: {
+                                this._JanIncomeSum = this._JanIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[1]: {
+                                this._FebIncomeSum = this._FebIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[2]: {
+                                this._MarIncomeSum = this._MarIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[3]: {
+                                this._AprIncomeSum = this._AprIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[4]: {
+                                this._MayIncomeSum = this._MayIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[5]: {
+                                this._JuneIncomeSum = this._JuneIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[6]: {
+                                this._JulyIncomeSum = this._JulyIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[7]: {
+                                this._AugIncomeSum = this._AugIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[8]: {
+                                this._SeptIncomeSum = this._SeptIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[9]: {
+                                this._OctIncomeSum = this._OctIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[10]: {
+                                this._NovIncomeSum = this._NovIncomeSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[11]: {
+                                this._DecIncomeSum = this._DecIncomeSum += itemAmount;
+                                break;
+                            }
                         }
-                        case this.Months[1]: {
-                            this._FebIncomeSum = this._FebIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[2]: {
-                            this._MarIncomeSum = this._MarIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[3]: {
-                            this._AprIncomeSum = this._AprIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[4]: {
-                            this._MayIncomeSum = this._MayIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[5]: {
-                            this._JuneIncomeSum = this._JuneIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[6]: {
-                            this._JulyIncomeSum = this._JulyIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[7]: {
-                            this._AugIncomeSum = this._AugIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[8]: {
-                            this._SeptIncomeSum = this._SeptIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[9]: {
-                            this._OctIncomeSum = this._OctIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[10]: {
-                            this._NovIncomeSum = this._NovIncomeSum += itemAmount;
-                            break;
-                        }
-                        case this.Months[11]: {
-                            this._DecIncomeSum = this._DecIncomeSum += itemAmount;
-                            break;
-                        }
+
                     }
-
+                    // Push sums into an array
+                    // Jans
+                    this._IncomeSum.push({
+                        amount: this._JanIncomeSum,
+                        month: this.Months[0]
+                    });
+                    // Febs
+                    this._IncomeSum.push({
+                        amount: this._FebIncomeSum,
+                        month: this.Months[1]
+                    });
+                    // Mars
+                    this._IncomeSum.push({
+                        amount: this._MarIncomeSum,
+                        month: this.Months[2]
+                    });
+                    // Aprs
+                    this._IncomeSum.push({
+                        amount: this._AprIncomeSum,
+                        month: this.Months[3]
+                    });
+                    // Mays
+                    this._IncomeSum.push({
+                        amount: this._MayIncomeSum,
+                        month: this.Months[4]
+                    });
+                    // Junes
+                    this._IncomeSum.push({
+                        amount: this._JuneIncomeSum,
+                        month: this.Months[5]
+                    });
+                    // Julys
+                    this._IncomeSum.push({
+                        amount: this._JulyIncomeSum,
+                        month: this.Months[6]
+                    });
+                    // Augs
+                    this._IncomeSum.push({
+                        amount: this._AugIncomeSum,
+                        month: this.Months[7]
+                    });
+                    // Septs
+                    this._IncomeSum.push({
+                        amount: this._SeptIncomeSum,
+                        month: this.Months[8]
+                    });
+                    // Octs
+                    this._IncomeSum.push({
+                        amount: this._OctIncomeSum,
+                        month: this.Months[9]
+                    });
+                    // Novs
+                    this._IncomeSum.push({
+                        amount: this._NovIncomeSum,
+                        month: this.Months[10]
+                    });
+                    // Decs
+                    this._IncomeSum.push({
+                        amount: this._DecIncomeSum,
+                        month: this.Months[11]
+                    });
                 }
-                // Push sums into an array
-                // Jans
-                this._IncomeSum.push({
-                    amount: this._JanIncomeSum,
-                    month: this.Months[0]
-                });
-                // Febs
-                this._IncomeSum.push({
-                    amount: this._FebIncomeSum,
-                    month: this.Months[1]
-                });
-                // Mars
-                this._IncomeSum.push({
-                    amount: this._MarIncomeSum,
-                    month: this.Months[2]
-                });
-                // Aprs
-                this._IncomeSum.push({
-                    amount: this._AprIncomeSum,
-                    month: this.Months[3]
-                });
-                // Mays
-                this._IncomeSum.push({
-                    amount: this._MayIncomeSum,
-                    month: this.Months[4]
-                });
-                // Junes
-                this._IncomeSum.push({
-                    amount: this._JuneIncomeSum,
-                    month: this.Months[5]
-                });
-                // Julys
-                this._IncomeSum.push({
-                    amount: this._JulyIncomeSum,
-                    month: this.Months[6]
-                });
-                // Augs
-                this._IncomeSum.push({
-                    amount: this._AugIncomeSum,
-                    month: this.Months[7]
-                });
-                // Septs
-                this._IncomeSum.push({
-                    amount: this._SeptIncomeSum,
-                    month: this.Months[8]
-                });
-                // Octs
-                this._IncomeSum.push({
-                    amount: this._OctIncomeSum,
-                    month: this.Months[9]
-                });
-                // Novs
-                this._IncomeSum.push({
-                    amount: this._NovIncomeSum,
-                    month: this.Months[10]
-                });
-                // Decs
-                this._IncomeSum.push({
-                    amount: this._DecIncomeSum,
-                    month: this.Months[11]
-                });
-                console.log("Loading Income Array: ");
+                console.log("Income Array Loaded: ");
                 console.log(this._IncomeSum);
-            }
-            console.log("Income Array Loaded: ");
-            console.log(this._IncomeSum);
+            });
+            resolve();
         });
     }
-    static loadNETData(): any {
-        this._NETDiff = [];
-        DataSource.init().then(() => {
+    // Loads the Expenses for each month
+    static loadExpenseData(): PromiseLike<void> {
+        return new Promise((resolve, reject) => {
+            this._ExpenseSum = [];
+            DataSource.init().then(() => {
+
+                if (DataSource.ExpenseItems) {
+
+                    for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+                        let item = DataSource.ExpenseItems[i];
+                        let itemDate = getFieldValue("date", item);
+                        let itemCategory = getFieldValue("category", item);
+                        let itemAmount = getFieldValue("amount", item);
+                        let wholeMOnth = formatDateValue(itemDate);
+
+                        // Sums for each month
+                        switch (wholeMOnth) {
+                            case this.Months[0]: {
+                                this._JanEXPSum = this._JanEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[1]: {
+                                this._FebEXPSum = this._FebEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[2]: {
+                                this._MarEXPSum = this._MarEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[3]: {
+                                this._AprEXPSum = this._AprEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[4]: {
+                                this._MayEXPSum = this._MayEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[5]: {
+                                this._JuneEXPSum = this._JuneEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[6]: {
+                                this._JulyEXPSum = this._JulyEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[7]: {
+                                this._AugEXPSum = this._AugEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[8]: {
+                                this._SeptEXPSum = this._SeptEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[9]: {
+                                this._OctEXPSum = this._OctEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[10]: {
+                                this._NovEXPSum = this._NovEXPSum += itemAmount;
+                                break;
+                            }
+                            case this.Months[11]: {
+                                this._DecEXPSum = this._DecEXPSum += itemAmount;
+                                break;
+                            }
+                        }
+
+                    }
+                    // Push sums into an array
+                    // Jans
+                    this._ExpenseSum.push({
+                        amount: this._JanEXPSum,
+                        month: this.Months[0]
+                    });
+                    // Febs
+                    this._ExpenseSum.push({
+                        amount: this._FebEXPSum,
+                        month: this.Months[1]
+                    });
+                    // Mars
+                    this._ExpenseSum.push({
+                        amount: this._MarEXPSum,
+                        month: this.Months[2]
+                    });
+                    // Aprs
+                    this._ExpenseSum.push({
+                        amount: this._AprEXPSum,
+                        month: this.Months[3]
+                    });
+                    // Mays
+                    this._ExpenseSum.push({
+                        amount: this._MayEXPSum,
+                        month: this.Months[4]
+                    });
+                    // Junes
+                    this._ExpenseSum.push({
+                        amount: this._JuneEXPSum,
+                        month: this.Months[5]
+                    });
+                    // Julys
+                    this._ExpenseSum.push({
+                        amount: this._JulyEXPSum,
+                        month: this.Months[6]
+                    });
+                    // Augs
+                    this._ExpenseSum.push({
+                        amount: this._AugEXPSum,
+                        month: this.Months[7]
+                    });
+                    // Septs
+                    this._ExpenseSum.push({
+                        amount: this._SeptEXPSum,
+                        month: this.Months[8]
+                    });
+                    // Octs
+                    this._ExpenseSum.push({
+                        amount: this._OctEXPSum,
+                        month: this.Months[9]
+                    });
+                    // Novs
+                    this._ExpenseSum.push({
+                        amount: this._NovEXPSum,
+                        month: this.Months[10]
+                    });
+                    // Decs
+                    this._ExpenseSum.push({
+                        amount: this._DecEXPSum,
+                        month: this.Months[11]
+                    });
+                    console.log("Loaded Expense Array: ");
+                    console.log(this._ExpenseSum);
+                }
+            });
+            resolve();
+        });
+    }
+
+    static loadExpenseCatelog(): PromiseLike<void> {
+        return new Promise((resolve, reject) => {
+            this._CatelogArray = [];
+            DataSource.init().then(() => {
+
+                if (DataSource.TransItems) {
+                    for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
+                        let item = DataSource.ExpenseItems[i];
+                        let itemDate = getFieldValue("date", item);
+                        let itemCategory = getFieldValue("category", item);
+                        let itemAmount = getFieldValue("amount", item);
+                        let wholeMOnth = formatDateValue(itemDate);
+
+                        // Sums for each category
+                        switch (itemCategory) {
+                            case this.CategoryLabels[0]: {
+                                this._MortageSum = this._MortageSum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[1]: {
+                                this._InternetSum = this._InternetSum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[2]: {
+                                this._PhoneSum = this._PhoneSum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[3]: {
+                                this._CarSum = this._CarSum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[4]: {
+                                this._UtilitySum = this._UtilitySum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[5]: {
+                                this._MiscSum = this._MiscSum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[6]: {
+                                this._LeisureSum = this._LeisureSum += itemAmount;
+                                break;
+                            }
+                            case this.CategoryLabels[7]: {
+                                this._EssentialsSum = this._EssentialsSum += itemAmount;
+                                break;
+                            }
+                        }
+                    }
+                    this._CatelogArray.push({
+                        amount: this._MortageSum,
+                        category: this.CategoryLabels[0]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._InternetSum,
+                        category: this.CategoryLabels[1]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._PhoneSum,
+                        category: this.CategoryLabels[2]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._CarSum,
+                        category: this.CategoryLabels[3]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._UtilitySum,
+                        category: this.CategoryLabels[4]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._MiscSum,
+                        category: this.CategoryLabels[5]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._LeisureSum,
+                        category: this.CategoryLabels[6]
+                    });
+                    this._CatelogArray.push({
+                        amount: this._EssentialsSum,
+                        category: this.CategoryLabels[7]
+                    });
+                }
+                console.log("Expense Categories Loaded:")
+                console.log(this._CatelogArray);
+            });
+            resolve();
+        });
+    }
+
+    static loadNETData(): PromiseLike<void> {
+        return new Promise((resolve, reject) => {
+            this._NETDiff = [];
             if (DataSource.TransItems) {
 
                 this._JanNETDiff = this._JanIncomeSum - this._JanEXPSum
@@ -414,91 +507,22 @@ export class ChartData {
             }
             console.log("Net Differences Loaded: ");
             console.log(this._NETDiff);
+            resolve();
         });
     }
-    static loadExpenseCatelog(): any {
-        this._CatelogArray = [];
 
-        DataSource.init().then(() => {
+    static LoadData(): PromiseLike<void> {
+        return new Promise((resolve, reject) => {
 
-            if (DataSource.TransItems) {
-                for (let i = 0; i < DataSource.ExpenseItems.length; i++) {
-                    let item = DataSource.ExpenseItems[i];
-                    let itemDate = getFieldValue("date", item);
-                    let itemCategory = getFieldValue("category", item);
-                    let itemAmount = getFieldValue("amount", item);
-                    let wholeMOnth = formatDateValue(itemDate);
+            this.loadIncomeData().then(() => {
+                this.loadExpenseData().then(() => {
+                    this.loadExpenseCatelog().then(() => {
+                        this.loadNETData();
+                    });
+                });
+            });
 
-                    // Sums for each category
-                    switch (itemCategory) {
-                        case this.CategoryLabels[0]: {
-                            this._MortageSum = this._MortageSum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[1]: {
-                            this._InternetSum = this._InternetSum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[2]: {
-                            this._PhoneSum = this._PhoneSum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[3]: {
-                            this._CarSum = this._CarSum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[4]: {
-                            this._UtilitySum = this._UtilitySum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[5]: {
-                            this._MiscSum = this._MiscSum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[6]: {
-                            this._LeisureSum = this._LeisureSum += itemAmount;
-                            break;
-                        }
-                        case this.CategoryLabels[7]: {
-                            this._EssentialsSum = this._EssentialsSum += itemAmount;
-                            break;
-                        }
-                    }
-                }
-                this._CatelogArray.push({
-                    amount: this._MortageSum,
-                    category: this.CategoryLabels[0]
-                });
-                this._CatelogArray.push({
-                    amount: this._InternetSum,
-                    category: this.CategoryLabels[1]
-                });
-                this._CatelogArray.push({
-                    amount: this._PhoneSum,
-                    category: this.CategoryLabels[2]
-                });
-                this._CatelogArray.push({
-                    amount: this._CarSum,
-                    category: this.CategoryLabels[3]
-                });
-                this._CatelogArray.push({
-                    amount: this._UtilitySum,
-                    category: this.CategoryLabels[4]
-                });
-                this._CatelogArray.push({
-                    amount: this._MiscSum,
-                    category: this.CategoryLabels[5]
-                });
-                this._CatelogArray.push({
-                    amount: this._LeisureSum,
-                    category: this.CategoryLabels[6]
-                });
-                this._CatelogArray.push({
-                    amount: this._EssentialsSum,
-                    category: this.CategoryLabels[7]
-                });
-            }
-            console.log(this._CatelogArray);
+            resolve();
         });
     }
 

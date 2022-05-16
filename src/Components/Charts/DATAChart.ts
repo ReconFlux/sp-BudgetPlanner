@@ -21,16 +21,12 @@ export class DATAChart {
     private _canvas: HTMLCanvasElement = null;
     private _datachart = null;
 
-    // TODO, move these to strings?
-    private _active: string = "active";
-    static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
-    static ChartLabels = ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"]
-
     // Chart
     get DataChart() { return this._datachart; }
+
     // Constructor
     constructor(el: HTMLElement) {
+
         // Properties
         this._canvas = document.createElement("canvas");
         this._canvas.id = "myChart";
@@ -47,11 +43,7 @@ export class DATAChart {
 
     // Load Data
     private loadData() {
-        // TODO, Refactor this. 
-        ChartData.loadExpenseData();
-        ChartData.loadNETData();
-        ChartData.loadIncomeData();
-        ChartData.loadExpenseCatelog();
+        ChartData.LoadData();
     }
 
 
@@ -70,13 +62,13 @@ export class DATAChart {
 
                 this.loadData();
                 // Checks the button state
-                if (btn_Expenses.classList.contains(this._active)) {
+                if (btn_Expenses.classList.contains(Strings.isActive)) {
                     this.switchtoMonthlyExp();
                     console.log("Monthly Expense Button is active, refreshes exp array");
-                } else if (btn_NET.classList.contains(this._active)) {
+                } else if (btn_NET.classList.contains(Strings.isActive)) {
                     this.switchtoNET();
                     console.log("NET Button si active, refreshes Net Data");
-                } else if (btn_catExp.classList.contains(this._active)) {
+                } else if (btn_catExp.classList.contains(Strings.isActive)) {
                     this.switchtoCATExp();
                     console.log("Cat Exp button is active, refreshes Cat Exp Data");
                 }
@@ -148,7 +140,7 @@ export class DATAChart {
 
                 // Load the the Expense Data (since Monthly Expenses is loaded by default)
                 {
-                    label: DATAChart.ChartLabels[0],
+                    label: Strings.ChartLabels[0],
                     data: ChartData._ExpenseSum,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(170, 0, 0, 1)',
@@ -177,7 +169,7 @@ function loadNetData(chart, NetData) {
         chart.options.plugins.title.text = 'NET';
         chart.data.datasets.pop(NetData);
         chart.data.datasets.push({
-            label: DATAChart.ChartLabels[1],
+            label: Strings.ChartLabels[1],
             data: NetData,
             borderColor: 'rgba(255, 0, 0, 1)',
             backgroundColor: 'rgba(170, 0, 0, 1)',
@@ -199,7 +191,7 @@ function loadExpCATData(chart, CatData) {
         chart.data.datasets.pop(CatData);
         chart.data.datasets.push({
             type: 'bar',
-            label: DATAChart.ChartLabels[2],
+            label: Strings.ChartLabels[2],
             data: CatData,
             borderColor: 'rgba(255, 0, 0, 1)',
             backgroundColor: 'rgba(170, 0, 0, 1)',
@@ -219,7 +211,7 @@ function loadMonthlyExp(chart, ExpData) {
         chart.options.plugins.title.text = 'Monthly Expenses';
         chart.data.datasets.pop(ExpData);
         chart.data.datasets.push({
-            label: DATAChart.ChartLabels[0],
+            label: Strings.ChartLabels[0],
             data: ExpData,
             borderColor: 'rgba(255, 0, 0, 1)',
             backgroundColor: 'rgba(170, 0, 0, 1)',
