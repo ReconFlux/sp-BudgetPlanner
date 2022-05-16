@@ -20,6 +20,8 @@ export class DATAChart {
     private _el: HTMLElement = null;
     private _canvas: HTMLCanvasElement = null;
     private _datachart = null;
+
+    // TODO, move these to strings?
     private _active: string = "active";
     static MonthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     static CategoryLabels = ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"]
@@ -35,11 +37,8 @@ export class DATAChart {
         this._canvas.width = 100;
         this._canvas.height = 35;
 
-        //el.appendChild(this._el);
-
         // Load Data
         this.loadData();
-
         // Render
         this.render(el)
 
@@ -48,9 +47,10 @@ export class DATAChart {
 
     // Load Data
     private loadData() {
+        // TODO, Refactor this. 
         ChartData.loadExpenseData();
-        ChartData.loadIncomeData();
         ChartData.loadNETData();
+        ChartData.loadIncomeData();
         ChartData.loadExpenseCatelog();
     }
 
@@ -145,6 +145,8 @@ export class DATAChart {
         const chartData = {
 
             datasets: [
+
+                // Load the the Expense Data (since Monthly Expenses is loaded by default)
                 {
                     label: DATAChart.ChartLabels[0],
                     data: ChartData._ExpenseSum,

@@ -72,3 +72,20 @@ a#Datasheet-tab:hover {
   border-color: black !important;
   border-width: thin !important;
 }
+button:focus {
+  color: black !important;
+}
+
+// Datasheet Table Props
+thead > * {
+color: white !important;
+background-color: #212121 !important;
+}
+tr.even > * {
+  color: white !important;
+}
+
+tr.odd > * {
+  color: white !important;
+  background-color: #212121 !important;
+}

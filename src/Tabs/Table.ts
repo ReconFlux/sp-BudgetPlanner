@@ -42,6 +42,9 @@ export class TableTab {
         let headContainer = document.createElement("div");
         let Table = new DataTable({
             el,
+            onRendered: (props) => {
+                props.id = "DataSheet_Table";
+            },
             rows: DataSource.TransItems,
             dtProps: {
                 dom: 'rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
@@ -90,17 +93,17 @@ export class TableTab {
                 }
             ]
         });
-        this._Header = new Navigation({
-            el: headContainer,
-            title: "Transactions Table",
-            hideFilter: true,
-            hideSearch: true,
-            onRendering: props => {
-                props.type = Components.NavbarTypes.Light;
-                props.id = "Table_Header";
-            }
-        });
-        el.prepend(headContainer);
+        // this._Header = new Navigation({
+        //     el: headContainer,
+        //     title: "Transactions Table",
+        //     hideFilter: true,
+        //     hideSearch: true,
+        //     onRendering: props => {
+        //         props.type = Components.NavbarTypes.Light;
+        //         props.id = "Table_Header";
+        //     }
+        // });
+        // el.prepend(headContainer);
     }
 
     // Render
