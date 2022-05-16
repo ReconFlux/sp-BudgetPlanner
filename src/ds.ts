@@ -88,7 +88,7 @@ export class DataSource {
                         }, reject);
                     }, reject);
                 }, reject);
-            }, reject)
+            }, reject);
         });
     }
 

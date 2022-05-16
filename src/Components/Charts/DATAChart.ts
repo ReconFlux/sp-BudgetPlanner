@@ -25,7 +25,7 @@ export class DATAChart {
     get DataChart() { return this._datachart; }
 
     // Constructor
-    constructor(el: HTMLElement) {
+    constructor(el: HTMLElement, ExpData) {
 
         // Properties
         this._canvas = document.createElement("canvas");
@@ -36,14 +36,17 @@ export class DATAChart {
         // Load Data
         this.loadData();
         // Render
-        this.render(el)
+        this.render(el, ExpData)
 
 
     }
 
     // Load Data
     private loadData() {
-        ChartData.LoadData();
+        ChartData.LoadData().then(() => {
+            ChartData.loadNETData();
+        });
+
     }
 
 
@@ -80,9 +83,10 @@ export class DATAChart {
 
     // Updates Chart to NET data
     switchtoNET() {
-        loadNetData(this._datachart, ChartData._NETDiff);
-        this._datachart.update();
-        console.log("switches to NET");
+        // console.log(ChartData._NETDiff);
+        // loadNetData(this._datachart, ChartData._NETDiff);
+        // this._datachart.update();
+        // console.log("switches to NET");
     }
     switchtoCATExp() {
         loadExpCATData(this._datachart, ChartData._CatelogArray);
@@ -90,12 +94,13 @@ export class DATAChart {
         console.log("switches to CAT");
     }
     switchtoMonthlyExp() {
-        loadMonthlyExp(this._datachart, ChartData._ExpenseSum);
+        loadMonthlyExp(this._datachart, ChartData.ExpenseItems);
         this._datachart.update();
         console.log("switches to Monthly");
+        console.log(ChartData.ExpenseItems);
     }
 
-    private render(el: HTMLElement) {
+    private render(el: HTMLElement, ExpData) {
         let headContainer = document.createElement("div");
         el.appendChild(headContainer);
         headContainer.appendChild(this._canvas);
@@ -135,13 +140,12 @@ export class DATAChart {
             }
         }
         const chartData = {
-
             datasets: [
 
                 // Load the the Expense Data (since Monthly Expenses is loaded by default)
                 {
                     label: Strings.ChartLabels[0],
-                    data: ChartData._ExpenseSum,
+                    data: ExpData,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(170, 0, 0, 1)',
                     fill: true,

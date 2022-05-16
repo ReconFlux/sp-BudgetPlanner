@@ -8,6 +8,7 @@ import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "../Tabs/Table";
 import { SubNavigation } from "../Components/subNav";
 import { DATAChart } from "../Components/Charts/DATAChart";
+import { ChartData } from "../Components/ChartLogic";
 
 
 // Properties
@@ -124,7 +125,7 @@ export class ChartSideMenu {
 
 
         _rightside.appendChild(this._chart);
-        this._DATAChart = new DATAChart(this._chart);
+        this._DATAChart = new DATAChart(this._chart, ChartData.ExpenseItems);
     }
 
     private setActiveElement(el: HTMLElement) {
