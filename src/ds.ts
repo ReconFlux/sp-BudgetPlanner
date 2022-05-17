@@ -78,15 +78,18 @@ export class DataSource {
     static init(): PromiseLike<void> {
         // Return a promise
         return new Promise((resolve, reject) => {
-            // Load the data
-            this.loadTransItems().then(() => {
-                // Load the category filters
-                this.loadcategoryFilters().then(() => {
-                    this.loadIncomeItems().then(() => {
-                        this.loadExpenseItems().then(() => {
-                            ChartData.LoadData().then(() => {
-                                // Resolve the request
-                                resolve();
+            // Clear the chart data
+            ChartData.ClearData().then(() => {
+                // Load the data
+                this.loadTransItems().then(() => {
+                    // Load the category filters
+                    this.loadcategoryFilters().then(() => {
+                        this.loadIncomeItems().then(() => {
+                            this.loadExpenseItems().then(() => {
+                                ChartData.LoadData().then(() => {
+                                    // Resolve the request
+                                    resolve();
+                                }, reject);
                             }, reject);
                         }, reject);
                     }, reject);

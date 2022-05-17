@@ -56,31 +56,28 @@ export class DATAChart {
     refresh() {
         console.log("Data Chart Refresh Method Called, clear the data is FIRST:");
         // Clear the data
-        ChartData.ClearData().then(() => {
-            // Grab the buttons
-            let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
-            let btn_NET = document.getElementById('btn_NET') as HTMLElement;
-            let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
+        // Grab the buttons
+        let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
+        let btn_NET = document.getElementById('btn_NET') as HTMLElement;
+        let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
 
-            // Grabs the latest and then updates the chart based on what button you selected
-            DataSource.init().then(() => {
+        // Grabs the latest and then updates the chart based on what button you selected
+        DataSource.init().then(() => {
 
-                this.loadData();
-                // Checks the button state
-                if (btn_Expenses.classList.contains(Strings.isActive)) {
-                    this.switchtoMonthlyExp();
-                    console.log("Monthly Expense Button is active, refreshes exp array");
-                } else if (btn_NET.classList.contains(Strings.isActive)) {
-                    this.switchtoNET();
-                    console.log("NET Button si active, refreshes Net Data");
-                } else if (btn_catExp.classList.contains(Strings.isActive)) {
-                    this.switchtoCATExp();
-                    console.log("Cat Exp button is active, refreshes Cat Exp Data");
-                }
-
-            });
+            // Checks the button state
+            if (btn_Expenses.classList.contains(Strings.isActive)) {
+                this.switchtoMonthlyExp();
+                console.log("Monthly Expense Button is active, refreshes exp array");
+            } else if (btn_NET.classList.contains(Strings.isActive)) {
+                this.switchtoNET();
+                console.log("NET Button si active, refreshes Net Data");
+            } else if (btn_catExp.classList.contains(Strings.isActive)) {
+                this.switchtoCATExp();
+                console.log("Cat Exp button is active, refreshes Cat Exp Data");
+            }
 
         });
+
     }
 
     // Updates Chart to NET data
