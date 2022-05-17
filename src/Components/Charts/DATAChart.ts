@@ -48,14 +48,13 @@ export class DATAChart {
 
     // Load Data
     private loadData() {
-        ChartData.loadNETData();
     }
 
 
     // Refresh
     refresh() {
-        console.log("Data Chart Refresh Method Called, clear the data is FIRST:");
-        // Clear the data
+        console.log("Data Chart Refresh Method Called");
+
         // Grab the buttons
         let btn_Expenses = document.getElementById('btn_Expenses') as HTMLElement;
         let btn_NET = document.getElementById('btn_NET') as HTMLElement;
@@ -82,6 +81,7 @@ export class DATAChart {
 
     // Updates Chart to NET data
     switchtoNET() {
+        ChartData.loadNETData();
         console.log(ChartData.NETDiffItems);
         loadNetData(this._datachart, ChartData.NETDiffItems);
         this._datachart.update();

@@ -459,6 +459,10 @@ export class ChartData {
             let IncomeArray = this._IncomeArray;
             let ExpArray = this._ExpenseSum;
             if (ExpArray.length > 0 && IncomeArray.length > 0) {
+                this.ClearData();
+                this.loadIncomeData();
+                this.loadExpenseData();
+                this.loadExpenseCatelog();
                 if (DataSource.TransItems) {
                     this._JanNETDiff = this._JanIncomeSum - this._JanEXPSum
                     this._FebNETDiff = this._FebIncomeSum - this._FebEXPSum
@@ -545,15 +549,7 @@ export class ChartData {
         return new Promise((resolve, reject) => {
             // call the clearallarray method
             ChartData.clearALLArrays();
-            console.log("Loading Expense Array: ");
-            console.log(this._ExpenseSum);
-            console.log("Income Array Loaded: ");
-            console.log(this._IncomeArray);
-            console.log("Net Differences Loaded: ");
-            console.log(this._NETDiff);
-            console.log("Expense Category Loaded: ");
-            console.log(this._CatelogArray);
-
+            console.log("ClearData: All Arrays cleared");
             resolve();
         });
     }
