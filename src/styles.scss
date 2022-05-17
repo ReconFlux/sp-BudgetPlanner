@@ -1,12 +1,27 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+:root {
+  --text-color: #000;
+  --background--color: #fff;
+  
+}
+
+@media (prefers-color-scheme: light) {
+
+  div#BudgetPlanner_App {
+    background-color: #ebebeb;
+    padding: 1rem !important;
+  }
+
+}
+@media (prefers-color-scheme: dark) {
 
 div#BudgetPlanner_App {
   background-color: #333;
   padding: 1rem !important;
 }
 
-.bg-dark{
+.bg-dark {
   background-color: #000 !important;
 }
 
@@ -88,4 +103,5 @@ tr.even > * {
 tr.odd > * {
   color: white !important;
   background-color: #212121 !important;
+}
 }

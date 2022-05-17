@@ -32,7 +32,7 @@ const Strings = {
     CategoryLabels: ["Mortage", "Internet", "Phone", "Car", "Utility", "Misc.", "Leisure", "Essentials"],
     ChartLabels: ["Monthly Expenses", "Monthly Net Differences", "Expense Categories", "Monthly Income", "Monthly Savings"],
 
-    Version: "2.5.2",
+    Version: "2.5.5",
 
 };
 export default Strings;

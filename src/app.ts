@@ -32,8 +32,6 @@ export class App {
         this.render(el);
     }
 
-
-
     // Renders the dashboard
     private render(el: HTMLElement) {
 
