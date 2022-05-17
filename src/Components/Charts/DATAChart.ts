@@ -41,14 +41,14 @@ export class DATAChart {
 
 
         // Render
-        this.render(el, this.InitalData);
+        this.render(el);
 
 
     }
 
     // Load Data
     private loadData() {
-        ChartData.loadDefault();
+        ChartData.loadNETData();
     }
 
 
@@ -102,7 +102,7 @@ export class DATAChart {
         console.log(ChartData.ExpenseItems);
     }
 
-    private render(el: HTMLElement, ds) {
+    private render(el: HTMLElement) {
         let headContainer = document.createElement("div");
         el.appendChild(headContainer);
         headContainer.appendChild(this._canvas);
@@ -147,7 +147,7 @@ export class DATAChart {
                 // Load the the Expense Data (since Monthly Expenses is loaded by default)
                 {
                     label: Strings.ChartLabels[0],
-                    data: ChartData._InitalArray,
+                    data: ChartData.ExpenseItems,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(170, 0, 0, 1)',
                     fill: true,
@@ -162,36 +162,13 @@ export class DATAChart {
         if (ChartData.ExpenseItems.length > 0) {
             this._datachart = new Chart(ctx, {
                 type: 'line',
-                data: ds,
+                data: chartData,
                 options: options
             });
         }
 
     }
 
-    private InitalData: any = {
-        label: Strings.ChartLabels[0],
-        data: ChartData._InitalArray,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(170, 0, 0, 1)',
-        fill: true,
-        parsing: {
-            yAxisKey: 'amount',
-            xAxisKey: 'month'
-        },
-        options: {
-            scales: {
-                y: {
-                    ticks: { color: 'white' },
-                    grid: { color: '#444' }
-                },
-                x: {
-                    ticks: { color: 'white' },
-                    grid: { color: '#444' }
-                }
-            }
-        }
-    }
 }
 // Add Data Function
 function loadNetData(chart, NetData) {
