@@ -28,6 +28,7 @@ const GlobalVariable = {
             () => {
                 // Create the application
                 new App(el);
+                console.log("THE CURRENT APP VERSION IS : " + Strings.Version);
             },
 
             // Error

@@ -1,5 +1,6 @@
 import { Components, Types, Web } from "gd-sprest-bs";
 import Strings from "./strings";
+import { ChartData } from "./Components/ChartLogic";
 
 // All Items
 export interface TransItem extends Types.SP.ListItem {
@@ -83,8 +84,10 @@ export class DataSource {
                 this.loadcategoryFilters().then(() => {
                     this.loadIncomeItems().then(() => {
                         this.loadExpenseItems().then(() => {
-                            // Resolve the request
-                            resolve();
+                            ChartData.LoadData().then(() => {
+                                // Resolve the request
+                                resolve();
+                            }, reject);
                         }, reject);
                     }, reject);
                 }, reject);

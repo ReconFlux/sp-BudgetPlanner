@@ -125,7 +125,7 @@ export class ChartSideMenu {
 
 
         _rightside.appendChild(this._chart);
-        this._DATAChart = new DATAChart(this._chart, ChartData.ExpenseItems);
+        this._DATAChart = new DATAChart(this._chart);
     }
 
     private setActiveElement(el: HTMLElement) {

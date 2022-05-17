@@ -25,7 +25,7 @@ export class DATAChart {
     get DataChart() { return this._datachart; }
 
     // Constructor
-    constructor(el: HTMLElement, ExpData) {
+    constructor(el: HTMLElement) {
 
         // Properties
         this._canvas = document.createElement("canvas");
@@ -33,10 +33,15 @@ export class DATAChart {
         this._canvas.width = 100;
         this._canvas.height = 35;
 
+
+
         // Load Data
         this.loadData();
+
+
+
         // Render
-        this.render(el, ExpData)
+        this.render(el, this.InitalData);
 
 
     }
@@ -47,6 +52,7 @@ export class DATAChart {
             ChartData.loadNETData();
         });
 
+        ChartData.loadDefault();
     }
 
 
@@ -100,7 +106,7 @@ export class DATAChart {
         console.log(ChartData.ExpenseItems);
     }
 
-    private render(el: HTMLElement, ExpData) {
+    private render(el: HTMLElement, ds) {
         let headContainer = document.createElement("div");
         el.appendChild(headContainer);
         headContainer.appendChild(this._canvas);
@@ -145,7 +151,7 @@ export class DATAChart {
                 // Load the the Expense Data (since Monthly Expenses is loaded by default)
                 {
                     label: Strings.ChartLabels[0],
-                    data: ExpData,
+                    data: ChartData._InitalArray,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(170, 0, 0, 1)',
                     fill: true,
@@ -157,12 +163,38 @@ export class DATAChart {
             ]
         }
 
-        this._datachart = new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: options
-        });
+        if (ChartData.ExpenseItems.length > 0) {
+            this._datachart = new Chart(ctx, {
+                type: 'line',
+                data: ds,
+                options: options
+            });
+        }
 
+    }
+
+    private InitalData: any = {
+        label: Strings.ChartLabels[0],
+        data: ChartData.ExpenseItems,
+        borderColor: 'rgba(255, 0, 0, 1)',
+        backgroundColor: 'rgba(170, 0, 0, 1)',
+        fill: true,
+        parsing: {
+            yAxisKey: 'amount',
+            xAxisKey: 'month'
+        },
+        options: {
+            scales: {
+                y: {
+                    ticks: { color: 'white' },
+                    grid: { color: '#444' }
+                },
+                x: {
+                    ticks: { color: 'white' },
+                    grid: { color: '#444' }
+                }
+            }
+        }
     }
 }
 // Add Data Function

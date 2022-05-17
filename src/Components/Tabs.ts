@@ -59,11 +59,11 @@ export class Tabs {
             items: [
                 {
                     title: Tabs.TabNames.DataSheet,
-                    isActive: true,
                     onRenderTab: (_tab) => { this._DataSheet = new TableTab(_tab); }
                 },
                 {
                     title: Tabs.TabNames.Charts,
+                    isActive: true,
                     onRenderTab: (_sidemenuElement) => {
                         this._SideMenu = new ChartSideMenu({
                             el: _sidemenuElement,
