@@ -61,21 +61,19 @@ export class DATAChart {
         let btn_catExp = document.getElementById('btn_catExp') as HTMLElement;
 
         // Grabs the latest and then updates the chart based on what button you selected
-        DataSource.init().then(() => {
 
-            // Checks the button state
-            if (btn_Expenses.classList.contains(Strings.isActive)) {
-                this.switchtoMonthlyExp();
-                console.log("Monthly Expense Button is active, refreshes exp array");
-            } else if (btn_NET.classList.contains(Strings.isActive)) {
-                this.switchtoNET();
-                console.log("NET Button si active, refreshes Net Data");
-            } else if (btn_catExp.classList.contains(Strings.isActive)) {
-                this.switchtoCATExp();
-                console.log("Cat Exp button is active, refreshes Cat Exp Data");
-            }
+        // Checks the button state
+        if (btn_Expenses.classList.contains(Strings.isActive)) {
+            this.switchtoMonthlyExp();
+            console.log("Monthly Expense Button is active, refreshes exp array");
+        } else if (btn_NET.classList.contains(Strings.isActive)) {
+            this.switchtoNET();
+            console.log("NET Button si active, refreshes Net Data");
+        } else if (btn_catExp.classList.contains(Strings.isActive)) {
+            this.switchtoCATExp();
+            console.log("Cat Exp button is active, refreshes Cat Exp Data");
+        }
 
-        });
 
     }
 
