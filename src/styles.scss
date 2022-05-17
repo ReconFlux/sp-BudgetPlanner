@@ -3,7 +3,7 @@
 :root {
   --text-color: #000;
   --background--color: #fff;
-  
+
 }
 
 @media (prefers-color-scheme: light) {
@@ -12,6 +12,11 @@
     background-color: #ebebeb;
     padding: 1rem !important;
   }
+
+  div#appSubNAV > * {
+    background-color: #898989 !important;
+    margin-bottom: 2rem !important;
+}
 
 }
 @media (prefers-color-scheme: dark) {
