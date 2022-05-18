@@ -20,6 +20,11 @@ export class DATAChart {
     private _el: HTMLElement = null;
     private _canvas: HTMLCanvasElement = null;
     private _datachart = null;
+    private _gridColor: string = null;
+    private _tickColor: string = null;
+    private _scaleGridColor: string = null;
+    private _titleColor: string = null;
+    private _labelColor: string = null;
 
     // Chart
     get DataChart() { return this._datachart; }
@@ -33,21 +38,11 @@ export class DATAChart {
         this._canvas.width = 100;
         this._canvas.height = 35;
 
-
-
-        // Load Data
-        this.loadData();
-
-
-
+        this.checkTheme();
         // Render
         this.render(el);
 
 
-    }
-
-    // Load Data
-    private loadData() {
     }
 
 
@@ -97,6 +92,20 @@ export class DATAChart {
         console.log(ChartData.ExpenseItems);
     }
 
+    private checkTheme() {
+        const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+        if (darkThemeMq.matches) {
+            // Theme set to dark.
+            this._gridColor = 'rgba(161, 0, 0, 1)';
+
+        } else {
+            // Theme set to light.
+            this._gridColor = 'rgba(255, 148, 148, 1)';
+
+        }
+    }
+
+
     private render(el: HTMLElement) {
         let headContainer = document.createElement("div");
         el.appendChild(headContainer);
@@ -143,8 +152,8 @@ export class DATAChart {
                 {
                     label: Strings.ChartLabels[0],
                     data: ChartData.ExpenseItems,
-                    borderColor: 'rgba(255, 0, 0, 1)',
-                    backgroundColor: 'rgba(170, 0, 0, 1)',
+                    borderColor: this._gridColor,
+                    backgroundColor: this._gridColor,
                     fill: true,
                     parsing: {
                         yAxisKey: 'amount',
@@ -164,6 +173,7 @@ export class DATAChart {
 
     }
 
+
 }
 // Add Data Function
 function loadNetData(chart, NetData) {
@@ -174,8 +184,8 @@ function loadNetData(chart, NetData) {
     chart.data.datasets.push({
         label: Strings.ChartLabels[1],
         data: NetData,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(170, 0, 0, 1)',
+        borderColor: this._gridColor,
+        backgroundColor: this._gridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -194,8 +204,8 @@ function loadExpCATData(chart, CatData) {
         type: 'bar',
         label: Strings.ChartLabels[2],
         data: CatData,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(170, 0, 0, 1)',
+        borderColor: this._gridColor,
+        backgroundColor: this._gridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -212,8 +222,8 @@ function loadMonthlyExp(chart, ExpData) {
     chart.data.datasets.push({
         label: Strings.ChartLabels[0],
         data: ExpData,
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(170, 0, 0, 1)',
+        borderColor: this._gridColor,
+        backgroundColor: this._gridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
