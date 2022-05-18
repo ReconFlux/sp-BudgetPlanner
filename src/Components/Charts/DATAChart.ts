@@ -18,7 +18,7 @@ export class DATAChart {
 
     // Vars
     private _el: HTMLElement = null;
-    private _canvas: HTMLCanvasElement = null;
+    private static _canvas: HTMLCanvasElement = null;
     private _datachart = null;
     private static _gridColor: string = null;
     private static _tickColor: string = null;
@@ -26,8 +26,11 @@ export class DATAChart {
     private static _titleColor: string = null;
     private static _labelColor: string = null;
 
-    // Chart
+    // Chart stuff
     get DataChart() { return this._datachart; }
+    static get Canvas() { return DATAChart._canvas; }
+    static get CTX() { return DATAChart._canvas.getContext('2d'); }
+    static get ChartGradient() { return DATAChart.CTX.createLinearGradient(0, 0, 0, 300); }
 
     //Color getters
     static get GridColor() { return this._gridColor; }
@@ -40,11 +43,12 @@ export class DATAChart {
     constructor(el: HTMLElement) {
 
         // Properties
-        this._canvas = document.createElement("canvas");
-        this._canvas.id = "myChart";
-        this._canvas.width = 100;
-        this._canvas.height = 35;
+        DATAChart._canvas = document.createElement("canvas");
+        DATAChart._canvas.id = "myChart";
+        DATAChart._canvas.width = 100;
+        DATAChart._canvas.height = 35;
 
+        this.loadGradient();
         this.checkTheme();
         // Render
         this.render(el);
@@ -104,25 +108,28 @@ export class DATAChart {
         if (darkThemeMq.matches) {
             // Theme set to dark.
             DATAChart._gridColor = 'rgba(123, 28, 28, 1)';
+            DATAChart._titleColor = 'rgba(255, 255, 255, 1)';
 
         } else {
             // Theme set to light.
             DATAChart._gridColor = 'rgba(255, 148, 148, 1)';
-
+            DATAChart._titleColor = 'rgba(0, 0, 0, 1)';
         }
     }
 
+    private loadGradient() {
+        DATAChart.ChartGradient.addColorStop(0, 'rgba(123, 28, 28, 1)');
+        DATAChart.ChartGradient.addColorStop(1, 'rgba(123, 28, 28, 0.5)');
+    }
 
     private render(el: HTMLElement) {
         let headContainer = document.createElement("div");
         el.appendChild(headContainer);
-        headContainer.appendChild(this._canvas);
+        headContainer.appendChild(DATAChart._canvas);
 
 
-        const ctx = this._canvas.getContext('2d');
-        let chartgradient = ctx.createLinearGradient(0, 0, 0, 300);
-        chartgradient.addColorStop(0, 'rgba(255, 0, 0, 1)');
-        chartgradient.addColorStop(1, 'rgba(77, 0, 0, 0.1)');
+
+
 
         // Constants ( for the chart )
         const options = {
@@ -131,7 +138,7 @@ export class DATAChart {
             plugins: {
                 title: {
                     display: true,
-                    color: 'white',
+                    color: DATAChart.TitleColor,
                     text: 'Monthly Expenses'
                 },
                 legend: {
@@ -160,7 +167,7 @@ export class DATAChart {
                     label: Strings.ChartLabels[0],
                     data: ChartData.ExpenseItems,
                     borderColor: DATAChart.GridColor,
-                    backgroundColor: DATAChart.GridColor,
+                    backgroundColor: DATAChart.ChartGradient,
                     fill: true,
                     parsing: {
                         yAxisKey: 'amount',
@@ -172,7 +179,7 @@ export class DATAChart {
 
         // Create the chart
         if (ChartData.ExpenseItems.length > 0) {
-            this._datachart = new Chart(ctx, {
+            this._datachart = new Chart(DATAChart.CTX, {
                 type: 'line',
                 data: chartData,
                 options: options
@@ -197,7 +204,7 @@ function loadNetData(chart, NetData) {
         label: Strings.ChartLabels[1],
         data: NetData,
         borderColor: DATAChart.GridColor,
-        backgroundColor: DATAChart.GridColor,
+        backgroundColor: DATAChart.ChartGradient,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -217,7 +224,7 @@ function loadExpCATData(chart, CatData) {
         label: Strings.ChartLabels[2],
         data: CatData,
         borderColor: DATAChart.GridColor,
-        backgroundColor: DATAChart.GridColor,
+        backgroundColor: DATAChart.ChartGradient,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -235,7 +242,7 @@ function loadMonthlyExp(chart, ExpData) {
         label: Strings.ChartLabels[0],
         data: ExpData,
         borderColor: DATAChart.GridColor,
-        backgroundColor: DATAChart.GridColor,
+        backgroundColor: DATAChart.ChartGradient,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
