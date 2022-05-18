@@ -20,14 +20,21 @@ export class DATAChart {
     private _el: HTMLElement = null;
     private _canvas: HTMLCanvasElement = null;
     private _datachart = null;
-    private _gridColor: string = null;
-    private _tickColor: string = null;
-    private _scaleGridColor: string = null;
-    private _titleColor: string = null;
-    private _labelColor: string = null;
+    private static _gridColor: string = null;
+    private static _tickColor: string = null;
+    private static _scaleGridColor: string = null;
+    private static _titleColor: string = null;
+    private static _labelColor: string = null;
 
     // Chart
     get DataChart() { return this._datachart; }
+
+    //Color getters
+    static get GridColor() { return this._gridColor; }
+    static get TickColor() { return this._tickColor; }
+    static get ScaleColor() { return this._scaleGridColor; }
+    static get TitleColor() { return this._titleColor; }
+    static get LabelColor() { return this._labelColor; }
 
     // Constructor
     constructor(el: HTMLElement) {
@@ -96,11 +103,11 @@ export class DATAChart {
         const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
         if (darkThemeMq.matches) {
             // Theme set to dark.
-            this._gridColor = 'rgba(161, 0, 0, 1)';
+            DATAChart._gridColor = 'rgba(123, 28, 28, 1)';
 
         } else {
             // Theme set to light.
-            this._gridColor = 'rgba(255, 148, 148, 1)';
+            DATAChart._gridColor = 'rgba(255, 148, 148, 1)';
 
         }
     }
@@ -152,8 +159,8 @@ export class DATAChart {
                 {
                     label: Strings.ChartLabels[0],
                     data: ChartData.ExpenseItems,
-                    borderColor: this._gridColor,
-                    backgroundColor: this._gridColor,
+                    borderColor: DATAChart.GridColor,
+                    backgroundColor: DATAChart.GridColor,
                     fill: true,
                     parsing: {
                         yAxisKey: 'amount',
@@ -163,6 +170,7 @@ export class DATAChart {
             ]
         }
 
+        // Create the chart
         if (ChartData.ExpenseItems.length > 0) {
             this._datachart = new Chart(ctx, {
                 type: 'line',
@@ -171,7 +179,11 @@ export class DATAChart {
             });
         }
 
+
     }
+
+
+
 
 
 }
@@ -184,8 +196,8 @@ function loadNetData(chart, NetData) {
     chart.data.datasets.push({
         label: Strings.ChartLabels[1],
         data: NetData,
-        borderColor: this._gridColor,
-        backgroundColor: this._gridColor,
+        borderColor: DATAChart.GridColor,
+        backgroundColor: DATAChart.GridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -204,8 +216,8 @@ function loadExpCATData(chart, CatData) {
         type: 'bar',
         label: Strings.ChartLabels[2],
         data: CatData,
-        borderColor: this._gridColor,
-        backgroundColor: this._gridColor,
+        borderColor: DATAChart.GridColor,
+        backgroundColor: DATAChart.GridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -222,8 +234,8 @@ function loadMonthlyExp(chart, ExpData) {
     chart.data.datasets.push({
         label: Strings.ChartLabels[0],
         data: ExpData,
-        borderColor: this._gridColor,
-        backgroundColor: this._gridColor,
+        borderColor: DATAChart.GridColor,
+        backgroundColor: DATAChart.GridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
