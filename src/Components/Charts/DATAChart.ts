@@ -113,12 +113,16 @@ export class DATAChart {
                 // Theme set to dark.
                 DATAChart._gridColor = 'rgba(123, 28, 28, 1)';
                 DATAChart._titleColor = 'rgba(255, 255, 255, 1)';
+                DATAChart._labelColor = 'rgba(255, 255, 255, 1)';
+                DATAChart._tickColor = 'rgba(255, 255, 255, 1)';
                 console.log("Darkmode On");
 
             } else {
                 // Theme set to light.
                 DATAChart._gridColor = 'rgba(255, 148, 148, 1)';
                 DATAChart._titleColor = 'rgba(0, 0, 0, 1)';
+                DATAChart._labelColor = 'rgba(0, 0, 0, 1)';
+                DATAChart._tickColor = 'rgba(0, 0, 0, 1)';
                 console.log("LightMode On");
             }
         }
@@ -148,18 +152,18 @@ export class DATAChart {
                 },
                 legend: {
                     labels: {
-                        color: 'white'
+                        color: DATAChart.LabelColor
                     }
                 }
 
             },
             scales: {
                 x: {
-                    ticks: { color: 'white' },
+                    ticks: { color: DATAChart.TickColor },
                     grid: { color: '#444' }
                 },
                 y: {
-                    ticks: { color: 'white' },
+                    ticks: { color: DATAChart.TickColor },
                     grid: { color: '#444' }
                 }
             }

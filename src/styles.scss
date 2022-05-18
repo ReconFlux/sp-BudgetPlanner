@@ -9,7 +9,7 @@
 @media (prefers-color-scheme: light) {
 
   div#BudgetPlanner_App {
-    background-color: #ebebeb;
+    background-color: #fff;
     padding: 1rem !important;
   }
 
@@ -17,6 +17,154 @@
     background-color: #898989 !important;
     margin-bottom: 2rem !important;
 }
+// Expense Button
+button#btn_Expenses {
+  color: black;
+  background-color: #f9f9f9;
+  border-color: black;
+  width: 100%;
+}
+button#btn_Expenses:hover {
+  color: #fff;
+  background-color: #000000;
+  border-color: black;
+  width: 100%;
+}
+button#btn_Expenses:focus {
+  background-color: black;
+  color: white;
+  border-color: black;
+  width: 100%;
+}
+button#btn_Expenses:active {
+    background-color: black;
+    border-color: black;
+    color: white;
+    width: 100%;
+}
+
+// NET BUTTON
+button#btn_NET {
+  color: black;
+  background-color: #f9f9f9;
+  border-color: black;
+  width: 100%;
+}
+button#btn_NET:hover {
+  color: white;
+  background-color: black;
+  border-color: black;
+  width: 100%;
+}
+button#btn_NET:active {
+  background-color: black;
+  color: white;
+  border-color: black;
+  width: 100%;
+}
+button#btn_NET:focus {
+  color: white;
+  background-color: black;
+  border-color: black;
+  width: 100%;
+}
+
+
+// Category Button
+button#btn_catExp {
+  color: black;
+  background-color: #f9f9f9;
+  border-color: black;
+  width: 100%;
+}
+button#btn_catExp:hover {
+  color: white;
+  background-color: black;
+  border-color: black;
+  width: 100%;
+}
+button#btn_catExp:active {
+  background-color: black;
+  color: white;
+  border-color: black;
+  width: 100%;
+}
+button#btn_catExp:focus {
+  color: white;
+  background-color: black;
+  border-color: black;
+  width: 100%;
+}
+
+
+// Active Pane
+.bs .tab-content>.active {
+  display: block;
+  background-color: #898989;
+}
+
+
+// SideMenu
+#SideMenu_MainContainer {
+  max-width: 100% !important;
+  padding: 0% !important;
+  margin-top: 1vh !important;
+  background-color: #fff !important;
+}
+
+.container .row .col-2 {
+  background-color: #dbdbdb !important;
+  padding-top: 4rem;
+}
+
+//  datasheet tab
+a#Datasheet-tab {
+  color: black;
+  border: 1px solid #000;
+}
+a#Datasheet-tab:hover {
+  color: white;
+  background-color: #000;
+  border-color: black;
+}
+a#Datasheet-tab:active {
+  color: white;
+  background-color: #000;
+  border-color: black;
+}
+a#Datasheet-tab:focus {
+  color: white;
+  background-color: #000;
+  border-color: black;
+}
+
+// Chart
+a#Charts-tab {
+  color: black;
+  border: 1px solid #000;
+}
+a#Charts-tab:hover {
+  color: white;
+  background-color: #000;
+  border-color: black;
+}
+a#Charts-tab:active {
+  color: white;
+  background-color: #000;
+  border-color: black;
+}
+a#Charts-tab:focus {
+  color: white;
+  background-color: #000;
+  border-color: black;
+}
+
+
+.bs .nav-tabs .nav-link.active, .bs .nav-tabs .show>.nav-link, .bs .nav-tabs .nav-link:focus {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
 
 }
 @media (prefers-color-scheme: dark) {
@@ -108,5 +256,8 @@ tr.even > * {
 tr.odd > * {
   color: white !important;
   background-color: #212121 !important;
+}
+.container .row .col-2 {
+  padding-top: 4rem;
 }
 }
