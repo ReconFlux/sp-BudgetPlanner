@@ -10,6 +10,7 @@ import { ArrayListener } from 'chart.js/helpers';
 import { DataSource, ExpenseItem } from "../../ds";
 import { formatDateValue, getFieldValue } from "../../common";
 import { ChartData } from "../ChartLogic";
+import { App } from "../../app";
 
 /**
  * Chart
@@ -30,7 +31,6 @@ export class DATAChart {
     get DataChart() { return this._datachart; }
     static get Canvas() { return DATAChart._canvas; }
     static get CTX() { return DATAChart._canvas.getContext('2d'); }
-    static get ChartGradient() { return DATAChart.CTX.createLinearGradient(0, 0, 0, 300); }
 
     //Color getters
     static get GridColor() { return this._gridColor; }
@@ -48,7 +48,6 @@ export class DATAChart {
         DATAChart._canvas.width = 100;
         DATAChart._canvas.height = 35;
 
-        this.loadGradient();
         this.checkTheme();
         // Render
         this.render(el);
@@ -103,33 +102,39 @@ export class DATAChart {
         console.log(ChartData.ExpenseItems);
     }
 
+    // Checks light/dark mode
     private checkTheme() {
+
         const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-        if (darkThemeMq.matches) {
-            // Theme set to dark.
-            DATAChart._gridColor = 'rgba(123, 28, 28, 1)';
-            DATAChart._titleColor = 'rgba(255, 255, 255, 1)';
 
-        } else {
-            // Theme set to light.
-            DATAChart._gridColor = 'rgba(255, 148, 148, 1)';
-            DATAChart._titleColor = 'rgba(0, 0, 0, 1)';
+        const setTheme = event => {
+
+            if (event.matches) {
+                // Theme set to dark.
+                DATAChart._gridColor = 'rgba(123, 28, 28, 1)';
+                DATAChart._titleColor = 'rgba(255, 255, 255, 1)';
+                console.log("Darkmode On");
+
+            } else {
+                // Theme set to light.
+                DATAChart._gridColor = 'rgba(255, 148, 148, 1)';
+                DATAChart._titleColor = 'rgba(0, 0, 0, 1)';
+                console.log("LightMode On");
+            }
         }
+
+        setTheme(darkThemeMq);
+        darkThemeMq.addEventListener('change', setTheme);
+
+
     }
 
-    private loadGradient() {
-        DATAChart.ChartGradient.addColorStop(0, 'rgba(123, 28, 28, 1)');
-        DATAChart.ChartGradient.addColorStop(1, 'rgba(123, 28, 28, 0.5)');
-    }
 
     private render(el: HTMLElement) {
+
         let headContainer = document.createElement("div");
         el.appendChild(headContainer);
         headContainer.appendChild(DATAChart._canvas);
-
-
-
-
 
         // Constants ( for the chart )
         const options = {
@@ -167,7 +172,7 @@ export class DATAChart {
                     label: Strings.ChartLabels[0],
                     data: ChartData.ExpenseItems,
                     borderColor: DATAChart.GridColor,
-                    backgroundColor: DATAChart.ChartGradient,
+                    backgroundColor: DATAChart.GridColor,
                     fill: true,
                     parsing: {
                         yAxisKey: 'amount',
@@ -189,10 +194,6 @@ export class DATAChart {
 
     }
 
-
-
-
-
 }
 // Add Data Function
 function loadNetData(chart, NetData) {
@@ -204,7 +205,7 @@ function loadNetData(chart, NetData) {
         label: Strings.ChartLabels[1],
         data: NetData,
         borderColor: DATAChart.GridColor,
-        backgroundColor: DATAChart.ChartGradient,
+        backgroundColor: DATAChart.GridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -216,7 +217,6 @@ function loadNetData(chart, NetData) {
 function loadExpCATData(chart, CatData) {
 
 
-    //ChartData._CatelogArray.length = 0;
     chart.options.plugins.title.text = 'Expense Catalog';
     chart.data.datasets.pop(CatData);
     chart.data.datasets.push({
@@ -224,7 +224,7 @@ function loadExpCATData(chart, CatData) {
         label: Strings.ChartLabels[2],
         data: CatData,
         borderColor: DATAChart.GridColor,
-        backgroundColor: DATAChart.ChartGradient,
+        backgroundColor: DATAChart.GridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
@@ -235,14 +235,13 @@ function loadExpCATData(chart, CatData) {
 }
 function loadMonthlyExp(chart, ExpData) {
 
-    //ChartData._ExpenseSum.length = 0,
     chart.options.plugins.title.text = 'Monthly Expenses';
     chart.data.datasets.pop(ExpData);
     chart.data.datasets.push({
         label: Strings.ChartLabels[0],
         data: ExpData,
         borderColor: DATAChart.GridColor,
-        backgroundColor: DATAChart.ChartGradient,
+        backgroundColor: DATAChart.GridColor,
         fill: true,
         parsing: {
             yAxisKey: 'amount',
