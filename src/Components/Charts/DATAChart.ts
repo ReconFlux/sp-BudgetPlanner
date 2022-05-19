@@ -49,11 +49,11 @@ export class DATAChart {
         DATAChart._canvas.width = 100;
         DATAChart._canvas.height = 35;
 
+        this.checkTheme();
 
         // Render
         this.render(el);
 
-        this.checkTheme();
 
     }
 
