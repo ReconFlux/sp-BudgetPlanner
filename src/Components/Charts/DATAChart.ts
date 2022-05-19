@@ -26,6 +26,7 @@ export class DATAChart {
     private static _scaleGridColor: string = null;
     private static _titleColor: string = null;
     private static _labelColor: string = null;
+    private _isDarkMode: boolean = null;
 
     // Chart stuff
     get DataChart() { return this._datachart; }
@@ -48,10 +49,11 @@ export class DATAChart {
         DATAChart._canvas.width = 100;
         DATAChart._canvas.height = 35;
 
-        this.checkTheme();
+
         // Render
         this.render(el);
 
+        this.checkTheme();
 
     }
 
@@ -102,6 +104,10 @@ export class DATAChart {
         console.log(ChartData.ExpenseItems);
     }
 
+    static themecheck() {
+        window.matchMedia("(prefers-color-scheme: dark)");
+    }
+
     // Checks light/dark mode
     private checkTheme() {
 
@@ -116,6 +122,7 @@ export class DATAChart {
                 DATAChart._labelColor = 'rgba(255, 255, 255, 1)';
                 DATAChart._tickColor = 'rgba(255, 255, 255, 1)';
                 console.log("Darkmode On");
+                this._isDarkMode = true;
 
             } else {
                 // Theme set to light.
@@ -124,13 +131,11 @@ export class DATAChart {
                 DATAChart._labelColor = 'rgba(0, 0, 0, 1)';
                 DATAChart._tickColor = 'rgba(0, 0, 0, 1)';
                 console.log("LightMode On");
+                this._isDarkMode = false;
             }
         }
-
         setTheme(darkThemeMq);
         darkThemeMq.addEventListener('change', setTheme);
-
-
     }
 
 
@@ -188,11 +193,13 @@ export class DATAChart {
 
         // Create the chart
         if (ChartData.ExpenseItems.length > 0) {
+
             this._datachart = new Chart(DATAChart.CTX, {
                 type: 'line',
                 data: chartData,
                 options: options
             });
+
         }
 
 
