@@ -8,6 +8,10 @@
 
 @media (prefers-color-scheme: light) {
 
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+    border-radius: 5px 5px 0px 0px;
+}
+
   div#BudgetPlanner_App {
     background-color: #fff;
     padding: 1rem !important;
@@ -169,6 +173,27 @@ a#Charts-tab:focus {
 
 }
 @media (prefers-color-scheme: dark) {
+
+  // Main Nav
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+    border-radius: 5px 5px 0px 0px;
+}
+
+  // Modal
+  .bs .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #404040;
+    background-clip: padding-box;
+    border: 1px solid white;
+    border-radius: .3rem;
+    outline: 0;
+    color: white;
+}
+
 
 div#BudgetPlanner_App {
   background-color: #333;

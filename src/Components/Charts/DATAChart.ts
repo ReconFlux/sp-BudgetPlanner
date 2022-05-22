@@ -117,7 +117,7 @@ export class DATAChart {
 
             if (event.matches) {
                 // Theme set to dark.
-                DATAChart._gridColor = 'rgba(123, 28, 28, 1)';
+                DATAChart._gridColor = 'rgba(255, 100, 100, 1)';
                 DATAChart._titleColor = 'rgba(255, 255, 255, 1)';
                 DATAChart._labelColor = 'rgba(255, 255, 255, 1)';
                 DATAChart._tickColor = 'rgba(255, 255, 255, 1)';
