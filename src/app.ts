@@ -9,6 +9,7 @@ import { TableTab } from "./Tabs/Table";
 //import { ChartsComponent } from "./Components/Charts/monthlyExpense";
 import { SubNavigation } from "./Components/subNav";
 import { Tabs } from "./Components/Tabs";
+import { Alert } from "gd-sprest-bs/src/components/components";
 
 /**
  * Main Application
@@ -48,6 +49,26 @@ export class App {
                 props.type = Components.NavbarTypes.Dark;
                 props.id = "app_mainNav";
             },
+            itemsEnd: [
+                {
+                    onRender: (el) => {
+                        Components.CheckboxGroup({
+                            el: el,
+                            isInline: true,
+                            items: [
+                                {
+                                    type: Components.CheckboxGroupTypes.Switch,
+                                    label: "Theme",
+                                    isSelected: true,
+                                    onChange: () => {
+                                        alert("Change Theme");
+                                    }
+                                }
+                            ]
+                        })
+                    }
+                }
+            ]
         });
 
 
