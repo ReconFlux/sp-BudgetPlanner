@@ -33,6 +33,7 @@ export class App {
         this.render(el);
     }
 
+
     // Renders the dashboard
     private render(el: HTMLElement) {
 
@@ -54,15 +55,14 @@ export class App {
                     onRender: (el) => {
                         Components.CheckboxGroup({
                             el: el,
-                            isInline: true,
+                            onRender: (props) => {
+                                props.id = "themeswitch";
+                            },
+                            multi: false,
+                            type: Components.CheckboxGroupTypes.Switch,
                             items: [
                                 {
-                                    type: Components.CheckboxGroupTypes.Switch,
                                     label: "Theme",
-                                    isSelected: true,
-                                    onChange: () => {
-                                        alert("Change Theme");
-                                    }
                                 }
                             ]
                         })
