@@ -6,10 +6,12 @@ import { DataSource, TransItem, ExpenseItem, IncomeItem } from "./ds";
 import Strings from "./strings";
 import { plusSquareFill } from "gd-sprest-bs/build/icons/svgs/plusSquareFill";
 import { TableTab } from "./Tabs/Table";
+import { gearWideConnected } from "gd-sprest-bs/build/icons/svgs/gearWideConnected";
 //import { ChartsComponent } from "./Components/Charts/monthlyExpense";
 import { SubNavigation } from "./Components/subNav";
 import { Tabs } from "./Components/Tabs";
 import { Alert } from "gd-sprest-bs/src/components/components";
+import { CustomChart } from "./Components/CusomizationModal";
 
 /**
  * Main Application
@@ -52,9 +54,26 @@ export class App {
             },
             itemsEnd: [
                 {
+                    text: "Options",
+                    iconSize: 18,
+                    iconType: gearWideConnected,
+                    isButton: true,
+                    className: "btn-outline-light",
+                    items: [
+                        {
+                            text: "Customization",
+                            onClick: (el: HTMLElement) => {
+                                new CustomChart(el);
+                            }
+                        }
+                    ]
+                },
+                {
                     onRender: (el) => {
+                        let elSwitch = document.createElement('div');
+                        el.appendChild(elSwitch);
                         Components.CheckboxGroup({
-                            el: el,
+                            el: elSwitch,
                             onRender: (props) => {
                                 props.id = "themeswitch";
                             },
@@ -63,6 +82,9 @@ export class App {
                             items: [
                                 {
                                     label: "Theme",
+                                    onChange: (item) => {
+                                        item ? alert("I Love You Senisa") : alert("Light Mode");
+                                    }
                                 }
                             ]
                         })

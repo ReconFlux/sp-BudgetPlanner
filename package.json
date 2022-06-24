@@ -27,7 +27,7 @@
     "datatables.net": "^1.11.5",
     "datatables.net-bs5": "^1.11.5",
     "dattatable": "^1.8.6",
-    "gd-sprest-bs": "^9.6.0",
+    "gd-sprest-bs": "^9.6.5",
     "gulp-cli": "^2.3.0",
     "jquery": "^3.6.0",
     "moment": "^2.29.1"
